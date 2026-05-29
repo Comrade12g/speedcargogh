@@ -151,27 +151,34 @@ document.querySelectorAll("[data-admin-tab]").forEach((button) => {
 });
 
 document.querySelectorAll("[data-save-json]").forEach((button) => {
-  button.addEventListener("click", () => {
+  button.addEventListener("click", async () => {
     try {
       siteData = JSON.parse(jsonEditor.value);
       saveData(siteData);
       syncEditor();
-      jsonNote.textContent = "Content saved. Refresh the public site to see updates.";
+      jsonNote.textContent = "Saving to server…";
+      await saveRemoteContent(siteData);
+      jsonNote.textContent = "Saved live. Public site will pick it up on next page load.";
     } catch (error) {
-      jsonNote.textContent = `JSON error: ${error.message}`;
+      jsonNote.textContent = `Save error: ${error.message}`;
     }
   });
 });
 
-document.querySelector("[data-reset-json]")?.addEventListener("click", () => {
+document.querySelector("[data-reset-json]")?.addEventListener("click", async () => {
   siteData = clone(defaultData);
   saveData(siteData);
   syncEditor();
-  jsonNote.textContent = "Default Speed Cargo content restored.";
+  try {
+    await saveRemoteContent(siteData);
+    jsonNote.textContent = "Defaults restored and saved live.";
+  } catch (error) {
+    jsonNote.textContent = `Reset saved locally only: ${error.message}`;
+  }
 });
 
 document.querySelectorAll("[data-add]").forEach((form) => {
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const section = form.dataset.add;
     const values = Object.fromEntries(new FormData(form).entries());
@@ -179,6 +186,7 @@ document.querySelectorAll("[data-add]").forEach((form) => {
     if (!Array.isArray(siteData[section])) {
       siteData[section] = [];
     }
+
 
     if (section === "news" && !values.date) {
       values.date = new Date().toISOString().slice(0, 10);
