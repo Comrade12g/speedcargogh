@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TrackingRouteImport } from './routes/tracking'
+import { Route as ScheduleRouteImport } from './routes/schedule'
 import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as CareersRouteImport } from './routes/careers'
@@ -21,6 +22,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const TrackingRoute = TrackingRouteImport.update({
   id: '/tracking',
   path: '/tracking',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScheduleRoute = ScheduleRouteImport.update({
+  id: '/schedule',
+  path: '/schedule',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PartnersRoute = PartnersRouteImport.update({
@@ -67,6 +73,7 @@ export interface FileRoutesByFullPath {
   '/careers': typeof CareersRoute
   '/login': typeof LoginRoute
   '/partners': typeof PartnersRoute
+  '/schedule': typeof ScheduleRoute
   '/tracking': typeof TrackingRoute
 }
 export interface FileRoutesByTo {
@@ -77,6 +84,7 @@ export interface FileRoutesByTo {
   '/careers': typeof CareersRoute
   '/login': typeof LoginRoute
   '/partners': typeof PartnersRoute
+  '/schedule': typeof ScheduleRoute
   '/tracking': typeof TrackingRoute
 }
 export interface FileRoutesById {
@@ -88,6 +96,7 @@ export interface FileRoutesById {
   '/careers': typeof CareersRoute
   '/login': typeof LoginRoute
   '/partners': typeof PartnersRoute
+  '/schedule': typeof ScheduleRoute
   '/tracking': typeof TrackingRoute
 }
 export interface FileRouteTypes {
@@ -100,6 +109,7 @@ export interface FileRouteTypes {
     | '/careers'
     | '/login'
     | '/partners'
+    | '/schedule'
     | '/tracking'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -110,6 +120,7 @@ export interface FileRouteTypes {
     | '/careers'
     | '/login'
     | '/partners'
+    | '/schedule'
     | '/tracking'
   id:
     | '__root__'
@@ -120,6 +131,7 @@ export interface FileRouteTypes {
     | '/careers'
     | '/login'
     | '/partners'
+    | '/schedule'
     | '/tracking'
   fileRoutesById: FileRoutesById
 }
@@ -131,6 +143,7 @@ export interface RootRouteChildren {
   CareersRoute: typeof CareersRoute
   LoginRoute: typeof LoginRoute
   PartnersRoute: typeof PartnersRoute
+  ScheduleRoute: typeof ScheduleRoute
   TrackingRoute: typeof TrackingRoute
 }
 
@@ -141,6 +154,13 @@ declare module '@tanstack/react-router' {
       path: '/tracking'
       fullPath: '/tracking'
       preLoaderRoute: typeof TrackingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/schedule': {
+      id: '/schedule'
+      path: '/schedule'
+      fullPath: '/schedule'
+      preLoaderRoute: typeof ScheduleRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/partners': {
@@ -203,8 +223,19 @@ const rootRouteChildren: RootRouteChildren = {
   CareersRoute: CareersRoute,
   LoginRoute: LoginRoute,
   PartnersRoute: PartnersRoute,
+  ScheduleRoute: ScheduleRoute,
   TrackingRoute: TrackingRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
