@@ -198,10 +198,15 @@ document.querySelectorAll("[data-add]").forEach((form) => {
     form.reset();
     const button = form.querySelector("button");
     const original = button.textContent;
-    button.textContent = "Saved";
-    setTimeout(() => {
-      button.textContent = original;
-    }, 1200);
+    button.textContent = "Saving…";
+    try {
+      await saveRemoteContent(siteData);
+      button.textContent = "Saved live";
+    } catch (err) {
+      button.textContent = "Save failed";
+      console.error(err);
+    }
+    setTimeout(() => { button.textContent = original; }, 1500);
   });
 });
 
