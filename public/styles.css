@@ -1375,6 +1375,10 @@ select:focus {
 }
 
 @media (max-width: 1080px) {
+  .site-header.header-hidden {
+    transform: translateY(-100%);
+  }
+
   .nav-bar {
     grid-template-columns: auto auto;
   }
