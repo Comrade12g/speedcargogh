@@ -99,20 +99,20 @@ window.SPEED_CARGO_DEFAULT_DATA = {
   ],
   process: [
     {
-      title: "Book and prepare",
-      text: "Share supplier, cargo type, weight, volume and destination details."
+      title: "Dedicated account manager",
+      text: "Every customer gets one account manager — single point of contact from quote to delivery, with 24-hour cargo tracking."
     },
     {
-      title: "Receive in China",
-      text: "Cargo is received, checked, consolidated and prepared for loading."
+      title: "Inbound to our China warehouse",
+      text: "Send your cargo to our Yiwu, Guangzhou or Shenzhen warehouse. We receive, photograph, check and consolidate."
     },
     {
-      title: "Move by sea or air",
-      text: "The route is selected around urgency, cargo size and cost expectations."
+      title: "Same-day dispatch",
+      text: "Once we confirm your cargo, we arrange dispatch the same day — air departs daily, containers load every day."
     },
     {
-      title: "Clear and release in Ghana",
-      text: "The Accra team coordinates clearing, pickup, delivery or warehouse release."
+      title: "Destination pickup or delivery",
+      text: "On arrival in Ghana, collect from our Laterbiokorshie or Spintex Manet warehouse, or have it delivered to your door."
     }
   ],
   offices: [
