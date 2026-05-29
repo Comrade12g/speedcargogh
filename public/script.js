@@ -411,15 +411,64 @@ const setupStatCounters = () => {
   numbers.forEach((n) => io.observe(n));
 };
 
+const submitQuoteToBackend = async (payload) => {
+  const cfg = window.SPEED_CARGO_SUPABASE;
+  if (!cfg?.url || !cfg?.anonKey) throw new Error("Backend not configured");
+  const res = await fetch(`${cfg.url}/rest/v1/quote_requests`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      apikey: cfg.anonKey,
+      Authorization: `Bearer ${cfg.anonKey}`,
+      Prefer: "return=minimal"
+    },
+    body: JSON.stringify(payload)
+  });
+  if (!res.ok) {
+    const txt = await res.text().catch(() => "");
+    throw new Error(txt || `Request failed (${res.status})`);
+  }
+};
+
 const setupForms = () => {
-  document.querySelector(".quote-form")?.addEventListener("submit", (event) => {
+  document.querySelector(".quote-form")?.addEventListener("submit", async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
     const formData = Object.fromEntries(new FormData(form).entries());
-    saveCollectionItem(QUOTES_KEY, formData);
-    form.reset();
-    document.querySelector('[data-note="quote"]').textContent =
-      "Quote request saved. The Speed Cargo team can review it from the admin dashboard.";
+    const note = document.querySelector('[data-note="quote"]');
+    const btn = form.querySelector('button[type="submit"]');
+    const payload = {
+      contact_name: String(formData.name || "").trim().slice(0, 200),
+      phone: String(formData.phone || "").trim().slice(0, 60) || null,
+      email: String(formData.email || formData.phone || "noemail@speedcargogh.com").trim().slice(0, 320),
+      origin: String(formData.origin || "Unspecified").trim().slice(0, 200) || "Unspecified",
+      destination: String(formData.destination || "Unspecified").trim().slice(0, 200) || "Unspecified",
+      mode: String(formData.route || "Not sure").trim().slice(0, 40),
+      goods: String(formData.cargo || "").trim().slice(0, 2000) || null,
+      notes: String(formData.size || "").trim().slice(0, 2000) || null
+    };
+    // Basic email pattern - fall back to placeholder if user didn't supply one
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(payload.email)) {
+      payload.email = "noemail@speedcargogh.com";
+    }
+    if (btn) { btn.disabled = true; btn.textContent = "Sending..."; }
+    try {
+      await submitQuoteToBackend(payload);
+      saveCollectionItem(QUOTES_KEY, formData); // keep local mirror for admin offline view
+      form.reset();
+      if (note) {
+        note.textContent = "Quote request sent. The Speed Cargo team will be in touch shortly.";
+        note.style.color = "var(--green, #1b8a3a)";
+      }
+    } catch (err) {
+      saveCollectionItem(QUOTES_KEY, formData);
+      if (note) {
+        note.textContent = "Saved locally — the Speed Cargo team will follow up. (" + err.message + ")";
+        note.style.color = "var(--red)";
+      }
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = "Send quote request"; }
+    }
   });
 
   document.querySelectorAll(".newsletter-form").forEach((form) => {
