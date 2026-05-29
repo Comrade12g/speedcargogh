@@ -86,9 +86,8 @@ h3 {
   position: sticky;
   z-index: 50;
   top: 0;
-  background: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 10px 32px rgba(7, 35, 63, 0.08);
-  backdrop-filter: blur(18px);
+  background: var(--dark-baby-blue);
+  box-shadow: 0 10px 32px rgba(7, 35, 63, 0.14);
   transition: transform 220ms ease;
 }
 
