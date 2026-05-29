@@ -754,6 +754,7 @@ const runAllRenders = () => {
   }
   runAllRenders();
   setupNavigation();
+  setupScrollHeader();
   setupForms();
   setupTracking();
   setupFloatingWhatsApp();
