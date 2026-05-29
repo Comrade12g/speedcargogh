@@ -1414,6 +1414,7 @@ select:focus {
   body.nav-open .site-header,
   body.nav-open .site-header.header-hidden {
     transform: none !important;
+  z-index: 80;
   }
 
   body:not(.nav-open) .main-nav.nav-pane {
@@ -1730,7 +1731,7 @@ select:focus {
   opacity: 0;
   pointer-events: none;
   transition: opacity 200ms ease;
-  z-index: 55;
+  z-index: 45;
 }
 body.nav-open .nav-backdrop {
   opacity: 1;
