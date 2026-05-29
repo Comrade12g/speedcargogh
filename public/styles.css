@@ -1588,3 +1588,125 @@ select:focus {
     height: 68vh;
   }
 }
+
+/* ---------- About page additions (wl.pb68.cn integration) ---------- */
+.hero-zh,
+.copy-zh {
+  margin-top: 0.75rem;
+  color: var(--muted, #6b6b6b);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+.strengths-section,
+.branches-section,
+.partners-strip-section {
+  background: transparent;
+}
+.strengths-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+.strength-card {
+  padding: 1.5rem;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 6px 22px rgba(15, 23, 42, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.strength-card img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+}
+.strength-card h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.strength-card h3 small {
+  font-weight: 400;
+  color: var(--muted, #6b6b6b);
+  font-size: 0.85rem;
+}
+.strength-card p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--muted, #555);
+}
+
+.branches-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+.branch-card {
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+.branch-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+.branch-card .branch-body {
+  padding: 1.25rem 1.25rem 1.5rem;
+}
+.branch-card .branch-body .eyebrow {
+  margin-bottom: 0.35rem;
+}
+.branch-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+}
+.branch-card h3 small {
+  font-weight: 400;
+  color: var(--muted, #6b6b6b);
+  margin-left: 0.4rem;
+  font-size: 0.85rem;
+}
+.branch-card p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--muted, #555);
+}
+
+.partners-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1.25rem;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+.partners-strip .partner-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+}
+.partners-strip .partner-logo img {
+  max-width: 100%;
+  max-height: 60px;
+  object-fit: contain;
+  filter: grayscale(20%);
+  transition: filter 0.2s ease;
+}
+.partners-strip .partner-logo:hover img {
+  filter: none;
+}
