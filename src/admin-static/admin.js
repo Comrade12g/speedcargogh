@@ -1,0 +1,194 @@
+const DATA_KEY = "speedCargoSiteData";
+const QUOTES_KEY = "speedCargoQuoteRequests";
+const NEWSLETTER_KEY = "speedCargoNewsletters";
+const APPLICATION_KEY = "speedCargoApplications";
+const AUTH_KEY = "speedCargoAdmin";
+
+const clone = (value) => JSON.parse(JSON.stringify(value));
+const defaultData = clone(window.SPEED_CARGO_DEFAULT_DATA);
+const mergeDeep = (base, override) => {
+  const output = clone(base);
+  Object.entries(override || {}).forEach(([key, value]) => {
+    if (
+      value &&
+      typeof value === "object" &&
+      !Array.isArray(value) &&
+      output[key] &&
+      typeof output[key] === "object" &&
+      !Array.isArray(output[key])
+    ) {
+      output[key] = mergeDeep(output[key], value);
+      return;
+    }
+    output[key] = value;
+  });
+  return output;
+};
+
+const getData = () => {
+  const stored = localStorage.getItem(DATA_KEY);
+  if (!stored) return clone(defaultData);
+  try {
+    return mergeDeep(defaultData, JSON.parse(stored));
+  } catch {
+    return clone(defaultData);
+  }
+};
+
+const saveData = (data) => {
+  localStorage.setItem(DATA_KEY, JSON.stringify(data));
+};
+
+const escapeHtml = (value = "") =>
+  String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+
+let siteData = getData();
+
+const loginPanel = document.querySelector("[data-admin-login]");
+const dashboard = document.querySelector("[data-admin-dashboard]");
+const jsonEditor = document.querySelector("[data-json-editor]");
+const jsonNote = document.querySelector("[data-json-note]");
+
+const showDashboard = () => {
+  loginPanel.hidden = true;
+  dashboard.hidden = false;
+  syncEditor();
+  renderSubmissions();
+};
+
+const showLogin = () => {
+  loginPanel.hidden = false;
+  dashboard.hidden = true;
+};
+
+const syncEditor = () => {
+  if (jsonEditor) {
+    jsonEditor.value = JSON.stringify(siteData, null, 2);
+  }
+};
+
+document.querySelector(".admin-login-form")?.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const values = Object.fromEntries(new FormData(event.currentTarget).entries());
+  if (values.email && values.password) {
+    localStorage.setItem(AUTH_KEY, "1");
+    showDashboard();
+    return;
+  }
+  document.querySelector("[data-admin-note]").textContent = "Enter an email and password.";
+});
+
+document.querySelector("[data-admin-logout]")?.addEventListener("click", () => {
+  localStorage.removeItem(AUTH_KEY);
+  showLogin();
+});
+
+document.querySelectorAll("[data-admin-tab]").forEach((button) => {
+  button.addEventListener("click", () => {
+    document
+      .querySelectorAll("[data-admin-tab]")
+      .forEach((item) => item.classList.toggle("is-active", item === button));
+    document.querySelectorAll("[data-admin-panel]").forEach((panel) => {
+      panel.classList.toggle("is-active", panel.dataset.adminPanel === button.dataset.adminTab);
+    });
+  });
+});
+
+document.querySelectorAll("[data-save-json]").forEach((button) => {
+  button.addEventListener("click", () => {
+    try {
+      siteData = JSON.parse(jsonEditor.value);
+      saveData(siteData);
+      syncEditor();
+      jsonNote.textContent = "Content saved. Refresh the public site to see updates.";
+    } catch (error) {
+      jsonNote.textContent = `JSON error: ${error.message}`;
+    }
+  });
+});
+
+document.querySelector("[data-reset-json]")?.addEventListener("click", () => {
+  siteData = clone(defaultData);
+  saveData(siteData);
+  syncEditor();
+  jsonNote.textContent = "Default Speed Cargo content restored.";
+});
+
+document.querySelectorAll("[data-add]").forEach((form) => {
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const section = form.dataset.add;
+    const values = Object.fromEntries(new FormData(form).entries());
+
+    if (!Array.isArray(siteData[section])) {
+      siteData[section] = [];
+    }
+
+    if (section === "news" && !values.date) {
+      values.date = new Date().toISOString().slice(0, 10);
+    }
+
+    siteData[section].unshift(values);
+    saveData(siteData);
+    syncEditor();
+    form.reset();
+    const button = form.querySelector("button");
+    const original = button.textContent;
+    button.textContent = "Saved";
+    setTimeout(() => {
+      button.textContent = original;
+    }, 1200);
+  });
+});
+
+const getSubmissions = (key) => {
+  try {
+    return JSON.parse(localStorage.getItem(key) || "[]");
+  } catch {
+    return [];
+  }
+};
+
+const submissionMarkup = (items) => {
+  if (!items.length) return "<p>No saved items yet.</p>";
+  return `
+    <div class="submission-list">
+      ${items
+        .map((item) => {
+          const title = item.name || item.email || item.role || "Submission";
+          const rows = Object.entries(item)
+            .map(([key, value]) => `<span><strong>${escapeHtml(key)}</strong>${escapeHtml(value)}</span>`)
+            .join("");
+          return `<article class="submission-item"><strong>${escapeHtml(title)}</strong>${rows}</article>`;
+        })
+        .join("")}
+    </div>
+  `;
+};
+
+const renderSubmissions = () => {
+  const quoteNode = document.querySelector('[data-submissions="quotes"]');
+  const newsletterNode = document.querySelector('[data-submissions="newsletters"]');
+  const applicationNode = document.querySelector('[data-submissions="applications"]');
+
+  if (quoteNode) quoteNode.innerHTML = submissionMarkup(getSubmissions(QUOTES_KEY));
+  if (newsletterNode) newsletterNode.innerHTML = submissionMarkup(getSubmissions(NEWSLETTER_KEY));
+  if (applicationNode) applicationNode.innerHTML = submissionMarkup(getSubmissions(APPLICATION_KEY));
+};
+
+document.querySelector("[data-clear-submissions]")?.addEventListener("click", () => {
+  localStorage.removeItem(QUOTES_KEY);
+  localStorage.removeItem(NEWSLETTER_KEY);
+  localStorage.removeItem(APPLICATION_KEY);
+  renderSubmissions();
+});
+
+if (localStorage.getItem(AUTH_KEY) === "1") {
+  showDashboard();
+} else {
+  showLogin();
+}
