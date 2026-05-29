@@ -372,6 +372,7 @@ const setupNavigation = () => {
 
   function openNav() {
     document.body.classList.add("nav-open");
+    document.querySelector(".site-header")?.classList.remove("header-hidden");
     navToggle?.setAttribute("aria-expanded", "true");
   }
   function closeNav() {
