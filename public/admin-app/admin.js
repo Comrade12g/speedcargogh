@@ -98,11 +98,18 @@ const dashboard = document.querySelector("[data-admin-dashboard]");
 const jsonEditor = document.querySelector("[data-json-editor]");
 const jsonNote = document.querySelector("[data-json-note]");
 
-const showDashboard = () => {
+const showDashboard = async () => {
   loginPanel.hidden = true;
   dashboard.hidden = false;
   syncEditor();
   renderSubmissions();
+  const remote = await fetchRemoteContent();
+  if (remote) {
+    siteData = mergeDeep(defaultData, remote);
+    saveData(siteData);
+    syncEditor();
+    if (jsonNote) jsonNote.textContent = "Loaded latest content from server.";
+  }
 };
 
 const showLogin = () => {
