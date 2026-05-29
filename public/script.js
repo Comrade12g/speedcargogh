@@ -392,6 +392,33 @@ const setupNavigation = () => {
   });
 };
 
+const setupScrollHeader = () => {
+  const header = document.querySelector(".site-header");
+  if (!header) return;
+
+  let lastScroll = 0;
+  const threshold = 6;
+
+  window.addEventListener("scroll", () => {
+    const current = window.scrollY || window.pageYOffset;
+
+    if (document.body.classList.contains("nav-open")) {
+      header.classList.remove("header-hidden");
+      lastScroll = current;
+      return;
+    }
+
+    if (Math.abs(current - lastScroll) < threshold) return;
+
+    if (current > lastScroll && current > 60) {
+      header.classList.add("header-hidden");
+    } else {
+      header.classList.remove("header-hidden");
+    }
+    lastScroll = current <= 0 ? 0 : current;
+  }, { passive: true });
+};
+
 const setupFloatingWhatsApp = () => {
   if (document.querySelector(".whatsapp-fab")) return;
   const profile = (window.SPEED_CARGO_DEFAULT_DATA || {}).profile || {};
@@ -727,6 +754,7 @@ const runAllRenders = () => {
   }
   runAllRenders();
   setupNavigation();
+  setupScrollHeader();
   setupForms();
   setupTracking();
   setupFloatingWhatsApp();

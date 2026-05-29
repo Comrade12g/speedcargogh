@@ -88,6 +88,7 @@ h3 {
   background: rgba(255, 255, 255, 0.96);
   box-shadow: 0 10px 32px rgba(7, 35, 63, 0.08);
   backdrop-filter: blur(18px);
+  transition: transform 220ms ease;
 }
 
 .utility-bar {
@@ -1374,6 +1375,10 @@ select:focus {
 }
 
 @media (max-width: 1080px) {
+  .site-header.header-hidden {
+    transform: translateY(-100%);
+  }
+
   .nav-bar {
     grid-template-columns: auto auto;
   }
