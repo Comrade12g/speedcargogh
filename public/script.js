@@ -313,36 +313,162 @@ const renderJobs = () => {
 const setupNavigation = () => {
   const navToggle = document.querySelector(".nav-toggle");
   const navPane = document.querySelector(".nav-pane");
+  if (!navPane) return;
+
+  // Inject backdrop + close button into the pane (mobile slide-out clarity)
+  if (!document.querySelector(".nav-backdrop")) {
+    const backdrop = document.createElement("div");
+    backdrop.className = "nav-backdrop";
+    backdrop.setAttribute("aria-hidden", "true");
+    document.body.appendChild(backdrop);
+    backdrop.addEventListener("click", () => closeNav());
+  }
+  if (!navPane.querySelector(".nav-close")) {
+    const closeBtn = document.createElement("button");
+    closeBtn.type = "button";
+    closeBtn.className = "nav-close";
+    closeBtn.setAttribute("aria-label", "Close menu");
+    closeBtn.innerHTML = "&times;";
+    navPane.prepend(closeBtn);
+    closeBtn.addEventListener("click", () => closeNav());
+  }
+
+  function openNav() {
+    document.body.classList.add("nav-open");
+    navToggle?.setAttribute("aria-expanded", "true");
+  }
+  function closeNav() {
+    document.body.classList.remove("nav-open");
+    navToggle?.setAttribute("aria-expanded", "false");
+  }
 
   navToggle?.addEventListener("click", () => {
-    const isOpen = document.body.classList.toggle("nav-open");
-    navToggle.setAttribute("aria-expanded", String(isOpen));
+    document.body.classList.contains("nav-open") ? closeNav() : openNav();
   });
 
-  navPane?.addEventListener("click", (event) => {
-    if (event.target instanceof HTMLAnchorElement) {
-      document.body.classList.remove("nav-open");
-      navToggle?.setAttribute("aria-expanded", "false");
-    }
+  navPane.addEventListener("click", (event) => {
+    if (event.target instanceof HTMLAnchorElement) closeNav();
   });
 
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      document.body.classList.remove("nav-open");
-      navToggle?.setAttribute("aria-expanded", "false");
-    }
+    if (event.key === "Escape") closeNav();
   });
 };
 
+const setupFloatingWhatsApp = () => {
+  if (document.querySelector(".whatsapp-fab")) return;
+  const profile = (window.SPEED_CARGO_DEFAULT_DATA || {}).profile || {};
+  const number = (profile.whatsapp || "").replace(/\D/g, "");
+  if (!number) return;
+  const a = document.createElement("a");
+  a.className = "whatsapp-fab";
+  a.href = `https://wa.me/${number}?text=${encodeURIComponent("Hello Speed Cargo, I would like more information.")}`;
+  a.target = "_blank";
+  a.rel = "noopener noreferrer";
+  a.setAttribute("aria-label", "Chat on WhatsApp");
+  a.innerHTML = `
+    <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true">
+      <path fill="currentColor" d="M16 .5C7.4.5.5 7.4.5 16c0 2.8.7 5.4 2 7.7L.5 31.5l8-2.1c2.2 1.2 4.8 1.9 7.5 1.9 8.6 0 15.5-6.9 15.5-15.5S24.6.5 16 .5zm0 28.2c-2.4 0-4.7-.6-6.7-1.8l-.5-.3-4.7 1.2 1.3-4.6-.3-.5C3.9 20.7 3.3 18.4 3.3 16 3.3 9 9 3.3 16 3.3S28.7 9 28.7 16 23 28.7 16 28.7zm7.3-9.5c-.4-.2-2.3-1.1-2.7-1.3s-.6-.2-.9.2-1 1.3-1.2 1.5-.4.3-.8.1c-2.4-1.2-4-2.1-5.6-4.7-.4-.7.4-.7 1.2-2.2.1-.3.1-.5 0-.7s-.9-2.1-1.2-2.9c-.3-.8-.6-.7-.9-.7h-.8c-.3 0-.7.1-1 .5s-1.3 1.3-1.3 3.1 1.3 3.6 1.5 3.8c.2.3 2.6 4 6.3 5.6 2.3 1 3.2 1.1 4.4.9.7-.1 2.3-.9 2.6-1.8.3-.9.3-1.7.2-1.8-.1-.2-.4-.3-.8-.5z"/>
+    </svg>
+    <span>Chat</span>
+  `;
+  document.body.appendChild(a);
+};
+
+const setupStatCounters = () => {
+  const numbers = document.querySelectorAll(".metric-strip strong, .metric-strip [data-metric-value]");
+  if (!numbers.length || !("IntersectionObserver" in window)) return;
+  const animate = (el) => {
+    const raw = el.textContent.trim();
+    const match = raw.match(/^([^\d]*)([\d,]+(?:\.\d+)?)(.*)$/);
+    if (!match) return;
+    const [, prefix, num, suffix] = match;
+    const target = parseFloat(num.replace(/,/g, ""));
+    if (!isFinite(target)) return;
+    const duration = 1400;
+    const start = performance.now();
+    const step = (now) => {
+      const p = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const cur = target * eased;
+      const formatted = target >= 100
+        ? Math.round(cur).toLocaleString()
+        : cur.toFixed(num.includes(".") ? 1 : 0);
+      el.textContent = `${prefix}${formatted}${suffix}`;
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  const seen = new WeakSet();
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting && !seen.has(e.target)) {
+        seen.add(e.target);
+        animate(e.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  numbers.forEach((n) => io.observe(n));
+};
+
+const submitQuoteToBackend = async (payload) => {
+  const cfg = window.SPEED_CARGO_SUPABASE;
+  if (!cfg?.url || !cfg?.anonKey) throw new Error("Backend not configured");
+  const res = await fetch(`${cfg.url}/rest/v1/quote_requests`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      apikey: cfg.anonKey,
+      Authorization: `Bearer ${cfg.anonKey}`,
+      Prefer: "return=minimal"
+    },
+    body: JSON.stringify(payload)
+  });
+  if (!res.ok) {
+    const txt = await res.text().catch(() => "");
+    throw new Error(txt || `Request failed (${res.status})`);
+  }
+};
+
 const setupForms = () => {
-  document.querySelector(".quote-form")?.addEventListener("submit", (event) => {
+  document.querySelector(".quote-form")?.addEventListener("submit", async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
     const formData = Object.fromEntries(new FormData(form).entries());
-    saveCollectionItem(QUOTES_KEY, formData);
-    form.reset();
-    document.querySelector('[data-note="quote"]').textContent =
-      "Quote request saved. The Speed Cargo team can review it from the admin dashboard.";
+    const note = document.querySelector('[data-note="quote"]');
+    const btn = form.querySelector('button[type="submit"]');
+    const payload = {
+      contact_name: String(formData.name || "").trim().slice(0, 200),
+      phone: String(formData.phone || "").trim().slice(0, 60) || null,
+      email: String(formData.email || formData.phone || "noemail@speedcargogh.com").trim().slice(0, 320),
+      origin: String(formData.origin || "Unspecified").trim().slice(0, 200) || "Unspecified",
+      destination: String(formData.destination || "Unspecified").trim().slice(0, 200) || "Unspecified",
+      mode: String(formData.route || "Not sure").trim().slice(0, 40),
+      goods: String(formData.cargo || "").trim().slice(0, 2000) || null,
+      notes: String(formData.size || "").trim().slice(0, 2000) || null
+    };
+    // Basic email pattern - fall back to placeholder if user didn't supply one
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(payload.email)) {
+      payload.email = "noemail@speedcargogh.com";
+    }
+    if (btn) { btn.disabled = true; btn.textContent = "Sending..."; }
+    try {
+      await submitQuoteToBackend(payload);
+      saveCollectionItem(QUOTES_KEY, formData); // keep local mirror for admin offline view
+      form.reset();
+      if (note) {
+        note.textContent = "Quote request sent. The Speed Cargo team will be in touch shortly.";
+        note.style.color = "var(--green, #1b8a3a)";
+      }
+    } catch (err) {
+      saveCollectionItem(QUOTES_KEY, formData);
+      if (note) {
+        note.textContent = "Saved locally — the Speed Cargo team will follow up. (" + err.message + ")";
+        note.style.color = "var(--red)";
+      }
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = "Send quote request"; }
+    }
   });
 
   document.querySelectorAll(".newsletter-form").forEach((form) => {
@@ -555,3 +681,5 @@ renderJobs();
 setupNavigation();
 setupForms();
 setupTracking();
+setupFloatingWhatsApp();
+setupStatCounters();
