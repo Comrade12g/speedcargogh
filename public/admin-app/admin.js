@@ -4,6 +4,51 @@ const NEWSLETTER_KEY = "speedCargoNewsletters";
 const APPLICATION_KEY = "speedCargoApplications";
 const AUTH_KEY = "speedCargoAdmin";
 
+const SUPABASE_URL = "https://rqmxolzibpoiqpqvhigj.supabase.co";
+const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJxbXhvbHppYnBvaXFwcXZoaWdqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwNjIxMTQsImV4cCI6MjA5NTYzODExNH0.Je1IXnfRlazgux_pwtV2aiEa-s1FVyXQTpDSGy7nb_8";
+const SB_TOKEN_KEY = "sb-rqmxolzibpoiqpqvhigj-auth-token";
+
+const getAccessToken = () => {
+  try {
+    const raw = localStorage.getItem(SB_TOKEN_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    return parsed?.access_token || parsed?.currentSession?.access_token || null;
+  } catch { return null; }
+};
+
+const fetchRemoteContent = async () => {
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/site_content?key=eq.main&select=data`, {
+      headers: { apikey: SUPABASE_ANON, Authorization: `Bearer ${SUPABASE_ANON}` }
+    });
+    if (!res.ok) return null;
+    const rows = await res.json();
+    const d = rows?.[0]?.data;
+    if (!d || typeof d !== "object" || Array.isArray(d) || Object.keys(d).length === 0) return null;
+    return d;
+  } catch { return null; }
+};
+
+const saveRemoteContent = async (payload) => {
+  const token = getAccessToken();
+  if (!token) throw new Error("Not signed in as admin. Sign in via /login.");
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/site_content?key=eq.main`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      apikey: SUPABASE_ANON,
+      Authorization: `Bearer ${token}`,
+      Prefer: "return=minimal"
+    },
+    body: JSON.stringify({ data: payload, updated_at: new Date().toISOString() })
+  });
+  if (!res.ok) {
+    const txt = await res.text().catch(() => "");
+    throw new Error(txt || `Save failed (${res.status})`);
+  }
+};
+
 const clone = (value) => JSON.parse(JSON.stringify(value));
 const defaultData = clone(window.SPEED_CARGO_DEFAULT_DATA);
 const mergeDeep = (base, override) => {
@@ -53,11 +98,18 @@ const dashboard = document.querySelector("[data-admin-dashboard]");
 const jsonEditor = document.querySelector("[data-json-editor]");
 const jsonNote = document.querySelector("[data-json-note]");
 
-const showDashboard = () => {
+const showDashboard = async () => {
   loginPanel.hidden = true;
   dashboard.hidden = false;
   syncEditor();
   renderSubmissions();
+  const remote = await fetchRemoteContent();
+  if (remote) {
+    siteData = mergeDeep(defaultData, remote);
+    saveData(siteData);
+    syncEditor();
+    if (jsonNote) jsonNote.textContent = "Loaded latest content from server.";
+  }
 };
 
 const showLogin = () => {
@@ -99,27 +151,34 @@ document.querySelectorAll("[data-admin-tab]").forEach((button) => {
 });
 
 document.querySelectorAll("[data-save-json]").forEach((button) => {
-  button.addEventListener("click", () => {
+  button.addEventListener("click", async () => {
     try {
       siteData = JSON.parse(jsonEditor.value);
       saveData(siteData);
       syncEditor();
-      jsonNote.textContent = "Content saved. Refresh the public site to see updates.";
+      jsonNote.textContent = "Saving to server…";
+      await saveRemoteContent(siteData);
+      jsonNote.textContent = "Saved live. Public site will pick it up on next page load.";
     } catch (error) {
-      jsonNote.textContent = `JSON error: ${error.message}`;
+      jsonNote.textContent = `Save error: ${error.message}`;
     }
   });
 });
 
-document.querySelector("[data-reset-json]")?.addEventListener("click", () => {
+document.querySelector("[data-reset-json]")?.addEventListener("click", async () => {
   siteData = clone(defaultData);
   saveData(siteData);
   syncEditor();
-  jsonNote.textContent = "Default Speed Cargo content restored.";
+  try {
+    await saveRemoteContent(siteData);
+    jsonNote.textContent = "Defaults restored and saved live.";
+  } catch (error) {
+    jsonNote.textContent = `Reset saved locally only: ${error.message}`;
+  }
 });
 
 document.querySelectorAll("[data-add]").forEach((form) => {
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const section = form.dataset.add;
     const values = Object.fromEntries(new FormData(form).entries());
@@ -127,6 +186,7 @@ document.querySelectorAll("[data-add]").forEach((form) => {
     if (!Array.isArray(siteData[section])) {
       siteData[section] = [];
     }
+
 
     if (section === "news" && !values.date) {
       values.date = new Date().toISOString().slice(0, 10);
@@ -138,10 +198,15 @@ document.querySelectorAll("[data-add]").forEach((form) => {
     form.reset();
     const button = form.querySelector("button");
     const original = button.textContent;
-    button.textContent = "Saved";
-    setTimeout(() => {
-      button.textContent = original;
-    }, 1200);
+    button.textContent = "Saving…";
+    try {
+      await saveRemoteContent(siteData);
+      button.textContent = "Saved live";
+    } catch (err) {
+      button.textContent = "Save failed";
+      console.error(err);
+    }
+    setTimeout(() => { button.textContent = original; }, 1500);
   });
 });
 
@@ -187,7 +252,9 @@ document.querySelector("[data-clear-submissions]")?.addEventListener("click", ()
   renderSubmissions();
 });
 
-if (localStorage.getItem(AUTH_KEY) === "1") {
+// Parent /admin route already validated admin role via Supabase. Skip the
+// inner email/password gate when a Supabase session exists.
+if (getAccessToken() || localStorage.getItem(AUTH_KEY) === "1") {
   showDashboard();
 } else {
   showLogin();

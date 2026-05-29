@@ -47,7 +47,23 @@ const escapeHtml = (value = "") =>
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;");
 
-const data = getSiteData();
+let data = getSiteData();
+
+const fetchRemoteSiteContent = async () => {
+  const cfg = window.SPEED_CARGO_SUPABASE;
+  if (!cfg?.url || !cfg?.anonKey) return null;
+  try {
+    const res = await fetch(`${cfg.url}/rest/v1/site_content?key=eq.main&select=data`, {
+      headers: { apikey: cfg.anonKey, Authorization: `Bearer ${cfg.anonKey}` }
+    });
+    if (!res.ok) return null;
+    const rows = await res.json();
+    const remote = rows?.[0]?.data;
+    if (!remote || typeof remote !== "object" || Array.isArray(remote)) return null;
+    if (Object.keys(remote).length === 0) return null;
+    return remote;
+  } catch { return null; }
+};
 
 const setText = (selector, value) => {
   document.querySelectorAll(selector).forEach((node) => {
@@ -685,23 +701,34 @@ const setupTracking = () => {
   }
 };
 
-setProfileLinks();
-renderHero();
-renderAnnouncements();
-renderStats();
-renderServices();
-renderProcess();
-renderStrengths();
-renderOffices();
-renderPartners();
-renderSupportPartners();
-renderGallery();
-renderTeam();
-renderTestimonials();
-renderNews();
-renderJobs();
-setupNavigation();
-setupForms();
-setupTracking();
-setupFloatingWhatsApp();
-setupStatCounters();
+const runAllRenders = () => {
+  setProfileLinks();
+  renderHero();
+  renderAnnouncements();
+  renderStats();
+  renderServices();
+  renderProcess();
+  renderStrengths();
+  renderOffices();
+  renderPartners();
+  renderSupportPartners();
+  renderGallery();
+  renderTeam();
+  renderTestimonials();
+  renderNews();
+  renderJobs();
+};
+
+(async () => {
+  const remote = await fetchRemoteSiteContent();
+  if (remote) {
+    localStorage.setItem(DATA_KEY, JSON.stringify(remote));
+    data = mergeDeep(window.SPEED_CARGO_DEFAULT_DATA, remote);
+  }
+  runAllRenders();
+  setupNavigation();
+  setupForms();
+  setupTracking();
+  setupFloatingWhatsApp();
+  setupStatCounters();
+})();
