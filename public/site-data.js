@@ -31,49 +31,67 @@ window.SPEED_CARGO_DEFAULT_DATA = {
     }
   ],
   stats: [
-    { value: "2", label: "Accra warehouse locations" },
-    { value: "24h", label: "Support response target" },
-    { value: "FCL/LCL", label: "Sea cargo options" },
-    { value: "Air", label: "Priority cargo route" }
+    { value: "800+", label: "Containers shipped each year" },
+    { value: "100+", label: "Countries in our trade network" },
+    { value: "20+", label: "Years moving cargo to Africa" },
+    { value: "4", label: "Branches: Yiwu · Shenzhen · Ghana · Congo" }
+  ],
+  strengths: [
+    {
+      title: "Safety advantage",
+      text: "China dispatch and destination receipt handled by Speed Cargo staff — your cargo is never handed off mid-route."
+    },
+    {
+      title: "Stability advantage",
+      text: "High volume guarantees stable space on every major route. Air departs daily; sea containers load every day."
+    },
+    {
+      title: "Financial strength",
+      text: "Well-capitalised operations and a full after-sales team make claims, exceptions and re-routes easy to resolve."
+    },
+    {
+      title: "Network advantage",
+      text: "Four China / Africa branches and warehouse counters inside every major wholesale market — 20 years deep in Africa & Middle East trade."
+    }
   ],
   services: [
     {
-      title: "Sea Freight",
-      text: "Full container load, less-than-container load and consolidated cargo from China into Ghana.",
-      link: "/services/sea-freight",
+      title: "Sea LCL Groupage",
+      text: "One-stop LCL, bonded-zone fast LCL, Asia LCL and port-to-port options. Flexible consolidation — your container is sealed and never opened until clearing.",
+      link: "/services/groupage",
       image:
         "https://images.unsplash.com/photo-1605745341112-85968b19335b?auto=format&fit=crop&w=900&q=82"
     },
     {
-      title: "Air Freight",
-      text: "Fast route support for urgent goods, samples, electronics and high-value cargo.",
-      link: "/services/air-freight",
-      image:
-        "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=900&q=82"
-    },
-    {
-      title: "Container Shipping",
-      text: "Container planning, loading coordination, sailing updates and release support.",
+      title: "Sea FCL Full Container",
+      text: "20ft, 40ft and 40HC one-stop full-container service and port-to-port loads, backed by partnerships with the world's top shipping lines.",
       link: "/services/sea-freight",
       image:
         "https://images.unsplash.com/photo-1524522173746-f628baad3644?auto=format&fit=crop&w=900&q=82"
     },
     {
-      title: "Customs Clearing",
-      text: "Documentation guidance and clearance coordination with Ghana-facing support teams.",
+      title: "VIP Air — 3-Day Direct",
+      text: "One-stop air, VIP 3-day direct, MCO per-piece pricing, airport-to-airport and Africa e-commerce air freight.",
+      link: "/services/air-freight",
+      image:
+        "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=900&q=82"
+    },
+    {
+      title: "Double Customs Clearing",
+      text: "Door-to-door and warehouse-to-warehouse double clearing. Your cargo clears China export and Ghana import without ever leaving our network.",
       link: "/services/customs-clearing",
       image:
         "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=900&q=82"
     },
     {
-      title: "Warehousing",
-      text: "Cargo receiving, sorting, storage and release from Accra warehouse points.",
+      title: "Warehousing & Pickup",
+      text: "Oversized warehouses at every China branch. Pickup any time, with one dedicated account manager and 24-hour cargo tracking.",
       link: "/services/warehousing",
       image: "./assets/speed-cargo-warehouse.mp4"
     },
     {
-      title: "Procurement Support",
-      text: "Supplier pickup, China-side coordination and import guidance for shops and SMEs.",
+      title: "Procurement & Sourcing",
+      text: "Supplier pickup, market sourcing in Yiwu / Guangzhou / Shenzhen and China-side coordination for shops, salons, traders and SMEs.",
       link: "/lanes/guangzhou-to-ghana",
       image:
         "https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=900&q=82"
