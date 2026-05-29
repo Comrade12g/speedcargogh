@@ -691,6 +691,14 @@ const setupTracking = () => {
     queryLiveTracking(code);
   };
 
+  const scrollToTrackingDetails = () => {
+    const target = document.querySelector(".tracking-workspace") || document.querySelector("[data-tracking-results]");
+    if (!target) return;
+    window.setTimeout(() => {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 120);
+  };
+
   document.querySelector(".mini-tracking-form")?.addEventListener("submit", (event) => {
     event.preventDefault();
     const code = new FormData(event.currentTarget).get("tracking") || "";
@@ -704,6 +712,7 @@ const setupTracking = () => {
       ? "Tracking desk ready. Use the live engine or WhatsApp support button below."
       : "Enter a tracking number to check cargo movement.";
     openTracking(code);
+    if (code) scrollToTrackingDetails();
   });
 
   document.querySelectorAll("[data-copy-tracking]").forEach((button) => {
