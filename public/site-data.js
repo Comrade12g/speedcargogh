@@ -139,6 +139,27 @@ window.SPEED_CARGO_DEFAULT_DATA = {
       mapEmbed: "https://maps.google.com/maps?q=5.637702,-0.122072&z=16&output=embed",
       map:
         "https://www.google.com/maps/place/5%C2%B038'15.7%22N+0%C2%B007'19.5%22W/@5.637702,-0.122072,596m/data=!3m2!1e3!4b1!4m4!3m3!8m2!3d5.637702!4d-0.122072?entry=ttu&g_ep=EgoyMDI2MDUxNy4wIKXMDSoASAFQAw%3D%3D"
+    },
+    {
+      title: "Yiwu Branch (China)",
+      text: "Receiving address inside Yiwu International Trade Market — small commodities, accessories, hair, gifts.",
+      address: "Yiwu, Zhejiang, China",
+      mapEmbed: "https://maps.google.com/maps?q=Yiwu+International+Trade+City&z=14&output=embed",
+      map: "https://www.google.com/maps/place/Yiwu+International+Trade+City"
+    },
+    {
+      title: "Guangzhou & Shenzhen Branch (China)",
+      text: "Warehouse counters in Guangzhou wholesale markets and Shenzhen for electronics, fabric, hair and cosmetics.",
+      address: "Guangzhou & Shenzhen, China",
+      mapEmbed: "https://maps.google.com/maps?q=Guangzhou&z=11&output=embed",
+      map: "https://www.google.com/maps/place/Guangzhou"
+    },
+    {
+      title: "Congo Branch",
+      text: "Sister branch serving DRC and Central Africa — extending the same one-stop China-to-Africa network.",
+      address: "Congo",
+      mapEmbed: "https://maps.google.com/maps?q=Kinshasa&z=11&output=embed",
+      map: "https://www.google.com/maps/place/Kinshasa"
     }
   ],
   partners: [
