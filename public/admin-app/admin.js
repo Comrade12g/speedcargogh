@@ -252,7 +252,9 @@ document.querySelector("[data-clear-submissions]")?.addEventListener("click", ()
   renderSubmissions();
 });
 
-if (localStorage.getItem(AUTH_KEY) === "1") {
+// Parent /admin route already validated admin role via Supabase. Skip the
+// inner email/password gate when a Supabase session exists.
+if (getAccessToken() || localStorage.getItem(AUTH_KEY) === "1") {
   showDashboard();
 } else {
   showLogin();
