@@ -1871,3 +1871,14 @@ body.nav-open {
 .service-card-link:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
 .service-card-link:hover .service-cta { color: var(--red); }
 .service-cta { display: inline-block; margin-top: 14px; font-weight: 700; color: var(--blue); font-size: 0.95rem; letter-spacing: 0.02em; transition: color 0.2s; }
+
+/* Strengths grid (wl.pb68.cn-inspired) */
+.strengths-section { background: linear-gradient(135deg, var(--navy), #0a3d6a); color: #fff; border-radius: 24px; padding: 56px 32px; margin: 40px auto; max-width: 1180px; }
+.strengths-section .eyebrow { color: #ffb3b9; }
+.strengths-section h2 { color: #fff; }
+.strengths-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin-top: 28px; }
+.strength-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 22px; transition: background 0.2s, transform 0.2s; }
+.strength-card:hover { background: rgba(255,255,255,0.10); transform: translateY(-3px); }
+.strength-index { display: inline-block; color: var(--red); font-weight: 800; font-size: 0.85rem; letter-spacing: 0.08em; margin-bottom: 10px; }
+.strength-card h3 { color: #fff; margin: 0 0 8px; font-size: 1.1rem; }
+.strength-card p { color: rgba(255,255,255,0.82); margin: 0; font-size: 0.95rem; }

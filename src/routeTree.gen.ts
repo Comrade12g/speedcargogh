@@ -22,6 +22,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesWarehousingRouteImport } from './routes/services.warehousing'
 import { Route as ServicesSeaFreightRouteImport } from './routes/services.sea-freight'
+import { Route as ServicesGroupageRouteImport } from './routes/services.groupage'
 import { Route as ServicesCustomsClearingRouteImport } from './routes/services.customs-clearing'
 import { Route as ServicesAirFreightRouteImport } from './routes/services.air-freight'
 import { Route as LanesYiwuToGhanaRouteImport } from './routes/lanes.yiwu-to-ghana'
@@ -92,6 +93,11 @@ const ServicesSeaFreightRoute = ServicesSeaFreightRouteImport.update({
   path: '/services/sea-freight',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesGroupageRoute = ServicesGroupageRouteImport.update({
+  id: '/services/groupage',
+  path: '/services/groupage',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesCustomsClearingRoute = ServicesCustomsClearingRouteImport.update({
   id: '/services/customs-clearing',
   path: '/services/customs-clearing',
@@ -129,6 +135,7 @@ export interface FileRoutesByFullPath {
   '/lanes/yiwu-to-ghana': typeof LanesYiwuToGhanaRoute
   '/services/air-freight': typeof ServicesAirFreightRoute
   '/services/customs-clearing': typeof ServicesCustomsClearingRoute
+  '/services/groupage': typeof ServicesGroupageRoute
   '/services/sea-freight': typeof ServicesSeaFreightRoute
   '/services/warehousing': typeof ServicesWarehousingRoute
 }
@@ -148,6 +155,7 @@ export interface FileRoutesByTo {
   '/lanes/yiwu-to-ghana': typeof LanesYiwuToGhanaRoute
   '/services/air-freight': typeof ServicesAirFreightRoute
   '/services/customs-clearing': typeof ServicesCustomsClearingRoute
+  '/services/groupage': typeof ServicesGroupageRoute
   '/services/sea-freight': typeof ServicesSeaFreightRoute
   '/services/warehousing': typeof ServicesWarehousingRoute
 }
@@ -168,6 +176,7 @@ export interface FileRoutesById {
   '/lanes/yiwu-to-ghana': typeof LanesYiwuToGhanaRoute
   '/services/air-freight': typeof ServicesAirFreightRoute
   '/services/customs-clearing': typeof ServicesCustomsClearingRoute
+  '/services/groupage': typeof ServicesGroupageRoute
   '/services/sea-freight': typeof ServicesSeaFreightRoute
   '/services/warehousing': typeof ServicesWarehousingRoute
 }
@@ -189,6 +198,7 @@ export interface FileRouteTypes {
     | '/lanes/yiwu-to-ghana'
     | '/services/air-freight'
     | '/services/customs-clearing'
+    | '/services/groupage'
     | '/services/sea-freight'
     | '/services/warehousing'
   fileRoutesByTo: FileRoutesByTo
@@ -208,6 +218,7 @@ export interface FileRouteTypes {
     | '/lanes/yiwu-to-ghana'
     | '/services/air-freight'
     | '/services/customs-clearing'
+    | '/services/groupage'
     | '/services/sea-freight'
     | '/services/warehousing'
   id:
@@ -227,6 +238,7 @@ export interface FileRouteTypes {
     | '/lanes/yiwu-to-ghana'
     | '/services/air-freight'
     | '/services/customs-clearing'
+    | '/services/groupage'
     | '/services/sea-freight'
     | '/services/warehousing'
   fileRoutesById: FileRoutesById
@@ -247,6 +259,7 @@ export interface RootRouteChildren {
   LanesYiwuToGhanaRoute: typeof LanesYiwuToGhanaRoute
   ServicesAirFreightRoute: typeof ServicesAirFreightRoute
   ServicesCustomsClearingRoute: typeof ServicesCustomsClearingRoute
+  ServicesGroupageRoute: typeof ServicesGroupageRoute
   ServicesSeaFreightRoute: typeof ServicesSeaFreightRoute
   ServicesWarehousingRoute: typeof ServicesWarehousingRoute
 }
@@ -344,6 +357,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesSeaFreightRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/groupage': {
+      id: '/services/groupage'
+      path: '/services/groupage'
+      fullPath: '/services/groupage'
+      preLoaderRoute: typeof ServicesGroupageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services/customs-clearing': {
       id: '/services/customs-clearing'
       path: '/services/customs-clearing'
@@ -391,6 +411,7 @@ const rootRouteChildren: RootRouteChildren = {
   LanesYiwuToGhanaRoute: LanesYiwuToGhanaRoute,
   ServicesAirFreightRoute: ServicesAirFreightRoute,
   ServicesCustomsClearingRoute: ServicesCustomsClearingRoute,
+  ServicesGroupageRoute: ServicesGroupageRoute,
   ServicesSeaFreightRoute: ServicesSeaFreightRoute,
   ServicesWarehousingRoute: ServicesWarehousingRoute,
 }
