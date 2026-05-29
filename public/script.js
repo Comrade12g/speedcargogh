@@ -154,6 +154,22 @@ const renderServices = () => {
   });
 };
 
+const renderStrengths = () => {
+  document.querySelectorAll('[data-render="strengths"]').forEach((node) => {
+    node.innerHTML = (data.strengths || [])
+      .map(
+        (item, index) => `
+          <article class="strength-card">
+            <span class="strength-index">${String(index + 1).padStart(2, "0")}</span>
+            <h3>${escapeHtml(item.title)}</h3>
+            <p>${escapeHtml(item.text)}</p>
+          </article>
+        `
+      )
+      .join("");
+  });
+};
+
 const renderProcess = () => {
   document.querySelectorAll('[data-render="process"]').forEach((node) => {
     node.innerHTML = (data.process || [])
@@ -675,6 +691,7 @@ renderAnnouncements();
 renderStats();
 renderServices();
 renderProcess();
+renderStrengths();
 renderOffices();
 renderPartners();
 renderSupportPartners();
