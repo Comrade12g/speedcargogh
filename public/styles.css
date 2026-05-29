@@ -1806,3 +1806,38 @@ body.nav-open {
   font-variant-numeric: tabular-nums;
   transition: color 200ms ease;
 }
+
+/* ===== Schedule + Rates tables ===== */
+.schedule-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line, #e3e8ef);
+  border-radius: 12px;
+  margin-top: 16px;
+}
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  background: #fff;
+}
+.schedule-table th,
+.schedule-table td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--line, #e3e8ef);
+}
+.schedule-table thead th {
+  background: var(--navy, #07233f);
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.schedule-table tbody tr:nth-child(even) { background: #f7f9fc; }
+.schedule-table tbody tr:hover { background: rgba(227, 19, 44, 0.05); }
+.rates-sheet h3 {
+  margin: 26px 0 6px;
+  color: var(--navy, #07233f);
+  font-size: 1.1rem;
+}
