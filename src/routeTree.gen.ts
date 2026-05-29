@@ -14,11 +14,18 @@ import { Route as ScheduleRouteImport } from './routes/schedule'
 import { Route as RatesRouteImport } from './routes/rates'
 import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as FaqRouteImport } from './routes/faq'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServicesWarehousingRouteImport } from './routes/services.warehousing'
+import { Route as ServicesSeaFreightRouteImport } from './routes/services.sea-freight'
+import { Route as ServicesCustomsClearingRouteImport } from './routes/services.customs-clearing'
+import { Route as ServicesAirFreightRouteImport } from './routes/services.air-freight'
+import { Route as LanesYiwuToGhanaRouteImport } from './routes/lanes.yiwu-to-ghana'
+import { Route as LanesGuangzhouToGhanaRouteImport } from './routes/lanes.guangzhou-to-ghana'
 
 const TrackingRoute = TrackingRouteImport.update({
   id: '/tracking',
@@ -43,6 +50,11 @@ const PartnersRoute = PartnersRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CareersRoute = CareersRouteImport.update({
@@ -70,6 +82,36 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesWarehousingRoute = ServicesWarehousingRouteImport.update({
+  id: '/services/warehousing',
+  path: '/services/warehousing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesSeaFreightRoute = ServicesSeaFreightRouteImport.update({
+  id: '/services/sea-freight',
+  path: '/services/sea-freight',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesCustomsClearingRoute = ServicesCustomsClearingRouteImport.update({
+  id: '/services/customs-clearing',
+  path: '/services/customs-clearing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesAirFreightRoute = ServicesAirFreightRouteImport.update({
+  id: '/services/air-freight',
+  path: '/services/air-freight',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LanesYiwuToGhanaRoute = LanesYiwuToGhanaRouteImport.update({
+  id: '/lanes/yiwu-to-ghana',
+  path: '/lanes/yiwu-to-ghana',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LanesGuangzhouToGhanaRoute = LanesGuangzhouToGhanaRouteImport.update({
+  id: '/lanes/guangzhou-to-ghana',
+  path: '/lanes/guangzhou-to-ghana',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -77,11 +119,18 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
   '/blog': typeof BlogRoute
   '/careers': typeof CareersRoute
+  '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
   '/partners': typeof PartnersRoute
   '/rates': typeof RatesRoute
   '/schedule': typeof ScheduleRoute
   '/tracking': typeof TrackingRoute
+  '/lanes/guangzhou-to-ghana': typeof LanesGuangzhouToGhanaRoute
+  '/lanes/yiwu-to-ghana': typeof LanesYiwuToGhanaRoute
+  '/services/air-freight': typeof ServicesAirFreightRoute
+  '/services/customs-clearing': typeof ServicesCustomsClearingRoute
+  '/services/sea-freight': typeof ServicesSeaFreightRoute
+  '/services/warehousing': typeof ServicesWarehousingRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -89,11 +138,18 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
   '/blog': typeof BlogRoute
   '/careers': typeof CareersRoute
+  '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
   '/partners': typeof PartnersRoute
   '/rates': typeof RatesRoute
   '/schedule': typeof ScheduleRoute
   '/tracking': typeof TrackingRoute
+  '/lanes/guangzhou-to-ghana': typeof LanesGuangzhouToGhanaRoute
+  '/lanes/yiwu-to-ghana': typeof LanesYiwuToGhanaRoute
+  '/services/air-freight': typeof ServicesAirFreightRoute
+  '/services/customs-clearing': typeof ServicesCustomsClearingRoute
+  '/services/sea-freight': typeof ServicesSeaFreightRoute
+  '/services/warehousing': typeof ServicesWarehousingRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -102,11 +158,18 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/blog': typeof BlogRoute
   '/careers': typeof CareersRoute
+  '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
   '/partners': typeof PartnersRoute
   '/rates': typeof RatesRoute
   '/schedule': typeof ScheduleRoute
   '/tracking': typeof TrackingRoute
+  '/lanes/guangzhou-to-ghana': typeof LanesGuangzhouToGhanaRoute
+  '/lanes/yiwu-to-ghana': typeof LanesYiwuToGhanaRoute
+  '/services/air-freight': typeof ServicesAirFreightRoute
+  '/services/customs-clearing': typeof ServicesCustomsClearingRoute
+  '/services/sea-freight': typeof ServicesSeaFreightRoute
+  '/services/warehousing': typeof ServicesWarehousingRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -116,11 +179,18 @@ export interface FileRouteTypes {
     | '/admin'
     | '/blog'
     | '/careers'
+    | '/faq'
     | '/login'
     | '/partners'
     | '/rates'
     | '/schedule'
     | '/tracking'
+    | '/lanes/guangzhou-to-ghana'
+    | '/lanes/yiwu-to-ghana'
+    | '/services/air-freight'
+    | '/services/customs-clearing'
+    | '/services/sea-freight'
+    | '/services/warehousing'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -128,11 +198,18 @@ export interface FileRouteTypes {
     | '/admin'
     | '/blog'
     | '/careers'
+    | '/faq'
     | '/login'
     | '/partners'
     | '/rates'
     | '/schedule'
     | '/tracking'
+    | '/lanes/guangzhou-to-ghana'
+    | '/lanes/yiwu-to-ghana'
+    | '/services/air-freight'
+    | '/services/customs-clearing'
+    | '/services/sea-freight'
+    | '/services/warehousing'
   id:
     | '__root__'
     | '/'
@@ -140,11 +217,18 @@ export interface FileRouteTypes {
     | '/admin'
     | '/blog'
     | '/careers'
+    | '/faq'
     | '/login'
     | '/partners'
     | '/rates'
     | '/schedule'
     | '/tracking'
+    | '/lanes/guangzhou-to-ghana'
+    | '/lanes/yiwu-to-ghana'
+    | '/services/air-freight'
+    | '/services/customs-clearing'
+    | '/services/sea-freight'
+    | '/services/warehousing'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -153,11 +237,18 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   BlogRoute: typeof BlogRoute
   CareersRoute: typeof CareersRoute
+  FaqRoute: typeof FaqRoute
   LoginRoute: typeof LoginRoute
   PartnersRoute: typeof PartnersRoute
   RatesRoute: typeof RatesRoute
   ScheduleRoute: typeof ScheduleRoute
   TrackingRoute: typeof TrackingRoute
+  LanesGuangzhouToGhanaRoute: typeof LanesGuangzhouToGhanaRoute
+  LanesYiwuToGhanaRoute: typeof LanesYiwuToGhanaRoute
+  ServicesAirFreightRoute: typeof ServicesAirFreightRoute
+  ServicesCustomsClearingRoute: typeof ServicesCustomsClearingRoute
+  ServicesSeaFreightRoute: typeof ServicesSeaFreightRoute
+  ServicesWarehousingRoute: typeof ServicesWarehousingRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -197,6 +288,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/careers': {
       id: '/careers'
       path: '/careers'
@@ -232,6 +330,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/warehousing': {
+      id: '/services/warehousing'
+      path: '/services/warehousing'
+      fullPath: '/services/warehousing'
+      preLoaderRoute: typeof ServicesWarehousingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/sea-freight': {
+      id: '/services/sea-freight'
+      path: '/services/sea-freight'
+      fullPath: '/services/sea-freight'
+      preLoaderRoute: typeof ServicesSeaFreightRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/customs-clearing': {
+      id: '/services/customs-clearing'
+      path: '/services/customs-clearing'
+      fullPath: '/services/customs-clearing'
+      preLoaderRoute: typeof ServicesCustomsClearingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/air-freight': {
+      id: '/services/air-freight'
+      path: '/services/air-freight'
+      fullPath: '/services/air-freight'
+      preLoaderRoute: typeof ServicesAirFreightRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lanes/yiwu-to-ghana': {
+      id: '/lanes/yiwu-to-ghana'
+      path: '/lanes/yiwu-to-ghana'
+      fullPath: '/lanes/yiwu-to-ghana'
+      preLoaderRoute: typeof LanesYiwuToGhanaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lanes/guangzhou-to-ghana': {
+      id: '/lanes/guangzhou-to-ghana'
+      path: '/lanes/guangzhou-to-ghana'
+      fullPath: '/lanes/guangzhou-to-ghana'
+      preLoaderRoute: typeof LanesGuangzhouToGhanaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -241,12 +381,29 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   BlogRoute: BlogRoute,
   CareersRoute: CareersRoute,
+  FaqRoute: FaqRoute,
   LoginRoute: LoginRoute,
   PartnersRoute: PartnersRoute,
   RatesRoute: RatesRoute,
   ScheduleRoute: ScheduleRoute,
   TrackingRoute: TrackingRoute,
+  LanesGuangzhouToGhanaRoute: LanesGuangzhouToGhanaRoute,
+  LanesYiwuToGhanaRoute: LanesYiwuToGhanaRoute,
+  ServicesAirFreightRoute: ServicesAirFreightRoute,
+  ServicesCustomsClearingRoute: ServicesCustomsClearingRoute,
+  ServicesSeaFreightRoute: ServicesSeaFreightRoute,
+  ServicesWarehousingRoute: ServicesWarehousingRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
