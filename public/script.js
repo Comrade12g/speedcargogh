@@ -874,4 +874,5 @@ const runAllRenders = () => {
   setupTracking();
   setupFloatingWhatsApp();
   setupStatCounters();
+  setupScrollReveal();
 })();
