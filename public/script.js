@@ -681,3 +681,5 @@ renderJobs();
 setupNavigation();
 setupForms();
 setupTracking();
+setupFloatingWhatsApp();
+setupStatCounters();
