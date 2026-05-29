@@ -40,35 +40,41 @@ window.SPEED_CARGO_DEFAULT_DATA = {
     {
       title: "Sea Freight",
       text: "Full container load, less-than-container load and consolidated cargo from China into Ghana.",
+      link: "/services/sea-freight",
       image:
         "https://images.unsplash.com/photo-1605745341112-85968b19335b?auto=format&fit=crop&w=900&q=82"
     },
     {
       title: "Air Freight",
       text: "Fast route support for urgent goods, samples, electronics and high-value cargo.",
+      link: "/services/air-freight",
       image:
         "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=900&q=82"
     },
     {
       title: "Container Shipping",
       text: "Container planning, loading coordination, sailing updates and release support.",
+      link: "/services/sea-freight",
       image:
         "https://images.unsplash.com/photo-1524522173746-f628baad3644?auto=format&fit=crop&w=900&q=82"
     },
     {
       title: "Customs Clearing",
       text: "Documentation guidance and clearance coordination with Ghana-facing support teams.",
+      link: "/services/customs-clearing",
       image:
         "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=900&q=82"
     },
     {
       title: "Warehousing",
       text: "Cargo receiving, sorting, storage and release from Accra warehouse points.",
+      link: "/services/warehousing",
       image: "./assets/speed-cargo-warehouse.mp4"
     },
     {
       title: "Procurement Support",
       text: "Supplier pickup, China-side coordination and import guidance for shops and SMEs.",
+      link: "/lanes/guangzhou-to-ghana",
       image:
         "https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=900&q=82"
     }
@@ -226,15 +232,15 @@ window.SPEED_CARGO_DEFAULT_DATA = {
     },
     {
       title: "Office photos",
-      type: "placeholder",
-      src: "",
-      caption: "Office images will appear here when the team uploads them."
+      type: "image",
+      src: "./assets/office-photo.jpg",
+      caption: "Speed Cargo customer service desk — Accra office."
     },
     {
       title: "Warehouse photos",
-      type: "placeholder",
-      src: "",
-      caption: "Laterbiokorshie and Manet warehouse images will appear here."
+      type: "image",
+      src: "./assets/warehouse-photo.jpg",
+      caption: "Laterbiokorshie & Manet warehouse — consolidation and dispatch floor."
     }
   ]
 };

@@ -1865,3 +1865,9 @@ body.nav-open {
 .faq-list details[open] summary::after { content: "−"; }
 .faq-list details p { margin: 12px 0 0; color: var(--ink); }
 .faq-list details a { color: var(--blue); }
+
+/* Clickable service cards */
+.service-card-link { text-decoration: none; color: inherit; display: block; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.service-card-link:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.service-card-link:hover .service-cta { color: var(--red); }
+.service-cta { display: inline-block; margin-top: 14px; font-weight: 700; color: var(--blue); font-size: 0.95rem; letter-spacing: 0.02em; transition: color 0.2s; }
