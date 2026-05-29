@@ -701,23 +701,34 @@ const setupTracking = () => {
   }
 };
 
-setProfileLinks();
-renderHero();
-renderAnnouncements();
-renderStats();
-renderServices();
-renderProcess();
-renderStrengths();
-renderOffices();
-renderPartners();
-renderSupportPartners();
-renderGallery();
-renderTeam();
-renderTestimonials();
-renderNews();
-renderJobs();
-setupNavigation();
-setupForms();
-setupTracking();
-setupFloatingWhatsApp();
-setupStatCounters();
+const runAllRenders = () => {
+  setProfileLinks();
+  renderHero();
+  renderAnnouncements();
+  renderStats();
+  renderServices();
+  renderProcess();
+  renderStrengths();
+  renderOffices();
+  renderPartners();
+  renderSupportPartners();
+  renderGallery();
+  renderTeam();
+  renderTestimonials();
+  renderNews();
+  renderJobs();
+};
+
+(async () => {
+  const remote = await fetchRemoteSiteContent();
+  if (remote) {
+    localStorage.setItem(DATA_KEY, JSON.stringify(remote));
+    data = mergeDeep(window.SPEED_CARGO_DEFAULT_DATA, remote);
+  }
+  runAllRenders();
+  setupNavigation();
+  setupForms();
+  setupTracking();
+  setupFloatingWhatsApp();
+  setupStatCounters();
+})();
