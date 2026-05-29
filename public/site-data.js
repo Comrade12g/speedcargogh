@@ -238,3 +238,8 @@ window.SPEED_CARGO_DEFAULT_DATA = {
     }
   ]
 };
+
+window.SPEED_CARGO_SUPABASE = {
+  url: "https://rqmxolzibpoiqpqvhigj.supabase.co",
+  anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJxbXhvbHppYnBvaXFwcXZoaWdqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwNjIxMTQsImV4cCI6MjA5NTYzODExNH0.Je1IXnfRlazgux_pwtV2aiEa-s1FVyXQTpDSGy7nb_8"
+};
