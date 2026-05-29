@@ -135,13 +135,18 @@ const renderServices = () => {
           } else if (item.image) {
             media = `<img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" loading="lazy" />`;
           }
+          const href = item.link || "#services";
+          const cta = item.link
+            ? `<span class="service-cta">Learn more →</span>`
+            : "";
           return `
-          <article class="service-card">
+          <a class="service-card service-card-link" href="${escapeHtml(href)}">
             <div class="service-media">${media}</div>
             <span class="service-index">${String(index + 1).padStart(2, "0")}</span>
             <h3>${escapeHtml(item.title)}</h3>
             <p>${escapeHtml(item.text)}</p>
-          </article>
+            ${cta}
+          </a>
         `;
         }
       )
