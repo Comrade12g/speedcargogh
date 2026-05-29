@@ -4,6 +4,51 @@ const NEWSLETTER_KEY = "speedCargoNewsletters";
 const APPLICATION_KEY = "speedCargoApplications";
 const AUTH_KEY = "speedCargoAdmin";
 
+const SUPABASE_URL = "https://rqmxolzibpoiqpqvhigj.supabase.co";
+const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJxbXhvbHppYnBvaXFwcXZoaWdqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwNjIxMTQsImV4cCI6MjA5NTYzODExNH0.Je1IXnfRlazgux_pwtV2aiEa-s1FVyXQTpDSGy7nb_8";
+const SB_TOKEN_KEY = "sb-rqmxolzibpoiqpqvhigj-auth-token";
+
+const getAccessToken = () => {
+  try {
+    const raw = localStorage.getItem(SB_TOKEN_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    return parsed?.access_token || parsed?.currentSession?.access_token || null;
+  } catch { return null; }
+};
+
+const fetchRemoteContent = async () => {
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/site_content?key=eq.main&select=data`, {
+      headers: { apikey: SUPABASE_ANON, Authorization: `Bearer ${SUPABASE_ANON}` }
+    });
+    if (!res.ok) return null;
+    const rows = await res.json();
+    const d = rows?.[0]?.data;
+    if (!d || typeof d !== "object" || Array.isArray(d) || Object.keys(d).length === 0) return null;
+    return d;
+  } catch { return null; }
+};
+
+const saveRemoteContent = async (payload) => {
+  const token = getAccessToken();
+  if (!token) throw new Error("Not signed in as admin. Sign in via /login.");
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/site_content?key=eq.main`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      apikey: SUPABASE_ANON,
+      Authorization: `Bearer ${token}`,
+      Prefer: "return=minimal"
+    },
+    body: JSON.stringify({ data: payload, updated_at: new Date().toISOString() })
+  });
+  if (!res.ok) {
+    const txt = await res.text().catch(() => "");
+    throw new Error(txt || `Save failed (${res.status})`);
+  }
+};
+
 const clone = (value) => JSON.parse(JSON.stringify(value));
 const defaultData = clone(window.SPEED_CARGO_DEFAULT_DATA);
 const mergeDeep = (base, override) => {
