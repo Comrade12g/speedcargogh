@@ -293,16 +293,27 @@ const renderTeam = () => {
 
 const renderTestimonials = () => {
   document.querySelectorAll('[data-render="testimonials"]').forEach((node) => {
-    node.innerHTML = (data.testimonials || [])
-      .map(
-        (item) => `
-          <article class="testimonial-card">
-            <blockquote>"${escapeHtml(item.quote)}"</blockquote>
-            <p><strong>${escapeHtml(item.name)}</strong><br />${escapeHtml(item.detail)}</p>
-          </article>
-        `
-      )
-      .join("");
+    const list = data.testimonials || [];
+    if (!list.length) {
+      node.innerHTML = "";
+      return;
+    }
+    const cardHtml = (item) => `
+      <article class="testimonial-card">
+        <div class="testimonial-stars" aria-label="5 star review">★★★★★</div>
+        <blockquote>"${escapeHtml(item.quote)}"</blockquote>
+        <p><strong>${escapeHtml(item.name)}</strong><br />${escapeHtml(item.detail)}</p>
+      </article>
+    `;
+    const cards = list.map(cardHtml).join("");
+    // Duplicate the track for a seamless marquee loop
+    node.classList.add("testimonial-marquee");
+    node.innerHTML = `
+      <div class="marquee-track" role="list">
+        ${cards}
+        ${cards}
+      </div>
+    `;
   });
 };
 
