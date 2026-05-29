@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Track Cargo | Speed Cargo Ghana</title>
+    <meta
+      name="description"
+      content="Track Speed Cargo shipments through the Speed Cargo branded tracking page using the live Yunwuyun route system."
+    />
+    <link rel="stylesheet" href="./styles.css?v=20260522" />
+    <script src="./site-data.js?v=20260522"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="utility-bar">
+        <a data-profile="phoneLink" href="tel:+233599208469">059 920 8469</a>
+        <a data-profile="emailLink" href="mailto:info@speedcargogh.com">info@speedcargogh.com</a>
+        <a data-profile="instagram" href="#" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a data-profile="facebook" href="#" target="_blank" rel="noopener noreferrer">Facebook</a>
+      </div>
+      <div class="nav-bar">
+        <a class="brand" href="./index.html" aria-label="Speed Cargo home">
+          <img src="./assets/speed-cargo-icon.png" alt="Speed Cargo" />
+          <span>
+            <strong>Speed Cargo</strong>
+            <small>Ghana</small>
+          </span>
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+          <span></span>
+          <span></span>
+          <span></span>
+          Menu
+        </button>
+        <nav class="main-nav nav-pane" id="primary-nav" aria-label="Primary navigation">
+          <a href="./index.html#services">Services</a>
+          <a href="./tracking.html">Tracking</a>
+          <a href="./index.html#quote">Quote</a>
+          <a href="./about.html">Company</a>
+          <a href="./blog.html">News</a>
+          <a href="./careers.html">Careers</a>
+        </nav>
+        <a class="nav-cta" href="./index.html#quote">Request Quote</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-hero tracking-hero">
+        <div>
+          <p class="eyebrow">Track and trace</p>
+          <h1>Track your Speed Cargo shipment.</h1>
+          <p>
+            Enter your shipment number to prepare the Speed Cargo tracking desk, then continue with
+            the secure live engine or WhatsApp support.
+          </p>
+        </div>
+        <form class="tracking-page-form panel" aria-label="Track shipment">
+          <label>
+            Tracking number
+            <input
+              id="tracking-code"
+              name="tracking"
+              type="text"
+              placeholder="Enter tracking number"
+              autocomplete="off"
+            />
+          </label>
+          <button class="button primary" type="submit">Track shipment</button>
+          <p class="form-note" data-note="tracking"></p>
+        </form>
+      </section>
+
+      <section class="tracking-workspace">
+        <aside class="tracking-aside panel">
+          <p class="eyebrow">Shipment path</p>
+          <div class="timeline">
+            <div class="timeline-step is-complete">
+              <span></span>
+              <div>
+                <strong>Booking received</strong>
+                <p>Shipment details are captured by Speed Cargo.</p>
+              </div>
+            </div>
+            <div class="timeline-step is-complete">
+              <span></span>
+              <div>
+                <strong>Origin handling</strong>
+                <p>Cargo is received, sorted and prepared for movement.</p>
+              </div>
+            </div>
+            <div class="timeline-step is-active">
+              <span></span>
+              <div>
+                <strong>In transit</strong>
+                <p>Sea or air movement is monitored through the route engine.</p>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <span></span>
+              <div>
+                <strong>Ghana release</strong>
+                <p>Clearing, warehouse release or delivery is coordinated.</p>
+              </div>
+            </div>
+          </div>
+        </aside>
+        <section class="tracking-desk panel">
+          <div class="frame-toolbar tracking-desk-toolbar">
+            <div>
+              <span>Speed Cargo tracking desk</span>
+              <strong data-tracking-label>Ready</strong>
+            </div>
+          </div>
+          <div class="tracking-options">
+            <a
+              class="tracking-option primary-option"
+              data-live-tracking-link
+              href="https://fms.yunwuyun.com/routes-ywy.html?tenantCode=FSWL"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <strong>Open secure live engine</strong>
+              <span>Continue to the route system with your tracking number attached.</span>
+            </a>
+            <a
+              class="tracking-option"
+              data-whatsapp-tracking-link
+              href="https://wa.me/233599208469"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <strong>Ask WhatsApp support</strong>
+              <span>Send the tracking number to the Speed Cargo team for a manual status check.</span>
+            </a>
+            <button class="tracking-option" data-copy-tracking type="button" disabled>
+              <strong>Copy number</strong>
+              <span>Copy the shipment number for phone, WhatsApp or office support.</span>
+            </button>
+          </div>
+          <div class="tracking-results" data-tracking-results>
+            <div class="empty-state">
+              <strong>Enter a tracking number above.</strong>
+              <p>Speed Cargo will query the live tracking system and show the result here.</p>
+            </div>
+          </div>
+          <div class="tracking-help-grid">
+            <article>
+              <strong>No result yet?</strong>
+              <p>Some shipments show after origin receiving, loading, sailing or Ghana arrival scans.</p>
+            </article>
+            <article>
+              <strong>Need urgent help?</strong>
+              <p>Use WhatsApp with the tracking number, supplier name and cargo description.</p>
+            </article>
+          </div>
+        </section>
+      </section>
+
+      <section class="tracking-embed-section" aria-labelledby="embedded-tracker-title">
+        <div class="section-heading">
+          <p class="eyebrow">Embedded official tracker</p>
+          <h2 id="embedded-tracker-title">Use the live tracking portal on this page.</h2>
+          <p>
+            This panel loads the official route system inside the Speed Cargo website. If it appears
+            slowly, use the direct tracking result above or open full screen.
+          </p>
+        </div>
+        <div class="tracking-frame-panel">
+          <div class="frame-toolbar">
+            <div>
+              <span>Official tracking portal</span>
+              <strong>Yunwuyun live system</strong>
+            </div>
+            <a
+              class="text-link"
+              data-live-tracking-link
+              href="https://fms.yunwuyun.com/routes-ywy.html?tenantCode=FSWL"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Open full screen
+            </a>
+          </div>
+          <iframe
+            class="tracking-frame"
+            data-tracking-frame
+            title="Speed Cargo embedded live tracking portal"
+            src="https://fms.yunwuyun.com/routes-ywy.html?tenantCode=FSWL"
+            loading="eager"
+          ></iframe>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <a class="footer-brand" href="./index.html">Speed Cargo Ghana</a>
+        <p>China to Ghana freight, clearing, warehousing and cargo tracking.</p>
+      </div>
+      <nav aria-label="Footer navigation">
+        <a href="./index.html#services">Services</a>
+        <a href="./partners.html">Partners</a>
+        <a href="./careers.html">Careers</a>
+        <a href="./blog.html">News</a>
+        <a href="./admin.html">Admin</a>
+      </nav>
+      <p>&copy; 2026 Speed Cargo Ghana.</p>
+    </footer>
+
+    <script src="./script.js?v=20260522"></script>
+  </body>
+</html>
