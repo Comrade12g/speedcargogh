@@ -153,7 +153,7 @@ h3 {
   align-items: center;
   justify-content: center;
   gap: clamp(14px, 2vw, 30px);
-  color: var(--navy);
+  color: var(--white);
   font-size: 0.95rem;
   font-weight: 850;
 }
