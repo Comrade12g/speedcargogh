@@ -1733,8 +1733,7 @@ select:focus {
 .nav-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(7, 35, 63, 0.55);
-  backdrop-filter: blur(2px);
+  background: rgba(7, 35, 63, 0.72);
   opacity: 0;
   pointer-events: none;
   transition: opacity 200ms ease;
@@ -1770,6 +1769,7 @@ body.nav-open {
   .main-nav.nav-pane {
     background: #fff;
     color: var(--navy, #07233f);
+    box-shadow: -20px 0 52px rgba(7, 35, 63, 0.32);
   }
   .main-nav.nav-pane a {
     color: var(--navy, #07233f) !important;
@@ -1779,6 +1779,7 @@ body.nav-open {
     transition: color 150ms ease, background 150ms ease;
     margin: 0 -24px;
     padding: 16px 24px;
+    background: #fff;
   }
   .main-nav.nav-pane a:hover,
   .main-nav.nav-pane a:active,
