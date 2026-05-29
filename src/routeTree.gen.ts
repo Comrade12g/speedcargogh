@@ -11,8 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TrackingRouteImport } from './routes/tracking'
 import { Route as PartnersRouteImport } from './routes/partners'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as BlogRouteImport } from './routes/blog'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -26,6 +28,11 @@ const PartnersRoute = PartnersRouteImport.update({
   path: '/partners',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CareersRoute = CareersRouteImport.update({
   id: '/careers',
   path: '/careers',
@@ -34,6 +41,11 @@ const CareersRoute = CareersRouteImport.update({
 const BlogRoute = BlogRouteImport.update({
   id: '/blog',
   path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -50,16 +62,20 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
   '/blog': typeof BlogRoute
   '/careers': typeof CareersRoute
+  '/login': typeof LoginRoute
   '/partners': typeof PartnersRoute
   '/tracking': typeof TrackingRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
   '/blog': typeof BlogRoute
   '/careers': typeof CareersRoute
+  '/login': typeof LoginRoute
   '/partners': typeof PartnersRoute
   '/tracking': typeof TrackingRoute
 }
@@ -67,22 +83,42 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
   '/blog': typeof BlogRoute
   '/careers': typeof CareersRoute
+  '/login': typeof LoginRoute
   '/partners': typeof PartnersRoute
   '/tracking': typeof TrackingRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/blog' | '/careers' | '/partners' | '/tracking'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/admin'
+    | '/blog'
+    | '/careers'
+    | '/login'
+    | '/partners'
+    | '/tracking'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/blog' | '/careers' | '/partners' | '/tracking'
+  to:
+    | '/'
+    | '/about'
+    | '/admin'
+    | '/blog'
+    | '/careers'
+    | '/login'
+    | '/partners'
+    | '/tracking'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/admin'
     | '/blog'
     | '/careers'
+    | '/login'
     | '/partners'
     | '/tracking'
   fileRoutesById: FileRoutesById
@@ -90,8 +126,10 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AdminRoute: typeof AdminRoute
   BlogRoute: typeof BlogRoute
   CareersRoute: typeof CareersRoute
+  LoginRoute: typeof LoginRoute
   PartnersRoute: typeof PartnersRoute
   TrackingRoute: typeof TrackingRoute
 }
@@ -112,6 +150,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PartnersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/careers': {
       id: '/careers'
       path: '/careers'
@@ -124,6 +169,13 @@ declare module '@tanstack/react-router' {
       path: '/blog'
       fullPath: '/blog'
       preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -146,8 +198,10 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AdminRoute: AdminRoute,
   BlogRoute: BlogRoute,
   CareersRoute: CareersRoute,
+  LoginRoute: LoginRoute,
   PartnersRoute: PartnersRoute,
   TrackingRoute: TrackingRoute,
 }
