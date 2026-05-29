@@ -14,6 +14,57 @@ export type Database = {
   }
   public: {
     Tables: {
+      quote_requests: {
+        Row: {
+          company: string | null
+          contact_name: string
+          created_at: string
+          destination: string
+          email: string
+          goods: string | null
+          id: string
+          mode: string
+          notes: string | null
+          origin: string
+          phone: string | null
+          status: string
+          volume_cbm: number | null
+          weight_kg: number | null
+        }
+        Insert: {
+          company?: string | null
+          contact_name: string
+          created_at?: string
+          destination: string
+          email: string
+          goods?: string | null
+          id?: string
+          mode: string
+          notes?: string | null
+          origin: string
+          phone?: string | null
+          status?: string
+          volume_cbm?: number | null
+          weight_kg?: number | null
+        }
+        Update: {
+          company?: string | null
+          contact_name?: string
+          created_at?: string
+          destination?: string
+          email?: string
+          goods?: string | null
+          id?: string
+          mode?: string
+          notes?: string | null
+          origin?: string
+          phone?: string | null
+          status?: string
+          volume_cbm?: number | null
+          weight_kg?: number | null
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
