@@ -86,7 +86,7 @@ h3 {
   position: sticky;
   z-index: 50;
   top: 0;
-  background: var(--dark-baby-blue);
+  background: var(--navy);
   box-shadow: 0 10px 32px rgba(7, 35, 63, 0.14);
   transition: transform 220ms ease;
 }
