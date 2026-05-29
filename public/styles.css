@@ -1841,3 +1841,27 @@ body.nav-open {
   color: var(--navy, #07233f);
   font-size: 1.1rem;
 }
+
+/* ===== Phase 3 content pages ===== */
+.content-page { max-width: 1180px; margin: 0 auto; padding: 60px 24px 80px; }
+.content-hero { padding: 40px 0 32px; border-bottom: 1px solid var(--line); margin-bottom: 40px; }
+.content-hero .eyebrow { color: var(--red); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.78rem; margin-bottom: 12px; }
+.content-hero h1 { font-size: clamp(2rem, 4.5vw, 3.2rem); color: var(--navy); margin: 0 0 16px; line-height: 1.1; }
+.content-hero .lede { font-size: 1.15rem; color: var(--ink); max-width: 780px; }
+.content-hero .hero-actions { margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap; }
+.content-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; margin-bottom: 48px; }
+.content-grid .panel { background: var(--soft); border: 1px solid var(--line); border-radius: 18px; padding: 26px; }
+.content-grid .panel h2 { margin: 0 0 12px; color: var(--navy); font-size: 1.2rem; }
+.content-grid .panel ul, .content-grid .panel ol { padding-left: 18px; margin: 8px 0 0; }
+.content-grid .panel li { margin: 4px 0; color: var(--ink); }
+.content-grid .panel a { color: var(--blue); }
+.cta-band { background: var(--navy); color: #fff; border-radius: 20px; padding: 36px; text-align: center; margin-top: 32px; }
+.cta-band h2 { color: #fff; margin: 0 0 10px; font-size: 1.6rem; }
+.cta-band p { color: rgba(255,255,255,0.85); margin: 0 0 20px; }
+.faq-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 48px; }
+.faq-list details { background: var(--soft); border: 1px solid var(--line); border-radius: 14px; padding: 18px 22px; }
+.faq-list summary { cursor: pointer; font-weight: 700; color: var(--navy); font-size: 1.05rem; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.faq-list summary::after { content: "+"; color: var(--red); font-size: 1.4rem; font-weight: 400; transition: transform 0.2s; }
+.faq-list details[open] summary::after { content: "−"; }
+.faq-list details p { margin: 12px 0 0; color: var(--ink); }
+.faq-list details a { color: var(--blue); }
