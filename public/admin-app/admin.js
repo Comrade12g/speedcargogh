@@ -218,6 +218,84 @@ const getSubmissions = (key) => {
   }
 };
 
+const fetchRemoteQuotes = async () => {
+  const token = getAccessToken();
+  if (!token) return null;
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/quote_requests?select=*&order=created_at.desc`,
+      { headers: { apikey: SUPABASE_ANON, Authorization: `Bearer ${token}` } }
+    );
+    if (!res.ok) return null;
+    return await res.json();
+  } catch { return null; }
+};
+
+const updateRemoteQuoteStatus = async (id, status) => {
+  const token = getAccessToken();
+  if (!token) throw new Error("Not signed in");
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/quote_requests?id=eq.${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      apikey: SUPABASE_ANON,
+      Authorization: `Bearer ${token}`,
+      Prefer: "return=minimal",
+    },
+    body: JSON.stringify({ status }),
+  });
+  if (!res.ok) throw new Error(await res.text());
+};
+
+const deleteRemoteQuote = async (id) => {
+  const token = getAccessToken();
+  if (!token) throw new Error("Not signed in");
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/quote_requests?id=eq.${id}`, {
+    method: "DELETE",
+    headers: { apikey: SUPABASE_ANON, Authorization: `Bearer ${token}` },
+  });
+  if (!res.ok) throw new Error(await res.text());
+};
+
+const formatDate = (iso) => {
+  if (!iso) return "";
+  try { return new Date(iso).toLocaleString(); } catch { return iso; }
+};
+
+const STATUS_OPTIONS = ["new", "contacted", "quoted", "won", "lost", "archived"];
+
+const quoteCardMarkup = (item) => {
+  const title = item.contact_name || item.email || "Quote request";
+  const fields = [
+    ["Submitted", formatDate(item.created_at)],
+    ["Email", item.email],
+    ["Phone", item.phone],
+    ["Company", item.company],
+    ["Mode", item.mode],
+    ["Origin", item.origin],
+    ["Destination", item.destination],
+    ["Weight (kg)", item.weight_kg],
+    ["Volume (cbm)", item.volume_cbm],
+    ["Goods", item.goods],
+    ["Notes", item.notes],
+  ].filter(([, v]) => v !== null && v !== undefined && v !== "");
+  const rows = fields
+    .map(([k, v]) => `<span><strong>${escapeHtml(k)}</strong>${escapeHtml(v)}</span>`)
+    .join("");
+  const statusSelect = `<label class="quote-status"><strong>Status</strong>
+    <select data-quote-status="${escapeHtml(item.id)}">
+      ${STATUS_OPTIONS.map((s) => `<option value="${s}"${s === item.status ? " selected" : ""}>${s}</option>`).join("")}
+    </select></label>`;
+  return `<article class="submission-item quote-card" data-quote-id="${escapeHtml(item.id)}">
+    <strong>${escapeHtml(title)}</strong>
+    ${rows}
+    ${statusSelect}
+    <div class="quote-actions">
+      <button type="button" class="button dark" data-quote-delete="${escapeHtml(item.id)}">Delete</button>
+    </div>
+  </article>`;
+};
+
 const submissionMarkup = (items) => {
   if (!items.length) return "<p>No saved items yet.</p>";
   return `
@@ -235,14 +313,65 @@ const submissionMarkup = (items) => {
   `;
 };
 
-const renderSubmissions = () => {
+const quotesMarkup = (items) => {
+  if (!items.length) return "<p>No quote requests yet.</p>";
+  return `<div class="submission-list">${items.map(quoteCardMarkup).join("")}</div>`;
+};
+
+const renderSubmissions = async () => {
   const quoteNode = document.querySelector('[data-submissions="quotes"]');
   const newsletterNode = document.querySelector('[data-submissions="newsletters"]');
   const applicationNode = document.querySelector('[data-submissions="applications"]');
 
-  if (quoteNode) quoteNode.innerHTML = submissionMarkup(getSubmissions(QUOTES_KEY));
   if (newsletterNode) newsletterNode.innerHTML = submissionMarkup(getSubmissions(NEWSLETTER_KEY));
   if (applicationNode) applicationNode.innerHTML = submissionMarkup(getSubmissions(APPLICATION_KEY));
+
+  if (quoteNode) {
+    quoteNode.innerHTML = "<p>Loading quote requests…</p>";
+    const remote = await fetchRemoteQuotes();
+    if (remote) {
+      quoteNode.innerHTML = quotesMarkup(remote);
+      bindQuoteHandlers(quoteNode);
+    } else {
+      // fallback to local mirror
+      quoteNode.innerHTML = submissionMarkup(getSubmissions(QUOTES_KEY));
+    }
+  }
+};
+
+const bindQuoteHandlers = (root) => {
+  root.querySelectorAll("[data-quote-status]").forEach((sel) => {
+    sel.addEventListener("change", async (e) => {
+      const id = e.target.dataset.quoteStatus;
+      const prev = e.target.dataset.prev || "";
+      e.target.disabled = true;
+      try {
+        await updateRemoteQuoteStatus(id, e.target.value);
+        e.target.dataset.prev = e.target.value;
+      } catch (err) {
+        alert("Failed to update status: " + err.message);
+        if (prev) e.target.value = prev;
+      } finally {
+        e.target.disabled = false;
+      }
+    });
+  });
+  root.querySelectorAll("[data-quote-delete]").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const id = btn.dataset.quoteDelete;
+      if (!confirm("Delete this quote request? This cannot be undone.")) return;
+      btn.disabled = true;
+      btn.textContent = "Deleting…";
+      try {
+        await deleteRemoteQuote(id);
+        document.querySelector(`[data-quote-id="${id}"]`)?.remove();
+      } catch (err) {
+        alert("Failed to delete: " + err.message);
+        btn.disabled = false;
+        btn.textContent = "Delete";
+      }
+    });
+  });
 };
 
 document.querySelector("[data-clear-submissions]")?.addEventListener("click", () => {
@@ -251,6 +380,7 @@ document.querySelector("[data-clear-submissions]")?.addEventListener("click", ()
   localStorage.removeItem(APPLICATION_KEY);
   renderSubmissions();
 });
+
 
 // Parent /admin route already validated admin role via Supabase. Skip the
 // inner email/password gate when a Supabase session exists.
