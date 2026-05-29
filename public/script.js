@@ -293,16 +293,27 @@ const renderTeam = () => {
 
 const renderTestimonials = () => {
   document.querySelectorAll('[data-render="testimonials"]').forEach((node) => {
-    node.innerHTML = (data.testimonials || [])
-      .map(
-        (item) => `
-          <article class="testimonial-card">
-            <blockquote>"${escapeHtml(item.quote)}"</blockquote>
-            <p><strong>${escapeHtml(item.name)}</strong><br />${escapeHtml(item.detail)}</p>
-          </article>
-        `
-      )
-      .join("");
+    const list = data.testimonials || [];
+    if (!list.length) {
+      node.innerHTML = "";
+      return;
+    }
+    const cardHtml = (item) => `
+      <article class="testimonial-card">
+        <div class="testimonial-stars" aria-label="5 star review">★★★★★</div>
+        <blockquote>"${escapeHtml(item.quote)}"</blockquote>
+        <p><strong>${escapeHtml(item.name)}</strong><br />${escapeHtml(item.detail)}</p>
+      </article>
+    `;
+    const cards = list.map(cardHtml).join("");
+    // Duplicate the track for a seamless marquee loop
+    node.classList.add("testimonial-marquee");
+    node.innerHTML = `
+      <div class="marquee-track" role="list">
+        ${cards}
+        ${cards}
+      </div>
+    `;
   });
 };
 
@@ -738,6 +749,99 @@ const setupTracking = () => {
   }
 };
 
+const renderFooter = () => {
+  const footers = document.querySelectorAll(".site-footer");
+  if (!footers.length) return;
+  const p = data.profile || {};
+  const services = (data.services || []).slice(0, 6);
+  const year = new Date().getFullYear();
+  const whatsappHref = p.whatsapp ? `https://wa.me/${p.whatsapp}` : "#";
+  const html = `
+    <div class="footer-inner">
+      <div class="footer-col footer-brand-col">
+        <a class="footer-brand" href="/">${escapeHtml(p.brand || "Speed Cargo")} <span>Ghana</span></a>
+        <p>Professional China to Ghana freight forwarding — sea &amp; air freight, customs clearing, warehousing and door-to-door delivery.</p>
+        <div class="footer-socials">
+          <a href="${escapeHtml(p.facebook || "#")}" aria-label="Facebook" target="_blank" rel="noopener">f</a>
+          <a href="${whatsappHref}" aria-label="WhatsApp" target="_blank" rel="noopener">W</a>
+          <a href="${escapeHtml(p.instagram || "#")}" aria-label="Instagram" target="_blank" rel="noopener">IG</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/#services">Services</a></li>
+          <li><a href="/rates">Rates</a></li>
+          <li><a href="/tracking">Track Shipment</a></li>
+          <li><a href="/blog">News</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/careers">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Our Services</h4>
+        <ul>
+          ${services
+            .map(
+              (s) =>
+                `<li><a href="${escapeHtml(s.link || "/#services")}">${escapeHtml(s.title)}</a></li>`
+            )
+            .join("")}
+          <li><a href="/services/warehousing">Warehousing</a></li>
+          <li><a href="/services/customs-clearing">Customs Clearance</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact Info</h4>
+        <ul class="footer-contact">
+          <li><span aria-hidden="true">◎</span> Latebiokorshie, Accra · Spintex Manet, Accra</li>
+          <li><span aria-hidden="true">☎</span> <a href="tel:${escapeHtml(p.phoneHref || "")}">${escapeHtml(p.phoneDisplay || "")}</a></li>
+          <li><span aria-hidden="true">✉</span> <a href="mailto:${escapeHtml(p.email || "")}">${escapeHtml(p.email || "")}</a></li>
+          <li><span aria-hidden="true">♛</span> <a href="${whatsappHref}" target="_blank" rel="noopener">WhatsApp ${escapeHtml(p.phoneDisplay || "")} — 24/7</a></li>
+          <li><span aria-hidden="true">⏱</span> ${escapeHtml(p.officeHours || "Mon–Sat, 8AM–6PM")}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; ${year} ${escapeHtml(p.brand || "Speed Cargo")} Ghana — China to Ghana freight, clearing &amp; warehousing.</p>
+      <nav aria-label="Footer secondary">
+        <a href="/partners">Partners</a>
+        <a href="/blog">News</a>
+        <a href="/admin">Admin</a>
+      </nav>
+    </div>
+  `;
+  footers.forEach((f) => {
+    f.innerHTML = html;
+  });
+};
+
+const setupScrollReveal = () => {
+  const targets = document.querySelectorAll(
+    ".service-card, .strength-card, .panel, .metric, .location-card, .team-card, .news-card, .testimonial-card, .route-step, .guide-grid > article, .shipping-console > a"
+  );
+  if (!targets.length) return;
+  targets.forEach((el) => el.classList.add("reveal"));
+  if (!("IntersectionObserver" in window)) {
+    targets.forEach((el) => el.classList.add("is-visible"));
+    return;
+  }
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          io.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+  );
+  targets.forEach((el) => io.observe(el));
+};
+
 const runAllRenders = () => {
   setProfileLinks();
   renderHero();
@@ -754,6 +858,7 @@ const runAllRenders = () => {
   renderTestimonials();
   renderNews();
   renderJobs();
+  renderFooter();
 };
 
 (async () => {
@@ -769,4 +874,5 @@ const runAllRenders = () => {
   setupTracking();
   setupFloatingWhatsApp();
   setupStatCounters();
+  setupScrollReveal();
 })();
