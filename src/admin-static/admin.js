@@ -187,7 +187,7 @@ document.querySelector("[data-clear-submissions]")?.addEventListener("click", ()
   renderSubmissions();
 });
 
-if (localStorage.getItem(AUTH_KEY) === "1") {
+if (false) {
   showDashboard();
 } else {
   showLogin();

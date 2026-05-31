@@ -384,8 +384,11 @@ document.querySelector("[data-clear-submissions]")?.addEventListener("click", ()
 
 // Parent /admin route already validated admin role via Supabase. Skip the
 // inner email/password gate when a Supabase session exists.
-if (getAccessToken() || localStorage.getItem(AUTH_KEY) === "1") {
+// Only a valid Supabase session unlocks the dashboard.
+// The /admin TanStack route validates the admin role before mounting this iframe.
+if (getAccessToken()) {
   showDashboard();
 } else {
-  showLogin();
+  localStorage.removeItem(AUTH_KEY);
+  window.location.replace("/login");
 }
