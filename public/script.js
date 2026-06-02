@@ -796,7 +796,7 @@ const renderFooter = () => {
       <div class="footer-col">
         <h4>Contact Info</h4>
         <ul class="footer-contact">
-          <li><span aria-hidden="true">◎</span> Latebiokorshie, Accra · Spintex Manet, Accra</li>
+          <li><span aria-hidden="true">◎</span> Spintex (Sliver St., Planners Ave), Accra</li>
           <li><span aria-hidden="true">☎</span> <a href="tel:${escapeHtml(p.phoneHref || "")}">${escapeHtml(p.phoneDisplay || "")}</a></li>
           <li><span aria-hidden="true">✉</span> <a href="mailto:${escapeHtml(p.email || "")}">${escapeHtml(p.email || "")}</a></li>
           <li><span aria-hidden="true">♛</span> <a href="${whatsappHref}" target="_blank" rel="noopener">WhatsApp ${escapeHtml(p.phoneDisplay || "")} — 24/7</a></li>
