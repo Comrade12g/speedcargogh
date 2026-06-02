@@ -255,7 +255,7 @@ window.SPEED_CARGO_DEFAULT_DATA = {
       title: "Warehouse photos",
       type: "image",
       src: "./assets/warehouse-photo.jpg",
-      caption: "Laterbiokorshie & Manet warehouse — consolidation and dispatch floor."
+      caption: "Spintex warehouse — consolidation and dispatch floor."
     }
   ]
 };
