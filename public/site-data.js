@@ -112,7 +112,7 @@ window.SPEED_CARGO_DEFAULT_DATA = {
     },
     {
       title: "Destination pickup or delivery",
-      text: "On arrival in Ghana, collect from our Laterbiokorshie or Spintex Manet warehouse, or have it delivered to your door."
+      text: "On arrival in Ghana, collect from our Spintex warehouse or have it delivered to your door."
     }
   ],
   offices: [
