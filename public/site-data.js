@@ -24,9 +24,9 @@ window.SPEED_CARGO_DEFAULT_DATA = {
   },
   announcements: [
     {
-      title: "New Manet warehouse now receiving cargo",
+      title: "New Spintex warehouse now receiving cargo",
       text:
-        "Customers can pick up and release shipments at the Spintex Manet location, opposite Ghana International Mall and behind KFC Manet.",
+        "Customers can pick up and release shipments at our Spintex warehouse on Sliver St., Planners Avenue.",
       tag: "Warehouse"
     }
   ],
