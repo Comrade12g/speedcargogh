@@ -2,9 +2,9 @@ window.SPEED_CARGO_DEFAULT_DATA = {
   profile: {
     brand: "Speed Cargo",
     domain: "speedcargogh.com",
-    phoneDisplay: "059 920 8469",
-    phoneHref: "+233599208469",
-    whatsapp: "233599208469",
+    phoneDisplay: "059 755 8668",
+    phoneHref: "+233597558668",
+    whatsapp: "233597558668",
     email: "info@speedcargogh.com",
     officeHours: "Monday to Saturday, 8:00 AM - 6:00 PM",
     instagram: "https://www.instagram.com/speedcargoghana?igsh=Z3Z6djJidG51bHNo",
