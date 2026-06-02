@@ -2,9 +2,9 @@ window.SPEED_CARGO_DEFAULT_DATA = {
   profile: {
     brand: "Speed Cargo",
     domain: "speedcargogh.com",
-    phoneDisplay: "059 920 8469",
-    phoneHref: "+233599208469",
-    whatsapp: "233599208469",
+    phoneDisplay: "059 755 8668",
+    phoneHref: "+233597558668",
+    whatsapp: "233597558668",
     email: "info@speedcargogh.com",
     officeHours: "Monday to Saturday, 8:00 AM - 6:00 PM",
     instagram: "https://www.instagram.com/speedcargoghana?igsh=Z3Z6djJidG51bHNo",
@@ -24,9 +24,9 @@ window.SPEED_CARGO_DEFAULT_DATA = {
   },
   announcements: [
     {
-      title: "New Manet warehouse now receiving cargo",
+      title: "New Spintex warehouse now receiving cargo",
       text:
-        "Customers can pick up and release shipments at the Spintex Manet location, opposite Ghana International Mall and behind KFC Manet.",
+        "Customers can pick up and release shipments at our Spintex warehouse on Sliver St., Planners Avenue.",
       tag: "Warehouse"
     }
   ],
@@ -112,54 +112,30 @@ window.SPEED_CARGO_DEFAULT_DATA = {
     },
     {
       title: "Destination pickup or delivery",
-      text: "On arrival in Ghana, collect from our Laterbiokorshie or Spintex Manet warehouse, or have it delivered to your door."
+      text: "On arrival in Ghana, collect from our Spintex warehouse or have it delivered to your door."
     }
   ],
   offices: [
     {
-      title: "Accra Office",
+      title: "Accra Head Office",
       text: "Main customer support office for enquiries, documentation and shipment help.",
-      address: "Speed Cargo, Accra",
-      mapEmbed: "https://maps.google.com/maps?q=5.5450797,-0.213703&z=17&output=embed",
-      map:
-        "https://www.google.com/maps/place/Speed+Cargo/@5.5450162,-0.2136326,75m/data=!3m1!1e3!4m7!3m6!1s0xfdf9100316aa439:0x21bf519b1f2ff0cd!4b1!8m2!3d5.5450797!4d-0.213703!16s%2Fg%2F11ybctpqq1?entry=ttu&g_ep=EgoyMDI2MDUxNy4wIKXMDSoASAFQAw%3D%3D"
+      address: "Ferro Bel Plaza Building, Derby Avenue, Accra",
+      mapEmbed: "https://maps.google.com/maps?q=Derby+Avenue+Accra&z=16&output=embed",
+      map: "https://www.google.com/maps/place/Derby+Avenue,+Accra"
     },
     {
-      title: "Laterbiokorshie Warehouse",
-      text: "Cargo release and warehouse support at 4th Sakumo Street.",
-      address: "4th Sakumo Street, Laterbiokorshie, Accra",
-      mapEmbed: "https://maps.google.com/maps?q=5.5443646,-0.2438005&z=17&output=embed",
-      map:
-        "https://www.google.com/maps/place/4th+Sakumo+St,+Accra/@5.5440394,-0.2443032,149m/data=!3m1!1e3!4m6!3m5!1s0xfdf976a6d1019f9:0x694abb126b0ca4c4!8m2!3d5.5443646!4d-0.2438005!16s%2Fg%2F1tgs28tp?entry=ttu&g_ep=EgoyMDI2MDUxNy4wIKXMDSoASAFQAw%3D%3D"
+      title: "Spintex Warehouse",
+      text: "Cargo release and warehouse support in Spintex.",
+      address: "Sliver St., Planners Avenue, Spintex, Accra",
+      mapEmbed: "https://maps.google.com/maps?q=Planners+Avenue+Spintex+Accra&z=16&output=embed",
+      map: "https://www.google.com/maps/place/Planners+Avenue,+Spintex,+Accra"
     },
     {
-      title: "Spintex Manet Warehouse",
-      text: "New warehouse opposite Ghana International Mall and behind KFC Manet.",
-      address: "Spintex Manet, Accra",
-      mapEmbed: "https://maps.google.com/maps?q=5.637702,-0.122072&z=16&output=embed",
-      map:
-        "https://www.google.com/maps/place/5%C2%B038'15.7%22N+0%C2%B007'19.5%22W/@5.637702,-0.122072,596m/data=!3m2!1e3!4b1!4m4!3m3!8m2!3d5.637702!4d-0.122072?entry=ttu&g_ep=EgoyMDI2MDUxNy4wIKXMDSoASAFQAw%3D%3D"
-    },
-    {
-      title: "Yiwu Branch (China)",
-      text: "Receiving address inside Yiwu International Trade Market — small commodities, accessories, hair, gifts.",
-      address: "Yiwu, Zhejiang, China",
-      mapEmbed: "https://maps.google.com/maps?q=Yiwu+International+Trade+City&z=14&output=embed",
-      map: "https://www.google.com/maps/place/Yiwu+International+Trade+City"
-    },
-    {
-      title: "Guangzhou & Shenzhen Branch (China)",
-      text: "Warehouse counters in Guangzhou wholesale markets and Shenzhen for electronics, fabric, hair and cosmetics.",
-      address: "Guangzhou & Shenzhen, China",
-      mapEmbed: "https://maps.google.com/maps?q=Guangzhou&z=11&output=embed",
-      map: "https://www.google.com/maps/place/Guangzhou"
-    },
-    {
-      title: "Congo Branch",
-      text: "Sister branch serving DRC and Central Africa — extending the same one-stop China-to-Africa network.",
-      address: "Congo",
-      mapEmbed: "https://maps.google.com/maps?q=Kinshasa&z=11&output=embed",
-      map: "https://www.google.com/maps/place/Kinshasa"
+      title: "Guangzhou Branch (China) — Ricky",
+      text: "China receiving office. Contact Ricky: +86 159 8913 0186.",
+      address: "Rm. 1907 Block B, Tianxiu Building, No. 300 Huanshi Zhong Road, Guangzhou City",
+      mapEmbed: "https://maps.google.com/maps?q=Tianxiu+Building+300+Huanshi+Zhong+Road+Guangzhou&z=16&output=embed",
+      map: "https://www.google.com/maps/place/Tianxiu+Building,+Guangzhou"
     }
   ],
   partners: [
@@ -279,7 +255,7 @@ window.SPEED_CARGO_DEFAULT_DATA = {
       title: "Warehouse photos",
       type: "image",
       src: "./assets/warehouse-photo.jpg",
-      caption: "Laterbiokorshie & Manet warehouse — consolidation and dispatch floor."
+      caption: "Spintex warehouse — consolidation and dispatch floor."
     }
   ]
 };
