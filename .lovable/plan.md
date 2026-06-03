@@ -1,4 +1,3 @@
-
 ## Scope addition
 
 On top of the previously approved work (clean-URL hosting of the uploaded static site + Lovable Cloud admin gate for `generalx369@outlook.com`), pull real content and imagery from `wl.pb68.cn` into the About and Branches sections of the new site. Take light inspiration from `yishippinggh.com` for layout/structure. Keep the uploaded files' existing colors, fonts, and overall styling untouched.
@@ -6,6 +5,7 @@ On top of the previously approved work (clean-URL hosting of the uploaded static
 ## Content to pull from wl.pb68.cn
 
 Company facts (translated from Chinese to English):
+
 - Founded 2004; approved by China's Ministry of Commerce as an import/export agency.
 - Trade relationships with buyers in 100+ countries.
 - 800+ containers shipped per year.
@@ -14,6 +14,7 @@ Company facts (translated from Chinese to English):
 - Positioning: safe, professional, efficient; one-to-one account manager; warehouses at destination for self pickup or delivery.
 
 Images to download and self-host under `public/assets/wl/` (so the new site doesn't hotlink the old domain):
+
 - `skin/picture/supply_01.jpg` … `supply_07.jpg` (partner/brand strip)
 - `skin/picture/img.png`, `img21.png`, `img31.png`, `img41.png` (service icons)
 - `skin/picture/handover.png`, `cities.png`, `client.png`, `company.png` (strength section icons)

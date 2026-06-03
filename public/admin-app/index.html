@@ -27,12 +27,18 @@
         </aside>
         <div class="admin-main">
           <header class="admin-topline">
-            <div><p class="eyebrow">Dashboard</p><h1>Speed Cargo website control.</h1></div>
+            <div>
+              <p class="eyebrow">Dashboard</p>
+              <h1>Speed Cargo website control.</h1>
+            </div>
             <button class="button primary" data-save-json type="button">Save content</button>
           </header>
           <section class="admin-panel is-active" data-admin-panel="content">
             <div class="panel admin-editor">
-              <div><h2>Full site content</h2><p>Edit JSON, save, then refresh public pages.</p></div>
+              <div>
+                <h2>Full site content</h2>
+                <p>Edit JSON, save, then refresh public pages.</p>
+              </div>
               <textarea data-json-editor spellcheck="false"></textarea>
               <div class="admin-actions">
                 <button class="button primary" data-save-json type="button">Save content</button>
@@ -43,23 +49,84 @@
           </section>
           <section class="admin-panel" data-admin-panel="quick">
             <div class="admin-grid">
-              <form class="panel quick-form" data-add="announcements"><h2>Add announcement</h2><label>Title<input name="title" required /></label><label>Tag<input name="tag" placeholder="News" /></label><label>Text<textarea name="text" rows="4" required></textarea></label><button class="button primary" type="submit">Add announcement</button></form>
-              <form class="panel quick-form" data-add="news"><h2>Add blog or news</h2><label>Title<input name="title" required /></label><label>Category<input name="category" placeholder="Shipping Guide" /></label><label>Date<input name="date" type="date" /></label><label>Summary<textarea name="summary" rows="4" required></textarea></label><button class="button primary" type="submit">Add post</button></form>
-              <form class="panel quick-form" data-add="jobs"><h2>Add job opening</h2><label>Title<input name="title" required /></label><label>Location<input name="location" value="Accra" /></label><label>Type<input name="type" value="Full time" /></label><label>Summary<textarea name="summary" rows="4" required></textarea></label><button class="button primary" type="submit">Add job</button></form>
-              <form class="panel quick-form" data-add="team"><h2>Add team member</h2><label>Name<input name="name" required /></label><label>Role<input name="role" required /></label><label>Bio<textarea name="bio" rows="4" required></textarea></label><button class="button primary" type="submit">Add team</button></form>
-              <form class="panel quick-form" data-add="testimonials"><h2>Add testimonial</h2><label>Name<input name="name" required /></label><label>Detail<input name="detail" placeholder="Customer type" /></label><label>Quote<textarea name="quote" rows="4" required></textarea></label><button class="button primary" type="submit">Add testimonial</button></form>
-              <form class="panel quick-form" data-add="gallery"><h2>Add gallery media</h2><label>Title<input name="title" required /></label><label>Type<select name="type"><option>image</option><option>video</option><option>placeholder</option></select></label><label>Media URL<input name="src" placeholder="./assets/file.jpg" /></label><label>Caption<textarea name="caption" rows="4"></textarea></label><button class="button primary" type="submit">Add media</button></form>
+              <form class="panel quick-form" data-add="announcements">
+                <h2>Add announcement</h2>
+                <label>Title<input name="title" required /></label
+                ><label>Tag<input name="tag" placeholder="News" /></label
+                ><label>Text<textarea name="text" rows="4" required></textarea></label
+                ><button class="button primary" type="submit">Add announcement</button>
+              </form>
+              <form class="panel quick-form" data-add="news">
+                <h2>Add blog or news</h2>
+                <label>Title<input name="title" required /></label
+                ><label>Category<input name="category" placeholder="Shipping Guide" /></label
+                ><label>Date<input name="date" type="date" /></label
+                ><label>Summary<textarea name="summary" rows="4" required></textarea></label
+                ><button class="button primary" type="submit">Add post</button>
+              </form>
+              <form class="panel quick-form" data-add="jobs">
+                <h2>Add job opening</h2>
+                <label>Title<input name="title" required /></label
+                ><label>Location<input name="location" value="Accra" /></label
+                ><label>Type<input name="type" value="Full time" /></label
+                ><label>Summary<textarea name="summary" rows="4" required></textarea></label
+                ><button class="button primary" type="submit">Add job</button>
+              </form>
+              <form class="panel quick-form" data-add="team">
+                <h2>Add team member</h2>
+                <label>Name<input name="name" required /></label
+                ><label>Role<input name="role" required /></label
+                ><label>Bio<textarea name="bio" rows="4" required></textarea></label
+                ><button class="button primary" type="submit">Add team</button>
+              </form>
+              <form class="panel quick-form" data-add="testimonials">
+                <h2>Add testimonial</h2>
+                <label>Name<input name="name" required /></label
+                ><label>Detail<input name="detail" placeholder="Customer type" /></label
+                ><label>Quote<textarea name="quote" rows="4" required></textarea></label
+                ><button class="button primary" type="submit">Add testimonial</button>
+              </form>
+              <form class="panel quick-form" data-add="gallery">
+                <h2>Add gallery media</h2>
+                <label>Title<input name="title" required /></label
+                ><label
+                  >Type<select name="type">
+                    <option>image</option>
+                    <option>video</option>
+                    <option>placeholder</option>
+                  </select></label
+                ><label>Media URL<input name="src" placeholder="./assets/file.jpg" /></label
+                ><label>Caption<textarea name="caption" rows="4"></textarea></label
+                ><button class="button primary" type="submit">Add media</button>
+              </form>
             </div>
           </section>
           <section class="admin-panel" data-admin-panel="submissions">
             <div class="admin-grid submissions-grid">
-              <div class="panel"><h2>Quote requests</h2><div data-submissions="quotes"></div></div>
-              <div class="panel"><h2>Newsletter signups</h2><div data-submissions="newsletters"></div></div>
-              <div class="panel"><h2>Career applications</h2><div data-submissions="applications"></div></div>
+              <div class="panel">
+                <h2>Quote requests</h2>
+                <div data-submissions="quotes"></div>
+              </div>
+              <div class="panel">
+                <h2>Newsletter signups</h2>
+                <div data-submissions="newsletters"></div>
+              </div>
+              <div class="panel">
+                <h2>Career applications</h2>
+                <div data-submissions="applications"></div>
+              </div>
             </div>
           </section>
           <section class="admin-panel" data-admin-panel="settings">
-            <div class="panel"><h2>Notes</h2><p>Changes save to browser storage. For production, wire these to the database.</p><div class="admin-actions"><button class="button dark" data-clear-submissions type="button">Clear submissions</button><a class="button primary" href="/">Open public site</a></div></div>
+            <div class="panel">
+              <h2>Notes</h2>
+              <p>Changes save to browser storage. For production, wire these to the database.</p>
+              <div class="admin-actions">
+                <button class="button dark" data-clear-submissions type="button">
+                  Clear submissions</button
+                ><a class="button primary" href="/">Open public site</a>
+              </div>
+            </div>
           </section>
         </div>
       </section>
