@@ -161,7 +161,10 @@ const submissionMarkup = (items) => {
         .map((item) => {
           const title = item.name || item.email || item.role || "Submission";
           const rows = Object.entries(item)
-            .map(([key, value]) => `<span><strong>${escapeHtml(key)}</strong>${escapeHtml(value)}</span>`)
+            .map(
+              ([key, value]) =>
+                `<span><strong>${escapeHtml(key)}</strong>${escapeHtml(value)}</span>`,
+            )
             .join("");
           return `<article class="submission-item"><strong>${escapeHtml(title)}</strong>${rows}</article>`;
         })
@@ -177,7 +180,8 @@ const renderSubmissions = () => {
 
   if (quoteNode) quoteNode.innerHTML = submissionMarkup(getSubmissions(QUOTES_KEY));
   if (newsletterNode) newsletterNode.innerHTML = submissionMarkup(getSubmissions(NEWSLETTER_KEY));
-  if (applicationNode) applicationNode.innerHTML = submissionMarkup(getSubmissions(APPLICATION_KEY));
+  if (applicationNode)
+    applicationNode.innerHTML = submissionMarkup(getSubmissions(APPLICATION_KEY));
 };
 
 document.querySelector("[data-clear-submissions]")?.addEventListener("click", () => {

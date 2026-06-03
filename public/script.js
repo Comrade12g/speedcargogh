@@ -54,7 +54,7 @@ const fetchRemoteSiteContent = async () => {
   if (!cfg?.url || !cfg?.anonKey) return null;
   try {
     const res = await fetch(`${cfg.url}/rest/v1/site_content?key=eq.main&select=data`, {
-      headers: { apikey: cfg.anonKey, Authorization: `Bearer ${cfg.anonKey}` }
+      headers: { apikey: cfg.anonKey, Authorization: `Bearer ${cfg.anonKey}` },
     });
     if (!res.ok) return null;
     const rows = await res.json();
@@ -62,7 +62,9 @@ const fetchRemoteSiteContent = async () => {
     if (!remote || typeof remote !== "object" || Array.isArray(remote)) return null;
     if (Object.keys(remote).length === 0) return null;
     return remote;
-  } catch { return null; }
+  } catch {
+    return null;
+  }
 };
 
 const setText = (selector, value) => {
@@ -119,7 +121,7 @@ const renderAnnouncements = () => {
             <span>${escapeHtml(item.tag || "News")}</span>
             <p><strong>${escapeHtml(item.title)}</strong> ${escapeHtml(item.text)}</p>
           </article>
-        `
+        `,
       )
       .join("");
   });
@@ -134,7 +136,7 @@ const renderStats = () => {
             <strong>${escapeHtml(item.value)}</strong>
             <span>${escapeHtml(item.label)}</span>
           </article>
-        `
+        `,
       )
       .join("");
   });
@@ -143,19 +145,16 @@ const renderStats = () => {
 const renderServices = () => {
   document.querySelectorAll('[data-render="services"]').forEach((node) => {
     node.innerHTML = (data.services || [])
-      .map(
-        (item, index) => {
-          let media = `<div class="media-placeholder">${escapeHtml(item.title)}</div>`;
-          if (item.image?.endsWith(".mp4")) {
-            media = `<video src="${escapeHtml(item.image)}" autoplay muted loop playsinline></video>`;
-          } else if (item.image) {
-            media = `<img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" loading="lazy" />`;
-          }
-          const href = item.link || "#services";
-          const cta = item.link
-            ? `<span class="service-cta">Learn more →</span>`
-            : "";
-          return `
+      .map((item, index) => {
+        let media = `<div class="media-placeholder">${escapeHtml(item.title)}</div>`;
+        if (item.image?.endsWith(".mp4")) {
+          media = `<video src="${escapeHtml(item.image)}" autoplay muted loop playsinline></video>`;
+        } else if (item.image) {
+          media = `<img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" loading="lazy" />`;
+        }
+        const href = item.link || "#services";
+        const cta = item.link ? `<span class="service-cta">Learn more →</span>` : "";
+        return `
           <a class="service-card service-card-link" href="${escapeHtml(href)}">
             <div class="service-media">${media}</div>
             <span class="service-index">${String(index + 1).padStart(2, "0")}</span>
@@ -164,8 +163,7 @@ const renderServices = () => {
             ${cta}
           </a>
         `;
-        }
-      )
+      })
       .join("");
   });
 };
@@ -180,7 +178,7 @@ const renderStrengths = () => {
             <h3>${escapeHtml(item.title)}</h3>
             <p>${escapeHtml(item.text)}</p>
           </article>
-        `
+        `,
       )
       .join("");
   });
@@ -196,7 +194,7 @@ const renderProcess = () => {
             <h3>${escapeHtml(item.title)}</h3>
             <p>${escapeHtml(item.text)}</p>
           </article>
-        `
+        `,
       )
       .join("");
   });
@@ -222,7 +220,7 @@ const renderOffices = () => {
               Open map
             </a>
           </article>
-        `
+        `,
       )
       .join("");
   });
@@ -236,7 +234,7 @@ const renderPartners = () => {
           <div class="partner-logo">
             <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}" loading="lazy" />
           </div>
-        `
+        `,
       )
       .join("");
   });
@@ -285,7 +283,7 @@ const renderTeam = () => {
             <strong>${escapeHtml(item.role)}</strong>
             <p>${escapeHtml(item.bio)}</p>
           </article>
-        `
+        `,
       )
       .join("");
   });
@@ -327,7 +325,7 @@ const renderNews = () => {
             <h3>${escapeHtml(item.title)}</h3>
             <p>${escapeHtml(item.summary)}</p>
           </article>
-        `
+        `,
       )
       .join("");
   });
@@ -346,7 +344,7 @@ const renderJobs = () => {
             </div>
             <a class="text-link" href="#apply">Apply</a>
           </article>
-        `
+        `,
       )
       .join("");
   });
@@ -411,24 +409,28 @@ const setupScrollHeader = () => {
   let lastScroll = 0;
   const threshold = 6;
 
-  window.addEventListener("scroll", () => {
-    const current = window.scrollY || window.pageYOffset;
+  window.addEventListener(
+    "scroll",
+    () => {
+      const current = window.scrollY || window.pageYOffset;
 
-    if (document.body.classList.contains("nav-open")) {
-      header.classList.remove("header-hidden");
-      lastScroll = current;
-      return;
-    }
+      if (document.body.classList.contains("nav-open")) {
+        header.classList.remove("header-hidden");
+        lastScroll = current;
+        return;
+      }
 
-    if (Math.abs(current - lastScroll) < threshold) return;
+      if (Math.abs(current - lastScroll) < threshold) return;
 
-    if (current > lastScroll && current > 60) {
-      header.classList.add("header-hidden");
-    } else {
-      header.classList.remove("header-hidden");
-    }
-    lastScroll = current <= 0 ? 0 : current;
-  }, { passive: true });
+      if (current > lastScroll && current > 60) {
+        header.classList.add("header-hidden");
+      } else {
+        header.classList.remove("header-hidden");
+      }
+      lastScroll = current <= 0 ? 0 : current;
+    },
+    { passive: true },
+  );
 };
 
 const setupFloatingWhatsApp = () => {
@@ -452,7 +454,9 @@ const setupFloatingWhatsApp = () => {
 };
 
 const setupStatCounters = () => {
-  const numbers = document.querySelectorAll(".metric-strip strong, .metric-strip [data-metric-value]");
+  const numbers = document.querySelectorAll(
+    ".metric-strip strong, .metric-strip [data-metric-value]",
+  );
   if (!numbers.length || !("IntersectionObserver" in window)) return;
   const animate = (el) => {
     const raw = el.textContent.trim();
@@ -467,23 +471,25 @@ const setupStatCounters = () => {
       const p = Math.min(1, (now - start) / duration);
       const eased = 1 - Math.pow(1 - p, 3);
       const cur = target * eased;
-      const formatted = target >= 100
-        ? Math.round(cur).toLocaleString()
-        : cur.toFixed(num.includes(".") ? 1 : 0);
+      const formatted =
+        target >= 100 ? Math.round(cur).toLocaleString() : cur.toFixed(num.includes(".") ? 1 : 0);
       el.textContent = `${prefix}${formatted}${suffix}`;
       if (p < 1) requestAnimationFrame(step);
     };
     requestAnimationFrame(step);
   };
   const seen = new WeakSet();
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if (e.isIntersecting && !seen.has(e.target)) {
-        seen.add(e.target);
-        animate(e.target);
-      }
-    });
-  }, { threshold: 0.4 });
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting && !seen.has(e.target)) {
+          seen.add(e.target);
+          animate(e.target);
+        }
+      });
+    },
+    { threshold: 0.4 },
+  );
   numbers.forEach((n) => io.observe(n));
 };
 
@@ -496,9 +502,9 @@ const submitQuoteToBackend = async (payload) => {
       "Content-Type": "application/json",
       apikey: cfg.anonKey,
       Authorization: `Bearer ${cfg.anonKey}`,
-      Prefer: "return=minimal"
+      Prefer: "return=minimal",
     },
-    body: JSON.stringify(payload)
+    body: JSON.stringify(payload),
   });
   if (!res.ok) {
     const txt = await res.text().catch(() => "");
@@ -514,20 +520,44 @@ const setupForms = () => {
     const note = document.querySelector('[data-note="quote"]');
     const btn = form.querySelector('button[type="submit"]');
     const payload = {
-      contact_name: String(formData.name || "").trim().slice(0, 200),
-      phone: String(formData.phone || "").trim().slice(0, 60) || null,
-      email: String(formData.email || formData.phone || "noemail@speedcargogh.com").trim().slice(0, 320),
-      origin: String(formData.origin || "Unspecified").trim().slice(0, 200) || "Unspecified",
-      destination: String(formData.destination || "Unspecified").trim().slice(0, 200) || "Unspecified",
-      mode: String(formData.route || "Not sure").trim().slice(0, 40),
-      goods: String(formData.cargo || "").trim().slice(0, 2000) || null,
-      notes: String(formData.size || "").trim().slice(0, 2000) || null
+      contact_name: String(formData.name || "")
+        .trim()
+        .slice(0, 200),
+      phone:
+        String(formData.phone || "")
+          .trim()
+          .slice(0, 60) || null,
+      email: String(formData.email || formData.phone || "noemail@speedcargogh.com")
+        .trim()
+        .slice(0, 320),
+      origin:
+        String(formData.origin || "Unspecified")
+          .trim()
+          .slice(0, 200) || "Unspecified",
+      destination:
+        String(formData.destination || "Unspecified")
+          .trim()
+          .slice(0, 200) || "Unspecified",
+      mode: String(formData.route || "Not sure")
+        .trim()
+        .slice(0, 40),
+      goods:
+        String(formData.cargo || "")
+          .trim()
+          .slice(0, 2000) || null,
+      notes:
+        String(formData.size || "")
+          .trim()
+          .slice(0, 2000) || null,
     };
     // Basic email pattern - fall back to placeholder if user didn't supply one
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(payload.email)) {
       payload.email = "noemail@speedcargogh.com";
     }
-    if (btn) { btn.disabled = true; btn.textContent = "Sending..."; }
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = "Sending...";
+    }
     try {
       await submitQuoteToBackend(payload);
       saveCollectionItem(QUOTES_KEY, formData); // keep local mirror for admin offline view
@@ -539,11 +569,15 @@ const setupForms = () => {
     } catch (err) {
       saveCollectionItem(QUOTES_KEY, formData);
       if (note) {
-        note.textContent = "Saved locally — the Speed Cargo team will follow up. (" + err.message + ")";
+        note.textContent =
+          "Saved locally — the Speed Cargo team will follow up. (" + err.message + ")";
         note.style.color = "var(--red)";
       }
     } finally {
-      if (btn) { btn.disabled = false; btn.textContent = "Send quote request"; }
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = "Send quote request";
+      }
     }
   });
 
@@ -635,7 +669,7 @@ const renderTrackingResults = (state, code, payload) => {
               <strong>${escapeHtml(key)}</strong>
               ${escapeHtml(value)}
             </span>
-          `
+          `,
         )
         .join("");
 
@@ -658,12 +692,12 @@ const queryLiveTracking = async (code) => {
       mode: "cors",
       credentials: "include",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         tenantCode: data.profile.tenantCode || "FSWL",
-        conditionNo: code
-      })
+        conditionNo: code,
+      }),
     });
 
     if (!response.ok) {
@@ -703,7 +737,9 @@ const setupTracking = () => {
   };
 
   const scrollToTrackingDetails = () => {
-    const target = document.querySelector(".tracking-workspace") || document.querySelector("[data-tracking-results]");
+    const target =
+      document.querySelector(".tracking-workspace") ||
+      document.querySelector("[data-tracking-results]");
     if (!target) return;
     window.setTimeout(() => {
       target.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -786,7 +822,7 @@ const renderFooter = () => {
           ${services
             .map(
               (s) =>
-                `<li><a href="${escapeHtml(s.link || "/#services")}">${escapeHtml(s.title)}</a></li>`
+                `<li><a href="${escapeHtml(s.link || "/#services")}">${escapeHtml(s.title)}</a></li>`,
             )
             .join("")}
           <li><a href="/services/warehousing">Warehousing</a></li>
@@ -820,7 +856,7 @@ const renderFooter = () => {
 
 const setupScrollReveal = () => {
   const targets = document.querySelectorAll(
-    ".service-card, .strength-card, .panel, .metric, .location-card, .team-card, .news-card, .testimonial-card, .route-step, .guide-grid > article, .shipping-console > a"
+    ".service-card, .strength-card, .panel, .metric, .location-card, .team-card, .news-card, .testimonial-card, .route-step, .guide-grid > article, .shipping-console > a",
   );
   if (!targets.length) return;
   targets.forEach((el) => el.classList.add("reveal"));
@@ -837,7 +873,7 @@ const setupScrollReveal = () => {
         }
       });
     },
-    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
   );
   targets.forEach((el) => io.observe(el));
 };

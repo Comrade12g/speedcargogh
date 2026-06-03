@@ -5,7 +5,8 @@ const APPLICATION_KEY = "speedCargoApplications";
 const AUTH_KEY = "speedCargoAdmin";
 
 const SUPABASE_URL = "https://rqmxolzibpoiqpqvhigj.supabase.co";
-const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJxbXhvbHppYnBvaXFwcXZoaWdqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwNjIxMTQsImV4cCI6MjA5NTYzODExNH0.Je1IXnfRlazgux_pwtV2aiEa-s1FVyXQTpDSGy7nb_8";
+const SUPABASE_ANON =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJxbXhvbHppYnBvaXFwcXZoaWdqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwNjIxMTQsImV4cCI6MjA5NTYzODExNH0.Je1IXnfRlazgux_pwtV2aiEa-s1FVyXQTpDSGy7nb_8";
 const SB_TOKEN_KEY = "sb-rqmxolzibpoiqpqvhigj-auth-token";
 
 const getAccessToken = () => {
@@ -14,20 +15,24 @@ const getAccessToken = () => {
     if (!raw) return null;
     const parsed = JSON.parse(raw);
     return parsed?.access_token || parsed?.currentSession?.access_token || null;
-  } catch { return null; }
+  } catch {
+    return null;
+  }
 };
 
 const fetchRemoteContent = async () => {
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/site_content?key=eq.main&select=data`, {
-      headers: { apikey: SUPABASE_ANON, Authorization: `Bearer ${SUPABASE_ANON}` }
+      headers: { apikey: SUPABASE_ANON, Authorization: `Bearer ${SUPABASE_ANON}` },
     });
     if (!res.ok) return null;
     const rows = await res.json();
     const d = rows?.[0]?.data;
     if (!d || typeof d !== "object" || Array.isArray(d) || Object.keys(d).length === 0) return null;
     return d;
-  } catch { return null; }
+  } catch {
+    return null;
+  }
 };
 
 const saveRemoteContent = async (payload) => {
@@ -39,9 +44,9 @@ const saveRemoteContent = async (payload) => {
       "Content-Type": "application/json",
       apikey: SUPABASE_ANON,
       Authorization: `Bearer ${token}`,
-      Prefer: "return=minimal"
+      Prefer: "return=minimal",
     },
-    body: JSON.stringify({ data: payload, updated_at: new Date().toISOString() })
+    body: JSON.stringify({ data: payload, updated_at: new Date().toISOString() }),
   });
   if (!res.ok) {
     const txt = await res.text().catch(() => "");
@@ -187,7 +192,6 @@ document.querySelectorAll("[data-add]").forEach((form) => {
       siteData[section] = [];
     }
 
-
     if (section === "news" && !values.date) {
       values.date = new Date().toISOString().slice(0, 10);
     }
@@ -206,7 +210,9 @@ document.querySelectorAll("[data-add]").forEach((form) => {
       button.textContent = "Save failed";
       console.error(err);
     }
-    setTimeout(() => { button.textContent = original; }, 1500);
+    setTimeout(() => {
+      button.textContent = original;
+    }, 1500);
   });
 });
 
@@ -224,11 +230,13 @@ const fetchRemoteQuotes = async () => {
   try {
     const res = await fetch(
       `${SUPABASE_URL}/rest/v1/quote_requests?select=*&order=created_at.desc`,
-      { headers: { apikey: SUPABASE_ANON, Authorization: `Bearer ${token}` } }
+      { headers: { apikey: SUPABASE_ANON, Authorization: `Bearer ${token}` } },
     );
     if (!res.ok) return null;
     return await res.json();
-  } catch { return null; }
+  } catch {
+    return null;
+  }
 };
 
 const updateRemoteQuoteStatus = async (id, status) => {
@@ -259,7 +267,11 @@ const deleteRemoteQuote = async (id) => {
 
 const formatDate = (iso) => {
   if (!iso) return "";
-  try { return new Date(iso).toLocaleString(); } catch { return iso; }
+  try {
+    return new Date(iso).toLocaleString();
+  } catch {
+    return iso;
+  }
 };
 
 const STATUS_OPTIONS = ["new", "contacted", "quoted", "won", "lost", "archived"];
@@ -304,7 +316,10 @@ const submissionMarkup = (items) => {
         .map((item) => {
           const title = item.name || item.email || item.role || "Submission";
           const rows = Object.entries(item)
-            .map(([key, value]) => `<span><strong>${escapeHtml(key)}</strong>${escapeHtml(value)}</span>`)
+            .map(
+              ([key, value]) =>
+                `<span><strong>${escapeHtml(key)}</strong>${escapeHtml(value)}</span>`,
+            )
             .join("");
           return `<article class="submission-item"><strong>${escapeHtml(title)}</strong>${rows}</article>`;
         })
@@ -324,7 +339,8 @@ const renderSubmissions = async () => {
   const applicationNode = document.querySelector('[data-submissions="applications"]');
 
   if (newsletterNode) newsletterNode.innerHTML = submissionMarkup(getSubmissions(NEWSLETTER_KEY));
-  if (applicationNode) applicationNode.innerHTML = submissionMarkup(getSubmissions(APPLICATION_KEY));
+  if (applicationNode)
+    applicationNode.innerHTML = submissionMarkup(getSubmissions(APPLICATION_KEY));
 
   if (quoteNode) {
     quoteNode.innerHTML = "<p>Loading quote requests…</p>";
@@ -380,7 +396,6 @@ document.querySelector("[data-clear-submissions]")?.addEventListener("click", ()
   localStorage.removeItem(APPLICATION_KEY);
   renderSubmissions();
 });
-
 
 // Parent /admin route already validated admin role via Supabase. Skip the
 // inner email/password gate when a Supabase session exists.
