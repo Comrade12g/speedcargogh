@@ -9,7 +9,7 @@ Add these in your host dashboard before deploying:
 | Name | Value |
 | --- | --- |
 | `VITE_SUPABASE_URL` | `https://rqmxolzibpoiqpqvhigj.supabase.co` |
-| `VITE_SUPABASE_PUBLISHABLE_KEY` | `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJIUzI1NiIsInJlZiI6InJxbXhvbHppYnBvaXFwcXZoaWdqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwNjIxMTQsImV4cCI6MjA5NTYzODExNH0.Je1IXnfRlazgux_pwtV2aiEa-s1FVyXQTpDSGy7nb_8` |
+| `VITE_SUPABASE_PUBLISHABLE_KEY` | `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJxbXhvbHppYnBvaXFwcXZoaWdqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwNjIxMTQsImV4cCI6MjA5NTYzODExNH0.Je1IXnfRlazgux_pwtV2aiEa-s1FVyXQTpDSGy7nb_8` |
 | `VITE_SUPABASE_PROJECT_ID` | `rqmxolzibpoiqpqvhigj` |
 | `SUPABASE_URL` | `https://rqmxolzibpoiqpqvhigj.supabase.co` |
 | `SUPABASE_PUBLISHABLE_KEY` | same value as `VITE_SUPABASE_PUBLISHABLE_KEY` |
