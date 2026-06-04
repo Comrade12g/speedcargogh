@@ -43,7 +43,7 @@ window.SPEED_CARGO_DEFAULT_DATA = {
     },
     {
       title: "Stability advantage",
-      text: "High volume guarantees stable space on every major route. Air departs daily; sea containers load every day."
+      text: "High volume guarantees stable space on every sailing. LCL groupage departs weekly; FCL containers load every day across all major China ports."
     },
     {
       title: "Financial strength",
@@ -70,14 +70,19 @@ window.SPEED_CARGO_DEFAULT_DATA = {
         "https://images.unsplash.com/photo-1524522173746-f628baad3644?auto=format&fit=crop&w=900&q=82"
     },
     {
-      title: "VIP Air — 3-Day Direct",
-      text: "One-stop air, VIP 3-day direct, MCO per-piece pricing, airport-to-airport and Africa e-commerce air freight.",
-      link: "/services/air-freight",
+      title: "Express Sea LCL — Fast Lane",
+      text: "Bonded-zone fast LCL from Shenzhen and Nansha. Weekly fixed sailings, faster cut-off and predictable transit for repeat shippers who need ocean speed without container costs.",
+      link: "/services/groupage",
       image:
-        "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=900&q=82"
+        "https://images.unsplash.com/photo-1577416412292-747c6607f055?auto=format&fit=crop&w=900&q=82"
     },
     {
       title: "Double Customs Clearing",
+      text: "Door-to-door and warehouse-to-warehouse double clearing. Your cargo clears China export and Ghana import without ever leaving our network.",
+      link: "/services/customs-clearing",
+      image:
+        "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=900&q=82"
+    },
       text: "Door-to-door and warehouse-to-warehouse double clearing. Your cargo clears China export and Ghana import without ever leaving our network.",
       link: "/services/customs-clearing",
       image:
