@@ -820,7 +820,7 @@ const renderFooter = () => {
 
 const setupScrollReveal = () => {
   const targets = document.querySelectorAll(
-    ".service-card, .strength-card, .panel, .metric, .location-card, .team-card, .news-card, .testimonial-card, .route-step, .guide-grid > article, .shipping-console > a"
+    ".service-card, .strength-card, .panel, .metric, .location-card, .team-card, .news-card, .testimonial-card, .route-step, .guide-grid > article, .shipping-console > a, .ocean-tile, .branch-card"
   );
   if (!targets.length) return;
   targets.forEach((el) => el.classList.add("reveal"));
