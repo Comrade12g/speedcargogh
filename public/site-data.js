@@ -113,7 +113,7 @@ window.SPEED_CARGO_DEFAULT_DATA = {
     },
     {
       title: "Same-day dispatch",
-      text: "Once we confirm your cargo, we arrange dispatch the same day — air departs daily, containers load every day."
+      text: "Once we confirm your cargo, we book it onto the next sailing — LCL groupage every week, FCL containers loading every day."
     },
     {
       title: "Destination pickup or delivery",
