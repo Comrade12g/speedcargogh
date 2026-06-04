@@ -209,11 +209,11 @@ window.SPEED_CARGO_DEFAULT_DATA = {
         "A simple checklist for supplier invoices, packing details, photos, product type and delivery plans."
     },
     {
-      title: "Choosing air cargo or sea cargo",
+      title: "Choosing LCL or FCL for your shipment",
       date: "2026-05-22",
       category: "Import Tips",
       summary:
-        "Use air for urgent, lighter goods and sea freight for larger commercial loads or lower cost movement."
+        "Use LCL groupage for shipments under 12 CBM and FCL containers for full retail stock, furniture or machinery — same Tema clearing, very different pricing."
     },
     {
       title: "New Manet warehouse pickup point",
