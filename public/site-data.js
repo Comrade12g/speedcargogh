@@ -4,7 +4,8 @@ window.SPEED_CARGO_DEFAULT_DATA = {
     domain: "speedcargogh.com",
     phoneDisplay: "059 755 8668",
     phoneHref: "+233597558668",
-    whatsapp: "233597558668",
+    whatsapp: "233599208469",
+    whatsappDisplay: "059 920 8469",
     email: "info@speedcargogh.com",
     officeHours: "Monday to Saturday, 8:00 AM - 6:00 PM",
     instagram: "https://www.instagram.com/speedcargoghana?igsh=Z3Z6djJidG51bHNo",
@@ -68,13 +69,6 @@ window.SPEED_CARGO_DEFAULT_DATA = {
       link: "/services/sea-freight",
       image:
         "https://images.unsplash.com/photo-1524522173746-f628baad3644?auto=format&fit=crop&w=900&q=82"
-    },
-    {
-      title: "VIP Air — 3-Day Direct",
-      text: "One-stop air, VIP 3-day direct, MCO per-piece pricing, airport-to-airport and Africa e-commerce air freight.",
-      link: "/services/air-freight",
-      image:
-        "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=900&q=82"
     },
     {
       title: "Double Customs Clearing",
@@ -204,11 +198,11 @@ window.SPEED_CARGO_DEFAULT_DATA = {
         "A simple checklist for supplier invoices, packing details, photos, product type and delivery plans."
     },
     {
-      title: "Choosing air cargo or sea cargo",
+      title: "Choosing LCL or FCL sea cargo",
       date: "2026-05-22",
       category: "Import Tips",
       summary:
-        "Use air for urgent, lighter goods and sea freight for larger commercial loads or lower cost movement."
+        "Use LCL groupage for smaller mixed loads and FCL containers for high-volume shop stock or machinery."
     },
     {
       title: "New Manet warehouse pickup point",

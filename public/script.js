@@ -760,7 +760,7 @@ const renderFooter = () => {
     <div class="footer-inner">
       <div class="footer-col footer-brand-col">
         <a class="footer-brand" href="/">${escapeHtml(p.brand || "Speed Cargo")} <span>Ghana</span></a>
-        <p>Professional China to Ghana freight forwarding — sea &amp; air freight, customs clearing, warehousing and door-to-door delivery.</p>
+        <p>Professional China to Ghana freight forwarding — sea freight, customs clearing, warehousing and door-to-door delivery.</p>
         <div class="footer-socials">
           <a href="${escapeHtml(p.facebook || "#")}" aria-label="Facebook" target="_blank" rel="noopener">f</a>
           <a href="${whatsappHref}" aria-label="WhatsApp" target="_blank" rel="noopener">W</a>
@@ -799,7 +799,7 @@ const renderFooter = () => {
           <li><span aria-hidden="true">◎</span> Spintex (Sliver St., Planners Ave), Accra</li>
           <li><span aria-hidden="true">☎</span> <a href="tel:${escapeHtml(p.phoneHref || "")}">${escapeHtml(p.phoneDisplay || "")}</a></li>
           <li><span aria-hidden="true">✉</span> <a href="mailto:${escapeHtml(p.email || "")}">${escapeHtml(p.email || "")}</a></li>
-          <li><span aria-hidden="true">♛</span> <a href="${whatsappHref}" target="_blank" rel="noopener">WhatsApp ${escapeHtml(p.phoneDisplay || "")} — 24/7</a></li>
+          <li><span aria-hidden="true">♛</span> <a href="${whatsappHref}" target="_blank" rel="noopener">WhatsApp ${escapeHtml(p.whatsappDisplay || p.phoneDisplay || "")} — 24/7</a></li>
           <li><span aria-hidden="true">⏱</span> ${escapeHtml(p.officeHours || "Mon–Sat, 8AM–6PM")}</li>
         </ul>
       </div>
