@@ -198,11 +198,11 @@ window.SPEED_CARGO_DEFAULT_DATA = {
         "A simple checklist for supplier invoices, packing details, photos, product type and delivery plans."
     },
     {
-      title: "Choosing air cargo or sea cargo",
+      title: "Choosing LCL or FCL sea cargo",
       date: "2026-05-22",
       category: "Import Tips",
       summary:
-        "Use air for urgent, lighter goods and sea freight for larger commercial loads or lower cost movement."
+        "Use LCL groupage for smaller mixed loads and FCL containers for high-volume shop stock or machinery."
     },
     {
       title: "New Manet warehouse pickup point",
