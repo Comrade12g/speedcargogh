@@ -799,7 +799,7 @@ const renderFooter = () => {
           <li><span aria-hidden="true">◎</span> Spintex (Sliver St., Planners Ave), Accra</li>
           <li><span aria-hidden="true">☎</span> <a href="tel:${escapeHtml(p.phoneHref || "")}">${escapeHtml(p.phoneDisplay || "")}</a></li>
           <li><span aria-hidden="true">✉</span> <a href="mailto:${escapeHtml(p.email || "")}">${escapeHtml(p.email || "")}</a></li>
-          <li><span aria-hidden="true">♛</span> <a href="${whatsappHref}" target="_blank" rel="noopener">WhatsApp ${escapeHtml(p.phoneDisplay || "")} — 24/7</a></li>
+          <li><span aria-hidden="true">♛</span> <a href="${whatsappHref}" target="_blank" rel="noopener">WhatsApp ${escapeHtml(p.whatsappDisplay || p.phoneDisplay || "")} — 24/7</a></li>
           <li><span aria-hidden="true">⏱</span> ${escapeHtml(p.officeHours || "Mon–Sat, 8AM–6PM")}</li>
         </ul>
       </div>
