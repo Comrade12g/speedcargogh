@@ -71,13 +71,6 @@ window.SPEED_CARGO_DEFAULT_DATA = {
         "https://images.unsplash.com/photo-1524522173746-f628baad3644?auto=format&fit=crop&w=900&q=82"
     },
     {
-      title: "VIP Air — 3-Day Direct",
-      text: "One-stop air, VIP 3-day direct, MCO per-piece pricing, airport-to-airport and Africa e-commerce air freight.",
-      link: "/services/air-freight",
-      image:
-        "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=900&q=82"
-    },
-    {
       title: "Double Customs Clearing",
       text: "Door-to-door and warehouse-to-warehouse double clearing. Your cargo clears China export and Ghana import without ever leaving our network.",
       link: "/services/customs-clearing",
