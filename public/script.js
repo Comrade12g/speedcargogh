@@ -760,7 +760,7 @@ const renderFooter = () => {
     <div class="footer-inner">
       <div class="footer-col footer-brand-col">
         <a class="footer-brand" href="/">${escapeHtml(p.brand || "Speed Cargo")} <span>Ghana</span></a>
-        <p>Professional China to Ghana sea freight forwarding — LCL groupage, FCL container shipping, customs clearing, warehousing and door-to-door delivery.</p>
+        <p>Professional China to Ghana freight forwarding — sea &amp; air freight, customs clearing, warehousing and door-to-door delivery.</p>
         <div class="footer-socials">
           <a href="${escapeHtml(p.facebook || "#")}" aria-label="Facebook" target="_blank" rel="noopener">f</a>
           <a href="${whatsappHref}" aria-label="WhatsApp" target="_blank" rel="noopener">W</a>
@@ -820,7 +820,7 @@ const renderFooter = () => {
 
 const setupScrollReveal = () => {
   const targets = document.querySelectorAll(
-    ".service-card, .strength-card, .panel, .metric, .location-card, .team-card, .news-card, .testimonial-card, .route-step, .guide-grid > article, .shipping-console > a, .ocean-tile, .branch-card"
+    ".service-card, .strength-card, .panel, .metric, .location-card, .team-card, .news-card, .testimonial-card, .route-step, .guide-grid > article, .shipping-console > a"
   );
   if (!targets.length) return;
   targets.forEach((el) => el.classList.add("reveal"));

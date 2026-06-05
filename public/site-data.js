@@ -43,7 +43,7 @@ window.SPEED_CARGO_DEFAULT_DATA = {
     },
     {
       title: "Stability advantage",
-      text: "High volume guarantees stable space on every sailing. LCL groupage departs weekly; FCL containers load every day across all major China ports."
+      text: "High volume guarantees stable space on every major route. Air departs daily; sea containers load every day."
     },
     {
       title: "Financial strength",
@@ -70,19 +70,14 @@ window.SPEED_CARGO_DEFAULT_DATA = {
         "https://images.unsplash.com/photo-1524522173746-f628baad3644?auto=format&fit=crop&w=900&q=82"
     },
     {
-      title: "Express Sea LCL — Fast Lane",
-      text: "Bonded-zone fast LCL from Shenzhen and Nansha. Weekly fixed sailings, faster cut-off and predictable transit for repeat shippers who need ocean speed without container costs.",
-      link: "/services/groupage",
+      title: "VIP Air — 3-Day Direct",
+      text: "One-stop air, VIP 3-day direct, MCO per-piece pricing, airport-to-airport and Africa e-commerce air freight.",
+      link: "/services/air-freight",
       image:
-        "https://images.unsplash.com/photo-1577416412292-747c6607f055?auto=format&fit=crop&w=900&q=82"
+        "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=900&q=82"
     },
     {
       title: "Double Customs Clearing",
-      text: "Door-to-door and warehouse-to-warehouse double clearing. Your cargo clears China export and Ghana import without ever leaving our network.",
-      link: "/services/customs-clearing",
-      image:
-        "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=900&q=82"
-    },
       text: "Door-to-door and warehouse-to-warehouse double clearing. Your cargo clears China export and Ghana import without ever leaving our network.",
       link: "/services/customs-clearing",
       image:
@@ -113,7 +108,7 @@ window.SPEED_CARGO_DEFAULT_DATA = {
     },
     {
       title: "Same-day dispatch",
-      text: "Once we confirm your cargo, we book it onto the next sailing — LCL groupage every week, FCL containers loading every day."
+      text: "Once we confirm your cargo, we arrange dispatch the same day — air departs daily, containers load every day."
     },
     {
       title: "Destination pickup or delivery",
@@ -209,11 +204,11 @@ window.SPEED_CARGO_DEFAULT_DATA = {
         "A simple checklist for supplier invoices, packing details, photos, product type and delivery plans."
     },
     {
-      title: "Choosing LCL or FCL for your shipment",
+      title: "Choosing air cargo or sea cargo",
       date: "2026-05-22",
       category: "Import Tips",
       summary:
-        "Use LCL groupage for shipments under 12 CBM and FCL containers for full retail stock, furniture or machinery — same Tema clearing, very different pricing."
+        "Use air for urgent, lighter goods and sea freight for larger commercial loads or lower cost movement."
     },
     {
       title: "New Manet warehouse pickup point",

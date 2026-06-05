@@ -24,6 +24,7 @@ import { Route as ServicesWarehousingRouteImport } from './routes/services.wareh
 import { Route as ServicesSeaFreightRouteImport } from './routes/services.sea-freight'
 import { Route as ServicesGroupageRouteImport } from './routes/services.groupage'
 import { Route as ServicesCustomsClearingRouteImport } from './routes/services.customs-clearing'
+import { Route as ServicesAirFreightRouteImport } from './routes/services.air-freight'
 import { Route as LanesYiwuToGhanaRouteImport } from './routes/lanes.yiwu-to-ghana'
 import { Route as LanesGuangzhouToGhanaRouteImport } from './routes/lanes.guangzhou-to-ghana'
 
@@ -102,6 +103,11 @@ const ServicesCustomsClearingRoute = ServicesCustomsClearingRouteImport.update({
   path: '/services/customs-clearing',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesAirFreightRoute = ServicesAirFreightRouteImport.update({
+  id: '/services/air-freight',
+  path: '/services/air-freight',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LanesYiwuToGhanaRoute = LanesYiwuToGhanaRouteImport.update({
   id: '/lanes/yiwu-to-ghana',
   path: '/lanes/yiwu-to-ghana',
@@ -127,6 +133,7 @@ export interface FileRoutesByFullPath {
   '/tracking': typeof TrackingRoute
   '/lanes/guangzhou-to-ghana': typeof LanesGuangzhouToGhanaRoute
   '/lanes/yiwu-to-ghana': typeof LanesYiwuToGhanaRoute
+  '/services/air-freight': typeof ServicesAirFreightRoute
   '/services/customs-clearing': typeof ServicesCustomsClearingRoute
   '/services/groupage': typeof ServicesGroupageRoute
   '/services/sea-freight': typeof ServicesSeaFreightRoute
@@ -146,6 +153,7 @@ export interface FileRoutesByTo {
   '/tracking': typeof TrackingRoute
   '/lanes/guangzhou-to-ghana': typeof LanesGuangzhouToGhanaRoute
   '/lanes/yiwu-to-ghana': typeof LanesYiwuToGhanaRoute
+  '/services/air-freight': typeof ServicesAirFreightRoute
   '/services/customs-clearing': typeof ServicesCustomsClearingRoute
   '/services/groupage': typeof ServicesGroupageRoute
   '/services/sea-freight': typeof ServicesSeaFreightRoute
@@ -166,6 +174,7 @@ export interface FileRoutesById {
   '/tracking': typeof TrackingRoute
   '/lanes/guangzhou-to-ghana': typeof LanesGuangzhouToGhanaRoute
   '/lanes/yiwu-to-ghana': typeof LanesYiwuToGhanaRoute
+  '/services/air-freight': typeof ServicesAirFreightRoute
   '/services/customs-clearing': typeof ServicesCustomsClearingRoute
   '/services/groupage': typeof ServicesGroupageRoute
   '/services/sea-freight': typeof ServicesSeaFreightRoute
@@ -187,6 +196,7 @@ export interface FileRouteTypes {
     | '/tracking'
     | '/lanes/guangzhou-to-ghana'
     | '/lanes/yiwu-to-ghana'
+    | '/services/air-freight'
     | '/services/customs-clearing'
     | '/services/groupage'
     | '/services/sea-freight'
@@ -206,6 +216,7 @@ export interface FileRouteTypes {
     | '/tracking'
     | '/lanes/guangzhou-to-ghana'
     | '/lanes/yiwu-to-ghana'
+    | '/services/air-freight'
     | '/services/customs-clearing'
     | '/services/groupage'
     | '/services/sea-freight'
@@ -225,6 +236,7 @@ export interface FileRouteTypes {
     | '/tracking'
     | '/lanes/guangzhou-to-ghana'
     | '/lanes/yiwu-to-ghana'
+    | '/services/air-freight'
     | '/services/customs-clearing'
     | '/services/groupage'
     | '/services/sea-freight'
@@ -245,6 +257,7 @@ export interface RootRouteChildren {
   TrackingRoute: typeof TrackingRoute
   LanesGuangzhouToGhanaRoute: typeof LanesGuangzhouToGhanaRoute
   LanesYiwuToGhanaRoute: typeof LanesYiwuToGhanaRoute
+  ServicesAirFreightRoute: typeof ServicesAirFreightRoute
   ServicesCustomsClearingRoute: typeof ServicesCustomsClearingRoute
   ServicesGroupageRoute: typeof ServicesGroupageRoute
   ServicesSeaFreightRoute: typeof ServicesSeaFreightRoute
@@ -358,6 +371,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesCustomsClearingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/air-freight': {
+      id: '/services/air-freight'
+      path: '/services/air-freight'
+      fullPath: '/services/air-freight'
+      preLoaderRoute: typeof ServicesAirFreightRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lanes/yiwu-to-ghana': {
       id: '/lanes/yiwu-to-ghana'
       path: '/lanes/yiwu-to-ghana'
@@ -389,6 +409,7 @@ const rootRouteChildren: RootRouteChildren = {
   TrackingRoute: TrackingRoute,
   LanesGuangzhouToGhanaRoute: LanesGuangzhouToGhanaRoute,
   LanesYiwuToGhanaRoute: LanesYiwuToGhanaRoute,
+  ServicesAirFreightRoute: ServicesAirFreightRoute,
   ServicesCustomsClearingRoute: ServicesCustomsClearingRoute,
   ServicesGroupageRoute: ServicesGroupageRoute,
   ServicesSeaFreightRoute: ServicesSeaFreightRoute,
