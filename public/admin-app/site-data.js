@@ -35,7 +35,7 @@ window.SPEED_CARGO_DEFAULT_DATA = {
     { value: "800+", label: "Containers shipped each year" },
     { value: "100+", label: "Countries in our trade network" },
     { value: "20+", label: "Years moving cargo to Africa" },
-    { value: "4", label: "Branches: Yiwu · Shenzhen · Ghana · Congo" }
+    { value: "2", label: "China branches: Yiwu · Guangzhou — plus Ghana HQ" }
   ],
   strengths: [
     {
