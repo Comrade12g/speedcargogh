@@ -98,7 +98,7 @@ window.SPEED_CARGO_DEFAULT_DATA = {
     },
     {
       title: "Inbound to our China warehouse",
-      text: "Send your cargo to our Yiwu, Guangzhou or Shenzhen warehouse. We receive, photograph, check and consolidate."
+      text: "Send your cargo to our Yiwu or Guangzhou warehouse. We receive, photograph, check and consolidate."
     },
     {
       title: "Same-day dispatch",
