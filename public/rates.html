@@ -74,22 +74,19 @@
               </div>
             </div>
             <div style="text-align:right;font-size:0.85rem">
-              <div>Effective: <span id="rates-date"></span></div>
+              <div><strong>Today's rate</strong></div>
+              <div id="rates-date"></div>
               <div>Quote ref: SC-RATES</div>
             </div>
           </header>
+
+          <p id="rates-note" class="form-note" style="margin:0 0 12px"></p>
 
           <h3>Sea freight — LCL (per CBM)</h3>
           <div class="schedule-table-wrap">
             <table class="schedule-table">
               <thead><tr><th>Route</th><th>Service</th><th>Rate from</th><th>Min charge</th></tr></thead>
-              <tbody>
-                <tr><td>Shenzhen → Tema</td><td>LCL door-to-port</td><td>USD 280 / CBM</td><td>1 CBM</td></tr>
-                <tr><td>Guangzhou → Tema</td><td>LCL door-to-port</td><td>USD 290 / CBM</td><td>1 CBM</td></tr>
-                <tr><td>Shanghai → Tema</td><td>LCL door-to-port</td><td>USD 310 / CBM</td><td>1 CBM</td></tr>
-                <tr><td>Ningbo → Tema</td><td>LCL door-to-port</td><td>USD 310 / CBM</td><td>1 CBM</td></tr>
-                <tr><td>Yiwu → Tema</td><td>LCL consolidation</td><td>USD 300 / CBM</td><td>1 CBM</td></tr>
-              </tbody>
+              <tbody id="rates-lcl-body"></tbody>
             </table>
           </div>
 
@@ -97,12 +94,7 @@
           <div class="schedule-table-wrap">
             <table class="schedule-table">
               <thead><tr><th>Route</th><th>20' GP</th><th>40' GP</th><th>40' HC</th></tr></thead>
-              <tbody>
-                <tr><td>Shenzhen → Tema</td><td>USD 2,800</td><td>USD 4,600</td><td>USD 4,800</td></tr>
-                <tr><td>Guangzhou → Tema</td><td>USD 2,900</td><td>USD 4,700</td><td>USD 4,900</td></tr>
-                <tr><td>Shanghai → Tema</td><td>USD 3,100</td><td>USD 4,900</td><td>USD 5,100</td></tr>
-                <tr><td>Ningbo → Tema</td><td>USD 3,100</td><td>USD 4,900</td><td>USD 5,100</td></tr>
-              </tbody>
+              <tbody id="rates-fcl-body"></tbody>
             </table>
           </div>
 
@@ -111,13 +103,7 @@
           <div class="schedule-table-wrap">
             <table class="schedule-table">
               <thead><tr><th>Service</th><th>Indicative fee</th></tr></thead>
-              <tbody>
-                <tr><td>Customs clearing (per BL)</td><td>GHS 800 + statutory duties</td></tr>
-                <tr><td>Port handling &amp; terminal</td><td>At cost (port receipt)</td></tr>
-                <tr><td>Door delivery — Accra / Tema</td><td>GHS 600 – 1,500</td></tr>
-                <tr><td>Door delivery — Kumasi</td><td>GHS 2,500 – 4,500</td></tr>
-                <tr><td>Warehousing (Spintex)</td><td>First 7 days free</td></tr>
-              </tbody>
+              <tbody id="rates-clearing-body"></tbody>
             </table>
           </div>
 
@@ -170,9 +156,9 @@
     </footer>
 
     <script>
-      document.getElementById('rates-date').textContent = new Date().toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+      document.getElementById('rates-date').textContent = new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
       var y = document.getElementById('year-rates'); if (y) y.textContent = new Date().getFullYear();
     </script>
-    <script src="./script.js?v=20260530"></script>
+    <script src="./script.js?v=20260606"></script>
   </body>
 </html>

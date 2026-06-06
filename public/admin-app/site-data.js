@@ -35,7 +35,7 @@ window.SPEED_CARGO_DEFAULT_DATA = {
     { value: "800+", label: "Containers shipped each year" },
     { value: "100+", label: "Countries in our trade network" },
     { value: "20+", label: "Years moving cargo to Africa" },
-    { value: "4", label: "Branches: Yiwu · Shenzhen · Ghana · Congo" }
+    { value: "2", label: "China branches: Yiwu · Guangzhou — plus Ghana HQ" }
   ],
   strengths: [
     {
@@ -85,7 +85,7 @@ window.SPEED_CARGO_DEFAULT_DATA = {
     },
     {
       title: "Procurement & Sourcing",
-      text: "Supplier pickup, market sourcing in Yiwu / Guangzhou / Shenzhen and China-side coordination for shops, salons, traders and SMEs.",
+      text: "Supplier pickup, market sourcing in Yiwu and Guangzhou and China-side coordination for shops, salons, traders and SMEs.",
       link: "/lanes/guangzhou-to-ghana",
       image:
         "https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=900&q=82"
@@ -98,7 +98,7 @@ window.SPEED_CARGO_DEFAULT_DATA = {
     },
     {
       title: "Inbound to our China warehouse",
-      text: "Send your cargo to our Yiwu, Guangzhou or Shenzhen warehouse. We receive, photograph, check and consolidate."
+      text: "Send your cargo to our Yiwu or Guangzhou warehouse. We receive, photograph, check and consolidate."
     },
     {
       title: "Same-day dispatch",
@@ -251,7 +251,26 @@ window.SPEED_CARGO_DEFAULT_DATA = {
       src: "./assets/warehouse-photo.jpg",
       caption: "Spintex warehouse — consolidation and dispatch floor."
     }
-  ]
+  ],
+  rates: {
+    note: "Today's rate — updated daily by the Speed Cargo desk.",
+    currency: "USD",
+    lcl: [
+      { route: "Guangzhou → Tema", service: "LCL door-to-port", rate: "USD 290 / CBM", min: "1 CBM" },
+      { route: "Yiwu → Tema", service: "LCL consolidation", rate: "USD 300 / CBM", min: "1 CBM" }
+    ],
+    fcl: [
+      { route: "Guangzhou → Tema", gp20: "USD 2,900", gp40: "USD 4,700", hc40: "USD 4,900" },
+      { route: "Yiwu / Nansha → Tema", gp20: "USD 3,000", gp40: "USD 4,800", hc40: "USD 5,000" }
+    ],
+    clearing: [
+      { service: "Customs clearing (per BL)", fee: "GHS 800 + statutory duties" },
+      { service: "Port handling & terminal", fee: "At cost (port receipt)" },
+      { service: "Door delivery — Accra / Tema", fee: "GHS 600 – 1,500" },
+      { service: "Door delivery — Kumasi", fee: "GHS 2,500 – 4,500" },
+      { service: "Warehousing (Spintex)", fee: "First 7 days free" }
+    ]
+  }
 };
 
 window.SPEED_CARGO_SUPABASE = {

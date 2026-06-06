@@ -842,6 +842,31 @@ const setupScrollReveal = () => {
   targets.forEach((el) => io.observe(el));
 };
 
+const renderRates = () => {
+  const rates = data.rates;
+  if (!rates) return;
+  const note = document.getElementById("rates-note");
+  if (note && rates.note) note.textContent = rates.note;
+  const lclBody = document.getElementById("rates-lcl-body");
+  if (lclBody && Array.isArray(rates.lcl)) {
+    lclBody.innerHTML = rates.lcl
+      .map(r => `<tr><td>${escapeHtml(r.route || "")}</td><td>${escapeHtml(r.service || "")}</td><td>${escapeHtml(r.rate || "")}</td><td>${escapeHtml(r.min || "")}</td></tr>`)
+      .join("");
+  }
+  const fclBody = document.getElementById("rates-fcl-body");
+  if (fclBody && Array.isArray(rates.fcl)) {
+    fclBody.innerHTML = rates.fcl
+      .map(r => `<tr><td>${escapeHtml(r.route || "")}</td><td>${escapeHtml(r.gp20 || "")}</td><td>${escapeHtml(r.gp40 || "")}</td><td>${escapeHtml(r.hc40 || "")}</td></tr>`)
+      .join("");
+  }
+  const clearBody = document.getElementById("rates-clearing-body");
+  if (clearBody && Array.isArray(rates.clearing)) {
+    clearBody.innerHTML = rates.clearing
+      .map(r => `<tr><td>${escapeHtml(r.service || "")}</td><td>${escapeHtml(r.fee || "")}</td></tr>`)
+      .join("");
+  }
+};
+
 const runAllRenders = () => {
   setProfileLinks();
   renderHero();
@@ -858,6 +883,7 @@ const runAllRenders = () => {
   renderTestimonials();
   renderNews();
   renderJobs();
+  renderRates();
   renderFooter();
 };
 
