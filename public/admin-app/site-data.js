@@ -251,7 +251,26 @@ window.SPEED_CARGO_DEFAULT_DATA = {
       src: "./assets/warehouse-photo.jpg",
       caption: "Spintex warehouse — consolidation and dispatch floor."
     }
-  ]
+  ],
+  rates: {
+    note: "Today's rate — updated daily by the Speed Cargo desk.",
+    currency: "USD",
+    lcl: [
+      { route: "Guangzhou → Tema", service: "LCL door-to-port", rate: "USD 290 / CBM", min: "1 CBM" },
+      { route: "Yiwu → Tema", service: "LCL consolidation", rate: "USD 300 / CBM", min: "1 CBM" }
+    ],
+    fcl: [
+      { route: "Guangzhou → Tema", gp20: "USD 2,900", gp40: "USD 4,700", hc40: "USD 4,900" },
+      { route: "Yiwu / Nansha → Tema", gp20: "USD 3,000", gp40: "USD 4,800", hc40: "USD 5,000" }
+    ],
+    clearing: [
+      { service: "Customs clearing (per BL)", fee: "GHS 800 + statutory duties" },
+      { service: "Port handling & terminal", fee: "At cost (port receipt)" },
+      { service: "Door delivery — Accra / Tema", fee: "GHS 600 – 1,500" },
+      { service: "Door delivery — Kumasi", fee: "GHS 2,500 – 4,500" },
+      { service: "Warehousing (Spintex)", fee: "First 7 days free" }
+    ]
+  }
 };
 
 window.SPEED_CARGO_SUPABASE = {
