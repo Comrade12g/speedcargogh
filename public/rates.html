@@ -156,9 +156,9 @@
     </footer>
 
     <script>
-      document.getElementById('rates-date').textContent = new Date().toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+      document.getElementById('rates-date').textContent = new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
       var y = document.getElementById('year-rates'); if (y) y.textContent = new Date().getFullYear();
     </script>
-    <script src="./script.js?v=20260530"></script>
+    <script src="./script.js?v=20260606"></script>
   </body>
 </html>
