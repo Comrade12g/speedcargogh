@@ -516,7 +516,7 @@ const setupForms = () => {
     const payload = {
       contact_name: String(formData.name || "").trim().slice(0, 200),
       phone: String(formData.phone || "").trim().slice(0, 60) || null,
-      email: String(formData.email || formData.phone || "noemail@speedcargogh.com").trim().slice(0, 320),
+      email: String(formData.email || formData.phone || "noemail@sincereok.com").trim().slice(0, 320),
       origin: String(formData.origin || "Unspecified").trim().slice(0, 200) || "Unspecified",
       destination: String(formData.destination || "Unspecified").trim().slice(0, 200) || "Unspecified",
       mode: String(formData.route || "Not sure").trim().slice(0, 40),
@@ -525,7 +525,7 @@ const setupForms = () => {
     };
     // Basic email pattern - fall back to placeholder if user didn't supply one
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(payload.email)) {
-      payload.email = "noemail@speedcargogh.com";
+      payload.email = "noemail@sincereok.com";
     }
     if (btn) { btn.disabled = true; btn.textContent = "Sending..."; }
     try {

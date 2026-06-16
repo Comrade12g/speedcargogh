@@ -6,7 +6,7 @@ window.SPEED_CARGO_DEFAULT_DATA = {
     phoneHref: "+233597558668",
     whatsapp: "233599208469",
     whatsappDisplay: "059 920 8469",
-    email: "info@speedcargogh.com",
+    email: "speedcargo@sincereok.com",
     officeHours: "Monday to Saturday, 8:00 AM - 6:00 PM",
     instagram: "https://www.instagram.com/speedcargoghana?igsh=Z3Z6djJidG51bHNo",
     facebook: "https://web.facebook.com/people/Speed-Cargo/100076038286332/",
