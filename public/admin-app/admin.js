@@ -425,9 +425,11 @@ document.querySelector("[data-clear-submissions]")?.addEventListener("click", ()
 // inner email/password gate when a Supabase session exists.
 // Only a valid Supabase session unlocks the dashboard.
 // The /admin TanStack route validates the admin role before mounting this iframe.
-if (getAccessToken()) {
-  showDashboard();
-} else {
-  localStorage.removeItem(AUTH_KEY);
-  window.location.replace("/login");
-}
+(async () => {
+  if (await getAccessToken()) {
+    showDashboard();
+  } else {
+    localStorage.removeItem(AUTH_KEY);
+    window.location.replace("/login");
+  }
+})();
