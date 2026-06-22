@@ -54,7 +54,8 @@ const fetchRemoteSiteContent = async () => {
   if (!cfg?.url || !cfg?.anonKey) return null;
   try {
     const res = await fetch(`${cfg.url}/rest/v1/site_content?key=eq.main&select=data`, {
-      headers: { apikey: cfg.anonKey, Authorization: `Bearer ${cfg.anonKey}` }
+      headers: { apikey: cfg.anonKey, Authorization: `Bearer ${cfg.anonKey}` },
+      cache: "no-store",
     });
     if (!res.ok) return null;
     const rows = await res.json();
