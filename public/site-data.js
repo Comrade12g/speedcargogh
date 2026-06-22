@@ -27,7 +27,7 @@ window.SPEED_CARGO_DEFAULT_DATA = {
     {
       title: "Our Derby Avenue office is now open",
       text:
-        "Customers can pick up and release shipments at our Derby Avenue office on Sliver St., Planners Avenue.",
+        "Customers can pick up and release shipments at our Derby Avenue office at Derby Avenue.",
       tag: "Warehouse"
     }
   ],
