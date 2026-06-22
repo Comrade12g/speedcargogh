@@ -25,9 +25,9 @@ window.SPEED_CARGO_DEFAULT_DATA = {
   },
   announcements: [
     {
-      title: "New Spintex warehouse now receiving cargo",
+      title: "Our Derby Avenue office is now open",
       text:
-        "Customers can pick up and release shipments at our Spintex warehouse on Sliver St., Planners Avenue.",
+        "Customers can pick up and release shipments at our Derby Avenue office on Sliver St., Planners Avenue.",
       tag: "Warehouse"
     }
   ],
@@ -106,7 +106,7 @@ window.SPEED_CARGO_DEFAULT_DATA = {
     },
     {
       title: "Destination pickup or delivery",
-      text: "On arrival in Ghana, collect from our Spintex warehouse or have it delivered to your door."
+      text: "On arrival in Ghana, collect from our Derby Avenue office or have it delivered to your door."
     }
   ],
   offices: [
@@ -118,7 +118,7 @@ window.SPEED_CARGO_DEFAULT_DATA = {
       map: "https://www.google.com/maps/place/Derby+Avenue,+Accra"
     },
     {
-      title: "Spintex Warehouse",
+      title: "Derby Avenue Office",
       text: "Cargo release and warehouse support in Spintex.",
       address: "FERRO BEL PLAZA BUILDING DERBY AVENUE, ACCRA",
       mapEmbed: "https://maps.google.com/maps?q=Planners+Avenue+Spintex+Accra&z=16&output=embed",
@@ -249,7 +249,7 @@ window.SPEED_CARGO_DEFAULT_DATA = {
       title: "Warehouse photos",
       type: "image",
       src: "./assets/warehouse-photo.jpg",
-      caption: "Spintex warehouse — consolidation and dispatch floor."
+      caption: "Derby Avenue office — consolidation and dispatch floor."
     }
   ],
   rates: {
@@ -268,7 +268,7 @@ window.SPEED_CARGO_DEFAULT_DATA = {
       { service: "Port handling & terminal", fee: "At cost (port receipt)" },
       { service: "Door delivery — Accra / Tema", fee: "GHS 600 – 1,500" },
       { service: "Door delivery — Kumasi", fee: "GHS 2,500 – 4,500" },
-      { service: "Warehousing (Spintex)", fee: "First 7 days free" }
+      { service: "Warehousing (Accra)", fee: "First 7 days free" }
     ]
   }
 };
