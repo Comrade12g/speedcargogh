@@ -258,12 +258,12 @@ const getSubmissions = (key) => {
 };
 
 const fetchRemoteQuotes = async () => {
-  const token = getAccessToken();
+  const token = await getAccessToken();
   if (!token) return null;
   try {
     const res = await fetch(
       `${SUPABASE_URL}/rest/v1/quote_requests?select=*&order=created_at.desc`,
-      { headers: { apikey: SUPABASE_ANON, Authorization: `Bearer ${token}` } }
+      { headers: { apikey: SUPABASE_ANON, Authorization: `Bearer ${token}` }, cache: "no-store" }
     );
     if (!res.ok) return null;
     return await res.json();
@@ -271,7 +271,7 @@ const fetchRemoteQuotes = async () => {
 };
 
 const updateRemoteQuoteStatus = async (id, status) => {
-  const token = getAccessToken();
+  const token = await getAccessToken();
   if (!token) throw new Error("Not signed in");
   const res = await fetch(`${SUPABASE_URL}/rest/v1/quote_requests?id=eq.${id}`, {
     method: "PATCH",
@@ -287,7 +287,7 @@ const updateRemoteQuoteStatus = async (id, status) => {
 };
 
 const deleteRemoteQuote = async (id) => {
-  const token = getAccessToken();
+  const token = await getAccessToken();
   if (!token) throw new Error("Not signed in");
   const res = await fetch(`${SUPABASE_URL}/rest/v1/quote_requests?id=eq.${id}`, {
     method: "DELETE",
