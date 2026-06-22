@@ -120,7 +120,7 @@ window.SPEED_CARGO_DEFAULT_DATA = {
     {
       title: "Spintex Warehouse",
       text: "Cargo release and warehouse support in Spintex.",
-      address: "Sliver St., Planners Avenue, Spintex, Accra",
+      address: "FERRO BEL PLAZA BUILDING DERBY AVENUE, ACCRA",
       mapEmbed: "https://maps.google.com/maps?q=Planners+Avenue+Spintex+Accra&z=16&output=embed",
       map: "https://www.google.com/maps/place/Planners+Avenue,+Spintex,+Accra"
     },
