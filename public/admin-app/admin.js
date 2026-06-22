@@ -8,19 +8,49 @@ const SUPABASE_URL = "https://rqmxolzibpoiqpqvhigj.supabase.co";
 const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJxbXhvbHppYnBvaXFwcXZoaWdqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwNjIxMTQsImV4cCI6MjA5NTYzODExNH0.Je1IXnfRlazgux_pwtV2aiEa-s1FVyXQTpDSGy7nb_8";
 const SB_TOKEN_KEY = "sb-rqmxolzibpoiqpqvhigj-auth-token";
 
-const getAccessToken = () => {
+const readSession = () => {
   try {
     const raw = localStorage.getItem(SB_TOKEN_KEY);
     if (!raw) return null;
     const parsed = JSON.parse(raw);
-    return parsed?.access_token || parsed?.currentSession?.access_token || null;
+    return parsed?.currentSession || parsed || null;
   } catch { return null; }
+};
+
+const refreshSession = async () => {
+  const s = readSession();
+  const rt = s?.refresh_token;
+  if (!rt) return null;
+  try {
+    const res = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=refresh_token`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", apikey: SUPABASE_ANON },
+      body: JSON.stringify({ refresh_token: rt }),
+    });
+    if (!res.ok) return null;
+    const next = await res.json();
+    localStorage.setItem(SB_TOKEN_KEY, JSON.stringify(next));
+    return next?.access_token || null;
+  } catch { return null; }
+};
+
+const getAccessToken = async ({ forceRefresh = false } = {}) => {
+  const s = readSession();
+  if (!s) return null;
+  const exp = Number(s.expires_at || 0);
+  const expired = exp && exp * 1000 < Date.now() + 30_000; // 30s skew
+  if (forceRefresh || expired) {
+    const fresh = await refreshSession();
+    if (fresh) return fresh;
+  }
+  return s.access_token || null;
 };
 
 const fetchRemoteContent = async () => {
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/site_content?key=eq.main&select=data`, {
-      headers: { apikey: SUPABASE_ANON, Authorization: `Bearer ${SUPABASE_ANON}` }
+      headers: { apikey: SUPABASE_ANON, Authorization: `Bearer ${SUPABASE_ANON}` },
+      cache: "no-store",
     });
     if (!res.ok) return null;
     const rows = await res.json();
@@ -30,19 +60,28 @@ const fetchRemoteContent = async () => {
   } catch { return null; }
 };
 
-const saveRemoteContent = async (payload) => {
-  const token = getAccessToken();
-  if (!token) throw new Error("Not signed in as admin. Sign in via /login.");
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/site_content?key=eq.main`, {
-    method: "PATCH",
+const upsertSiteContent = async (token, payload) => {
+  return fetch(`${SUPABASE_URL}/rest/v1/site_content?on_conflict=key`, {
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
       apikey: SUPABASE_ANON,
       Authorization: `Bearer ${token}`,
-      Prefer: "return=minimal"
+      Prefer: "return=minimal,resolution=merge-duplicates",
     },
-    body: JSON.stringify({ data: payload, updated_at: new Date().toISOString() })
+    body: JSON.stringify({ key: "main", data: payload, updated_at: new Date().toISOString() }),
   });
+};
+
+const saveRemoteContent = async (payload) => {
+  let token = await getAccessToken();
+  if (!token) throw new Error("Not signed in as admin. Sign in via /login.");
+  let res = await upsertSiteContent(token, payload);
+  if (res.status === 401 || res.status === 403) {
+    token = await getAccessToken({ forceRefresh: true });
+    if (!token) throw new Error("Session expired. Sign in again at /login.");
+    res = await upsertSiteContent(token, payload);
+  }
   if (!res.ok) {
     const txt = await res.text().catch(() => "");
     throw new Error(txt || `Save failed (${res.status})`);
