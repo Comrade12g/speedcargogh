@@ -1,0 +1,13 @@
+# Speed Cargo Ghana — Google disavow file
+# Generated: 2026-06-23
+# Upload at: https://search.google.com/search-console/disavow-links
+# These domains created spammy/fake "SEO gig" backlinks pointing at speedcargogh.com.
+# Disavowing tells Google to ignore them when scoring our site.
+
+domain:fiverr-seo-for-small-businesses.site
+domain:seo-growth-authority-boost-hub.shop
+domain:seo-growth-optimization-hub.shop
+domain:seopxl-organic-boost-lab.shop
+domain:seopxl-performance-authority-engine.shop
+domain:seopxl-ranking-boost-lab.shop
+domain:seopxl-traffic-growth-lab.shop
