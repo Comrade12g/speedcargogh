@@ -1,43 +1,47 @@
+## SEO Foundation & Cleanup for speedcargogh.com
 
-## Scope addition
+Tackle the four highest-impact items from the analysis so the site can start ranking.
 
-On top of the previously approved work (clean-URL hosting of the uploaded static site + Lovable Cloud admin gate for `generalx369@outlook.com`), pull real content and imagery from `wl.pb68.cn` into the About and Branches sections of the new site. Take light inspiration from `yishippinggh.com` for layout/structure. Keep the uploaded files' existing colors, fonts, and overall styling untouched.
+### 1. Run a full SEO audit
+- Trigger the built-in SEO scan to surface every on-page issue (titles, meta descriptions, H1s, canonicals, OG tags, schema, alt text, sitemap, robots).
+- Auto-fix every flagged item that can be fixed in code (per-route titles/descriptions, canonical URLs, OG/Twitter cards, JSON-LD LocalBusiness + Organization schema for a Ghana freight forwarder).
 
-## Content to pull from wl.pb68.cn
+### 2. Sitemap + robots.txt
+- Replace the static `public/sitemap.xml` with a dynamic server route at `src/routes/sitemap[.]xml.ts` listing every real route (home, about, services/*, lanes/*, rates, schedule, tracking, partners, careers, blog, faq).
+- Use `https://speedcargogh.com` as the base URL.
+- Update `public/robots.txt` to allow all crawlers and reference the new sitemap.
 
-Company facts (translated from Chinese to English):
-- Founded 2004; approved by China's Ministry of Commerce as an import/export agency.
-- Trade relationships with buyers in 100+ countries.
-- 800+ containers shipped per year.
-- Branches: Yiwu, Shenzhen (China), Ghana, Congo.
-- Services: international air freight, LCL sea consolidation, FCL sea, Asia 16-country consolidation to Africa, double customs clearance, 24/7 cargo tracking, door-to-door.
-- Positioning: safe, professional, efficient; one-to-one account manager; warehouses at destination for self pickup or delivery.
+### 3. Local SEO schema (biggest near-term win)
+Add JSON-LD on the homepage and key pages for:
+- **LocalBusiness / MovingCompany** — name "Speed Cargo GH", address "Ferro Bel Plaza, Derby Avenue, Accra", phone, email speedcargo@sincereok.com, geo, opening hours, service area = Ghana, areaServed = China→Ghana lanes.
+- **Organization** — logo, sameAs (socials when available).
+- **Service** schema per service page (Sea Freight, Groupage, Customs Clearing, Warehousing).
+- **BreadcrumbList** on inner pages.
 
-Images to download and self-host under `public/assets/wl/` (so the new site doesn't hotlink the old domain):
-- `skin/picture/supply_01.jpg` … `supply_07.jpg` (partner/brand strip)
-- `skin/picture/img.png`, `img21.png`, `img31.png`, `img41.png` (service icons)
-- `skin/picture/handover.png`, `cities.png`, `client.png`, `company.png` (strength section icons)
-- `skin/image/epil.png`
+### 4. Per-route metadata pass
+For each route under `src/routes/`, write unique, keyword-targeted:
+- `<title>` (≤60 chars, includes "Ghana" + service/lane)
+- meta description (≤160 chars, includes a clear value prop)
+- canonical
+- og:title / og:description / og:image (use existing hero/asset per page)
+- twitter:card
 
-## Where it goes in the new site
+Targeting long-tail terms we can actually win: *sea freight Ghana, Guangzhou to Accra shipping, Yiwu cargo consolidation Ghana, customs clearing Tema, warehousing Accra*.
 
-- `about.html` — replace placeholder About copy with the translated company story (2004 founding, scale, philosophy), and add a "Our strengths" block using the four strength icons.
-- A new "Our branches" section on `about.html` (or as a small block on `index.html`, your call) listing the four branches: Yiwu, Shenzhen, Ghana (Accra), Congo. China + Congo get a short paragraph + photo each, as requested. Ghana + Shenzhen + Yiwu get a name + short line.
-- `index.html` — keep current layout/colors; only swap generic service blurbs for the four real service categories (air, LCL, FCL, Asia consolidation) using the matching icons.
-- No layout/CSS rewrites. All edits stay within existing HTML containers and reuse current classes from `styles.css`. Colors stay exactly as in the uploaded files.
+### 5. Disavow guidance (no code)
+Provide the user a ready-to-upload Google disavow file listing the spam .shop / fiverr-seo backlink domains, plus a 3-step instruction on submitting it in Google Search Console. (We can't submit it for you — Google requires the domain owner to upload via GSC.)
 
-## What I will NOT do
+### 6. Google Search Console setup
+- Add a meta verification tag to the root route head so the user can verify ownership in GSC.
+- After verification, submit the new sitemap URL.
 
-- No design system change, no new fonts, no new color tokens.
-- No copying of `wl.pb68.cn` HTML/CSS — only the textual facts and the listed image files.
-- No scraping of `yishippinggh.com` content; it's only a structural reference for how to lay out "branches" and "about" sections.
-- Admin page stays gated behind the Lovable Cloud auth flow from the prior plan.
+### Out of scope (flag for later)
+- Building real backlinks (PR, directory submissions, partner links) — this is ongoing marketing work, not a code change.
+- Google Business Profile claim — has to be done by the owner from a Google account.
+- Content strategy (lane guides, rate explainers) — separate writing project.
 
-## Questions before I build
-
-1. **Language for the pulled About/branch copy** — English only, Chinese only, or bilingual (EN primary, ZH secondary)? The source is Chinese; the uploaded site appears to be English.
-2. **Branch pictures for China and Congo** — I don't see branch photos on `wl.pb68.cn` (only generic stock/icon images). Options:
-   a) Use neutral city/port stock photos (Yiwu market, Shenzhen port, Pointe-Noire/Brazzaville port) generated via image gen, OR
-   b) Skip photos and use icon + address blocks only, OR
-   c) You'll upload real branch photos later.
-3. **Branch addresses / phone numbers** — `wl.pb68.cn` only exposes one phone (13676800396) and no street addresses (contact page is 404). Do you have the real addresses for the Congo and China branches, or should I list them as "Yiwu, China / Shenzhen, China / Brazzaville, Congo" without street detail?
+### Technical notes
+- All metadata uses TanStack Start's `head()` per-route pattern (no client-side document.title hacks).
+- JSON-LD injected via `<script type="application/ld+json">` in route `head()`.
+- Sitemap server route returns `Content-Type: application/xml` with 1h cache.
+- No new dependencies needed.
