@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>/</loc><priority>1.0</priority></url>
-  <url><loc>/about</loc><priority>0.7</priority></url>
-  <url><loc>/services/sea-freight</loc><priority>0.9</priority></url>
-  <url><loc>/services/customs-clearing</loc><priority>0.8</priority></url>
-  <url><loc>/services/warehousing</loc><priority>0.8</priority></url>
-  <url><loc>/lanes/yiwu-to-ghana</loc><priority>0.9</priority></url>
-  <url><loc>/lanes/guangzhou-to-ghana</loc><priority>0.9</priority></url>
-  <url><loc>/schedule</loc><priority>0.7</priority></url>
-  <url><loc>/rates</loc><priority>0.7</priority></url>
-  <url><loc>/tracking</loc><priority>0.8</priority></url>
-  <url><loc>/faq</loc><priority>0.7</priority></url>
-  <url><loc>/blog</loc><priority>0.6</priority></url>
-  <url><loc>/partners</loc><priority>0.5</priority></url>
-  <url><loc>/careers</loc><priority>0.5</priority></url>
+  <url><loc>https://speedcargogh.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://speedcargogh.com/about</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://speedcargogh.com/services/sea-freight</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://speedcargogh.com/services/groupage</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://speedcargogh.com/services/customs-clearing</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://speedcargogh.com/services/warehousing</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://speedcargogh.com/lanes/yiwu-to-ghana</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://speedcargogh.com/lanes/guangzhou-to-ghana</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://speedcargogh.com/schedule</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://speedcargogh.com/rates</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://speedcargogh.com/tracking</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://speedcargogh.com/faq</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://speedcargogh.com/blog</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://speedcargogh.com/partners</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://speedcargogh.com/careers</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
 </urlset>
