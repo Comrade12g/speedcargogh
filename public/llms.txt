@@ -1,0 +1,23 @@
+# Speed Cargo Ghana
+
+> Speed Cargo Ghana provides China-to-Ghana sea freight, groupage (LCL), customs clearing, warehousing, and shipment tracking — with pickup hubs in Guangzhou and Yiwu and delivery across Ghana.
+
+Speed Cargo Ghana is a freight forwarder specialising in moving goods from China to Ghana. We consolidate small parcels and full containers, handle Ghana customs clearance, and provide door-to-door delivery in Accra, Kumasi, and Takoradi. Contact: +233 59 755 8668 · speedcargo@sincereok.com · Ferro Bel Plaza, Derby Avenue, Accra.
+
+## Pages
+
+- [Home](/): Overview of China-to-Ghana shipping services.
+- [About](/about): Company background, team, and mission.
+- [Sea Freight](/services/sea-freight): FCL and LCL ocean shipping from China to Tema port.
+- [Groupage / LCL](/services/groupage): Shared-container shipping for smaller loads.
+- [Customs Clearing](/services/customs-clearing): Ghana port and customs clearance services.
+- [Warehousing](/services/warehousing): China-side consolidation warehouses in Guangzhou and Yiwu.
+- [Yiwu to Ghana Lane](/lanes/yiwu-to-ghana): Transit times, rates, and process for Yiwu shipments.
+- [Guangzhou to Ghana Lane](/lanes/guangzhou-to-ghana): Transit times, rates, and process for Guangzhou shipments.
+- [Schedule](/schedule): Upcoming sailing and arrival dates.
+- [Rates](/rates): Indicative shipping rates by volume and weight.
+- [Tracking](/tracking): Track a shipment by reference number.
+- [FAQ](/faq): Common questions about shipping, duties, and delivery.
+- [Blog](/blog): Updates, guides, and shipping news.
+- [Partners](/partners): Logistics and trade partners.
+- [Careers](/careers): Open roles at Speed Cargo Ghana.
