@@ -736,14 +736,7 @@ const queryLiveTracking = async (code) => {
 const setupTracking = () => {
   const openTracking = (code) => {
     const label = document.querySelector("[data-tracking-label]");
-    const url = trackingUrlWithCode(code);
     if (label) label.textContent = code ? `Checking ${code}` : "Ready";
-    document.querySelectorAll("[data-tracking-frame]").forEach((frame) => {
-      frame.src = url;
-    });
-    document.querySelectorAll("[data-live-tracking-link]").forEach((link) => {
-      link.href = url;
-    });
     document.querySelectorAll("[data-whatsapp-tracking-link]").forEach((link) => {
       const text = code
         ? `Hello Speed Cargo, please help me track shipment ${code}.`
@@ -776,7 +769,7 @@ const setupTracking = () => {
     event.preventDefault();
     const code = String(new FormData(event.currentTarget).get("tracking") || "").trim();
     document.querySelector('[data-note="tracking"]').textContent = code
-      ? "Tracking desk ready. Use the live engine or WhatsApp support button below."
+      ? "Checking your shipment now — results appear below."
       : "Enter a tracking number to check cargo movement.";
     openTracking(code);
     if (code) scrollToTrackingDetails();
