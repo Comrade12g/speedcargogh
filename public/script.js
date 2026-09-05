@@ -580,6 +580,42 @@ const trackingUrlWithCode = (code) => {
   return `${base}${separator}conditionNo=${encodeURIComponent(code)}&trackingNo=${encodeURIComponent(code)}&trackNo=${encodeURIComponent(code)}`;
 };
 
+const TRACK_LABELS = {
+  refno: "Reference no.",
+  transferNo: "Transfer no.",
+  deliveryExpressNo: "Delivery no.",
+  vessel: "Vessel",
+  voyage: "Voyage",
+  pieces: "Pieces",
+  grosskgs: "Gross weight (kg)",
+  volume: "Volume (CBM)",
+  freighttons: "Freight tons",
+  portofreceiveplace: "Place of receipt",
+  portofloading: "Port of loading",
+  portofdischarge: "Port of discharge",
+  portofdestination: "Final destination",
+  etd: "Estimated departure",
+  eta: "Estimated arrival",
+  atd: "Actual departure",
+  ata: "Actual arrival",
+  destination: "Delivery city",
+  deliveryAddr: "Delivery address",
+  warehouseCollectName: "Origin warehouse"
+};
+
+const formatTraceTime = (value) => {
+  if (!value) return "";
+  const parsed = new Date(String(value).replace(" ", "T"));
+  if (Number.isNaN(parsed.getTime())) return String(value);
+  return parsed.toLocaleString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+};
+
 const renderTrackingResults = (state, code, payload) => {
   const node = document.querySelector("[data-tracking-results]");
   if (!node) return;
@@ -588,7 +624,7 @@ const renderTrackingResults = (state, code, payload) => {
     node.innerHTML = `
       <div class="empty-state">
         <strong>Enter a tracking number above.</strong>
-        <p>Speed Cargo will query the live tracking system and show the result here.</p>
+        <p>Speed Cargo will show the full shipment journey right here.</p>
       </div>
     `;
     return;
@@ -598,7 +634,7 @@ const renderTrackingResults = (state, code, payload) => {
     node.innerHTML = `
       <div class="empty-state">
         <strong>Checking ${escapeHtml(code)}...</strong>
-        <p>Speed Cargo is querying the live tracking system.</p>
+        <p>Fetching the latest movement for your cargo.</p>
       </div>
     `;
     return;
@@ -608,42 +644,68 @@ const renderTrackingResults = (state, code, payload) => {
     node.innerHTML = `
       <div class="empty-state error-state">
         <strong>Tracking lookup could not load.</strong>
-        <p>${escapeHtml(payload?.message || "Use the embedded portal below or WhatsApp support while we retry the live lookup.")}</p>
+        <p>${escapeHtml(payload?.message || "Please try again in a moment, or send the number to our WhatsApp team.")}</p>
       </div>
     `;
     return;
   }
 
-  const results = Array.isArray(payload?.result) ? payload.result : [];
-  if (!results.length) {
+  const shipments = Array.isArray(payload?.shipments) ? payload.shipments : [];
+  if (!shipments.length) {
     node.innerHTML = `
       <div class="empty-state">
-        <strong>No live record found for ${escapeHtml(code)} yet.</strong>
-        <p>The number may not be scanned into the live system yet. You can still use the embedded portal or WhatsApp support below.</p>
+        <strong>No record found for ${escapeHtml(code)} yet.</strong>
+        <p>New shipments appear once the China warehouse scans the cargo in. Send the number to our WhatsApp team for a manual check.</p>
       </div>
     `;
     return;
   }
 
-  node.innerHTML = results
-    .map((item, index) => {
-      const rows = Object.entries(item)
-        .filter(([, value]) => value !== null && value !== "" && typeof value !== "object")
-        .slice(0, 12)
+  node.innerHTML = shipments
+    .map((shipment) => {
+      const rows = Object.entries(shipment.details || {})
+        .filter(([, value]) => value !== null && value !== undefined && value !== "")
         .map(
           ([key, value]) => `
             <span>
-              <strong>${escapeHtml(key)}</strong>
+              <strong>${escapeHtml(TRACK_LABELS[key] || key)}</strong>
               ${escapeHtml(value)}
             </span>
           `
         )
         .join("");
 
+      const journey = (shipment.legs || [])
+        .map((leg) => {
+          const steps = (leg.steps || [])
+            .map(
+              (step, index) => `
+                <li class="${index === 0 ? "is-latest" : ""}">
+                  <span></span>
+                  <div>
+                    <strong>${escapeHtml(step.traceName || "Update")}</strong>
+                    <small>${escapeHtml(formatTraceTime(step.traceTime))}</small>
+                  </div>
+                </li>
+              `
+            )
+            .join("");
+          const legTitle = [leg.cntNo, leg.haulageNo].filter(Boolean).join(" · ");
+          return `
+            <div class="track-journey">
+              ${legTitle ? `<h4>${escapeHtml(legTitle)}</h4>` : ""}
+              <ol class="track-steps">${steps}</ol>
+            </div>
+          `;
+        })
+        .join("");
+
       return `
         <article class="tracking-result-card">
-          <h3>Tracking result ${index + 1}</h3>
+          <h3>Shipment ${escapeHtml(shipment.jobNo || code)}</h3>
+          ${shipment.status ? `<p class="track-status">${escapeHtml(shipment.status)}</p>` : ""}
           <div class="tracking-result-grid">${rows}</div>
+          ${journey || `<p class="form-note">Movement updates will appear here as the cargo is scanned.</p>`}
         </article>
       `;
     })
@@ -654,24 +716,17 @@ const queryLiveTracking = async (code) => {
   if (!code) return;
   renderTrackingResults("loading", code);
   try {
-    const response = await fetch(data.profile.trackingApi, {
+    const response = await fetch("/api/public/track", {
       method: "POST",
-      mode: "cors",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        tenantCode: data.profile.tenantCode || "FSWL",
-        conditionNo: code
-      })
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ code })
     });
 
-    if (!response.ok) {
-      throw new Error(`Tracker returned ${response.status}`);
+    const payload = await response.json().catch(() => null);
+    if (!response.ok || !payload?.success) {
+      throw new Error(payload?.message || `Tracker returned ${response.status}`);
     }
 
-    const payload = await response.json();
     renderTrackingResults("ready", code, payload);
   } catch (error) {
     renderTrackingResults("error", code, error);
