@@ -7,10 +7,10 @@ First, one thing to know: your hosted database is currently paused, so nothing c
 Create the records the whole system runs on:
 
 - Customers: name, phone (WhatsApp), email, notes
-- Shipments: customer, goods description, weight, volume, sender in China, current stage, auto-generated Speed Cargo tracking ID
+- Shipments: customer, goods description, weight, volume, sender in China, current stage, tracking number from commerce platform auto-generated Speed Cargo tracking ID
 - Containers: container/booking number (e.g. YWGH083), vessel, voyage, departure and arrival dates, status
 - Warehouse arrivals: date received, pieces, marks, photos
-- Clearing records: duty status, documents, clearing fees, release date
+  &nbsp;
 - Deliveries: recipient, address, dispatch date, driver, delivery confirmation
 - Invoices: freight, clearing and delivery charges, total, paid/unpaid — created automatically at intake and editable later
 - Message wording (templates) you can edit, plus a log of every message sent
