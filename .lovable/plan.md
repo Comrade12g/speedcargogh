@@ -1,47 +1,45 @@
-## SEO Foundation & Cleanup for speedcargogh.com
+# Speed Cargo operations system — build plan
 
-Tackle the four highest-impact items from the analysis so the site can start ranking.
+First, one thing to know: your hosted database is currently paused, so nothing can be created in it yet. Approving this plan will start with waking it up, then the build proceeds.
 
-### 1. Run a full SEO audit
-- Trigger the built-in SEO scan to surface every on-page issue (titles, meta descriptions, H1s, canonicals, OG tags, schema, alt text, sitemap, robots).
-- Auto-fix every flagged item that can be fixed in code (per-route titles/descriptions, canonical URLs, OG/Twitter cards, JSON-LD LocalBusiness + Organization schema for a Ghana freight forwarder).
+## Phase 1 — The records (database)
 
-### 2. Sitemap + robots.txt
-- Replace the static `public/sitemap.xml` with a dynamic server route at `src/routes/sitemap[.]xml.ts` listing every real route (home, about, services/*, lanes/*, rates, schedule, tracking, partners, careers, blog, faq).
-- Use `https://speedcargogh.com` as the base URL.
-- Update `public/robots.txt` to allow all crawlers and reference the new sitemap.
+Create the records the whole system runs on:
 
-### 3. Local SEO schema (biggest near-term win)
-Add JSON-LD on the homepage and key pages for:
-- **LocalBusiness / MovingCompany** — name "Speed Cargo GH", address "Ferro Bel Plaza, Derby Avenue, Accra", phone, email speedcargo@sincereok.com, geo, opening hours, service area = Ghana, areaServed = China→Ghana lanes.
-- **Organization** — logo, sameAs (socials when available).
-- **Service** schema per service page (Sea Freight, Groupage, Customs Clearing, Warehousing).
-- **BreadcrumbList** on inner pages.
+- Customers: name, phone (WhatsApp), email, notes
+- Shipments: customer, goods description, weight, volume, sender in China, current stage, auto-generated Speed Cargo tracking ID
+- Containers: container/booking number (e.g. YWGH083), vessel, voyage, departure and arrival dates, status
+- Warehouse arrivals: date received, pieces, marks, photos
+- Clearing records: duty status, documents, clearing fees, release date
+- Deliveries: recipient, address, dispatch date, driver, delivery confirmation
+- Invoices: freight, clearing and delivery charges, total, paid/unpaid — created automatically at intake and editable later
+- Message wording (templates) you can edit, plus a log of every message sent
 
-### 4. Per-route metadata pass
-For each route under `src/routes/`, write unique, keyword-targeted:
-- `<title>` (≤60 chars, includes "Ghana" + service/lane)
-- meta description (≤160 chars, includes a clear value prop)
-- canonical
-- og:title / og:description / og:image (use existing hero/asset per page)
-- twitter:card
+Access rules: only signed-in staff and admins can see or change these records. Customers see nothing directly — only the public tracking lookup returns a safe summary.
 
-Targeting long-tail terms we can actually win: *sea freight Ghana, Guangzhou to Accra shipping, Yiwu cargo consolidation Ghana, customs clearing Tema, warehousing Accra*.
+## Phase 2 — Staff console and tracking
 
-### 5. Disavow guidance (no code)
-Provide the user a ready-to-upload Google disavow file listing the spam .shop / fiverr-seo backlink domains, plus a 3-step instruction on submitting it in Google Search Console. (We can't submit it for you — Google requires the domain owner to upload via GSC.)
+- A staff area where your team logs each step: intake, Yiwu warehouse receiving (with photo upload), assigning a shipment to a container, ocean status updates, clearing, arrival at the Derby Avenue office, and delivery dispatch
+- Each stage update moves the shipment forward and records who did it and when
+- Invoice editing (freight / clearing / delivery fees, mark as paid)
+- Public tracking by Speed Cargo tracking ID on your existing tracking page, showing the journey stages and dates — no internal notes, no prices
+- Your existing lookup of the partner portal codes stays as it is
 
-### 6. Google Search Console setup
-- Add a meta verification tag to the root route head so the user can verify ownership in GSC.
-- After verification, submit the new sitemap URL.
+## Phase 3 — Automatic WhatsApp messages
 
-### Out of scope (flag for later)
-- Building real backlinks (PR, directory submissions, partner links) — this is ongoing marketing work, not a code change.
-- Google Business Profile claim — has to be done by the owner from a Google account.
-- Content strategy (lane guides, rate explainers) — separate writing project.
+- A message is queued automatically at each stage change (received in Yiwu, loaded to container, sailed, arrived Tema, cleared, ready for pickup, out for delivery, delivered)
+- Wording is editable by you, with the tracking ID and dates filled in
+- Sending uses the official WhatsApp Business API — this needs two credentials from your WhatsApp Business account (a phone number ID and an access token). I will ask you to paste those securely when we reach this phase; nothing is faked or hardcoded.
+- Admin view of the message log with failures visible and a resend button
 
-### Technical notes
-- All metadata uses TanStack Start's `head()` per-route pattern (no client-side document.title hacks).
-- JSON-LD injected via `<script type="application/ld+json">` in route `head()`.
-- Sitemap server route returns `Content-Type: application/xml` with 1h cache.
-- No new dependencies needed.
+## Staying intact
+
+Company info, office/warehouse details, the daily rate sheet and the existing content editing all keep working exactly as now — this is added alongside them.
+
+## Technical notes
+
+- Postgres tables in the existing backend with row-level security; staff role added to the existing role table; storage bucket for warehouse photos
+- Tracking IDs and intake invoices generated by database triggers; stage transitions enqueue notification rows
+- Staff console as protected routes; all reads/writes through server functions with auth middleware
+- Public tracking through a server route returning whitelisted fields only
+- WhatsApp sender as a server function reading `WHATSAPP_PHONE_NUMBER_ID` and `WHATSAPP_ACCESS_TOKEN` from secrets
