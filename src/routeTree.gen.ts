@@ -9,68 +9,28 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TrackingRouteImport } from './routes/tracking'
-import { Route as ScheduleRouteImport } from './routes/schedule'
-import { Route as RatesRouteImport } from './routes/rates'
-import { Route as PartnersRouteImport } from './routes/partners'
-import { Route as LoginRouteImport } from './routes/login'
-import { Route as FaqRouteImport } from './routes/faq'
-import { Route as CareersRouteImport } from './routes/careers'
-import { Route as BlogRouteImport } from './routes/blog'
-import { Route as AdminRouteImport } from './routes/admin'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ServicesWarehousingRouteImport } from './routes/services.warehousing'
-import { Route as ServicesSeaFreightRouteImport } from './routes/services.sea-freight'
-import { Route as ServicesGroupageRouteImport } from './routes/services.groupage'
-import { Route as ServicesCustomsClearingRouteImport } from './routes/services.customs-clearing'
-import { Route as LanesYiwuToGhanaRouteImport } from './routes/lanes.yiwu-to-ghana'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as BlogRouteImport } from './routes/blog'
+import { Route as CareersRouteImport } from './routes/careers'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as PartnersRouteImport } from './routes/partners'
+import { Route as RatesRouteImport } from './routes/rates'
+import { Route as ScheduleRouteImport } from './routes/schedule'
+import { Route as TrackingRouteImport } from './routes/tracking'
 import { Route as LanesGuangzhouToGhanaRouteImport } from './routes/lanes.guangzhou-to-ghana'
+import { Route as LanesYiwuToGhanaRouteImport } from './routes/lanes.yiwu-to-ghana'
+import { Route as ServicesCustomsClearingRouteImport } from './routes/services.customs-clearing'
+import { Route as ServicesGroupageRouteImport } from './routes/services.groupage'
+import { Route as ServicesSeaFreightRouteImport } from './routes/services.sea-freight'
+import { Route as ServicesWarehousingRouteImport } from './routes/services.warehousing'
 import { Route as ApiPublicTrackRouteImport } from './routes/api/public/track'
 
-const TrackingRoute = TrackingRouteImport.update({
-  id: '/tracking',
-  path: '/tracking',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ScheduleRoute = ScheduleRouteImport.update({
-  id: '/schedule',
-  path: '/schedule',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RatesRoute = RatesRouteImport.update({
-  id: '/rates',
-  path: '/rates',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PartnersRoute = PartnersRouteImport.update({
-  id: '/partners',
-  path: '/partners',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FaqRoute = FaqRouteImport.update({
-  id: '/faq',
-  path: '/faq',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CareersRoute = CareersRouteImport.update({
-  id: '/careers',
-  path: '/careers',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BlogRoute = BlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminRoute = AdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -78,29 +38,54 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicesWarehousingRoute = ServicesWarehousingRouteImport.update({
-  id: '/services/warehousing',
-  path: '/services/warehousing',
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicesSeaFreightRoute = ServicesSeaFreightRouteImport.update({
-  id: '/services/sea-freight',
-  path: '/services/sea-freight',
+const CareersRoute = CareersRouteImport.update({
+  id: '/careers',
+  path: '/careers',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicesGroupageRoute = ServicesGroupageRouteImport.update({
-  id: '/services/groupage',
-  path: '/services/groupage',
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicesCustomsClearingRoute = ServicesCustomsClearingRouteImport.update({
-  id: '/services/customs-clearing',
-  path: '/services/customs-clearing',
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnersRoute = PartnersRouteImport.update({
+  id: '/partners',
+  path: '/partners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RatesRoute = RatesRouteImport.update({
+  id: '/rates',
+  path: '/rates',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScheduleRoute = ScheduleRouteImport.update({
+  id: '/schedule',
+  path: '/schedule',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrackingRoute = TrackingRouteImport.update({
+  id: '/tracking',
+  path: '/tracking',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LanesGuangzhouToGhanaRoute = LanesGuangzhouToGhanaRouteImport.update({
+  id: '/lanes/guangzhou-to-ghana',
+  path: '/lanes/guangzhou-to-ghana',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LanesYiwuToGhanaRoute = LanesYiwuToGhanaRouteImport.update({
@@ -108,9 +93,24 @@ const LanesYiwuToGhanaRoute = LanesYiwuToGhanaRouteImport.update({
   path: '/lanes/yiwu-to-ghana',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LanesGuangzhouToGhanaRoute = LanesGuangzhouToGhanaRouteImport.update({
-  id: '/lanes/guangzhou-to-ghana',
-  path: '/lanes/guangzhou-to-ghana',
+const ServicesCustomsClearingRoute = ServicesCustomsClearingRouteImport.update({
+  id: '/services/customs-clearing',
+  path: '/services/customs-clearing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesGroupageRoute = ServicesGroupageRouteImport.update({
+  id: '/services/groupage',
+  path: '/services/groupage',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesSeaFreightRoute = ServicesSeaFreightRouteImport.update({
+  id: '/services/sea-freight',
+  path: '/services/sea-freight',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesWarehousingRoute = ServicesWarehousingRouteImport.update({
+  id: '/services/warehousing',
+  path: '/services/warehousing',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicTrackRoute = ApiPublicTrackRouteImport.update({
@@ -266,67 +266,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/tracking': {
-      id: '/tracking'
-      path: '/tracking'
-      fullPath: '/tracking'
-      preLoaderRoute: typeof TrackingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/schedule': {
-      id: '/schedule'
-      path: '/schedule'
-      fullPath: '/schedule'
-      preLoaderRoute: typeof ScheduleRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/rates': {
-      id: '/rates'
-      path: '/rates'
-      fullPath: '/rates'
-      preLoaderRoute: typeof RatesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/partners': {
-      id: '/partners'
-      path: '/partners'
-      fullPath: '/partners'
-      preLoaderRoute: typeof PartnersRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/faq': {
-      id: '/faq'
-      path: '/faq'
-      fullPath: '/faq'
-      preLoaderRoute: typeof FaqRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/careers': {
-      id: '/careers'
-      path: '/careers'
-      fullPath: '/careers'
-      preLoaderRoute: typeof CareersRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -336,39 +280,74 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services/warehousing': {
-      id: '/services/warehousing'
-      path: '/services/warehousing'
-      fullPath: '/services/warehousing'
-      preLoaderRoute: typeof ServicesWarehousingRouteImport
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services/sea-freight': {
-      id: '/services/sea-freight'
-      path: '/services/sea-freight'
-      fullPath: '/services/sea-freight'
-      preLoaderRoute: typeof ServicesSeaFreightRouteImport
+    '/careers': {
+      id: '/careers'
+      path: '/careers'
+      fullPath: '/careers'
+      preLoaderRoute: typeof CareersRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services/groupage': {
-      id: '/services/groupage'
-      path: '/services/groupage'
-      fullPath: '/services/groupage'
-      preLoaderRoute: typeof ServicesGroupageRouteImport
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services/customs-clearing': {
-      id: '/services/customs-clearing'
-      path: '/services/customs-clearing'
-      fullPath: '/services/customs-clearing'
-      preLoaderRoute: typeof ServicesCustomsClearingRouteImport
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partners': {
+      id: '/partners'
+      path: '/partners'
+      fullPath: '/partners'
+      preLoaderRoute: typeof PartnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rates': {
+      id: '/rates'
+      path: '/rates'
+      fullPath: '/rates'
+      preLoaderRoute: typeof RatesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/schedule': {
+      id: '/schedule'
+      path: '/schedule'
+      fullPath: '/schedule'
+      preLoaderRoute: typeof ScheduleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tracking': {
+      id: '/tracking'
+      path: '/tracking'
+      fullPath: '/tracking'
+      preLoaderRoute: typeof TrackingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lanes/guangzhou-to-ghana': {
+      id: '/lanes/guangzhou-to-ghana'
+      path: '/lanes/guangzhou-to-ghana'
+      fullPath: '/lanes/guangzhou-to-ghana'
+      preLoaderRoute: typeof LanesGuangzhouToGhanaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lanes/yiwu-to-ghana': {
@@ -378,11 +357,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LanesYiwuToGhanaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/lanes/guangzhou-to-ghana': {
-      id: '/lanes/guangzhou-to-ghana'
-      path: '/lanes/guangzhou-to-ghana'
-      fullPath: '/lanes/guangzhou-to-ghana'
-      preLoaderRoute: typeof LanesGuangzhouToGhanaRouteImport
+    '/services/customs-clearing': {
+      id: '/services/customs-clearing'
+      path: '/services/customs-clearing'
+      fullPath: '/services/customs-clearing'
+      preLoaderRoute: typeof ServicesCustomsClearingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/groupage': {
+      id: '/services/groupage'
+      path: '/services/groupage'
+      fullPath: '/services/groupage'
+      preLoaderRoute: typeof ServicesGroupageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/sea-freight': {
+      id: '/services/sea-freight'
+      path: '/services/sea-freight'
+      fullPath: '/services/sea-freight'
+      preLoaderRoute: typeof ServicesSeaFreightRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/warehousing': {
+      id: '/services/warehousing'
+      path: '/services/warehousing'
+      fullPath: '/services/warehousing'
+      preLoaderRoute: typeof ServicesWarehousingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/track': {
