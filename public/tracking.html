@@ -64,24 +64,10 @@
           <p class="eyebrow">Track and trace</p>
           <h1>Track your Speed Cargo shipment.</h1>
           <p>
-            Enter your shipment number to prepare the Speed Cargo tracking desk, then continue with
-            the secure live engine or WhatsApp support.
+            Enter your tracking number in the tracking box below to see your shipment status.
           </p>
+          <a class="button primary" href="#tracking-embed">Go to tracking</a>
         </div>
-        <form class="tracking-page-form panel" aria-label="Track shipment">
-          <label>
-            Tracking number
-            <input
-              id="tracking-code"
-              name="tracking"
-              type="text"
-              placeholder="Enter tracking number"
-              autocomplete="off"
-            />
-          </label>
-          <button class="button primary" type="submit">Track shipment</button>
-          <p class="form-note" data-note="tracking"></p>
-        </form>
       </section>
 
       <section class="tracking-workspace">
@@ -125,11 +111,17 @@
               <strong data-tracking-label>Ready</strong>
             </div>
           </div>
-          <div class="tracking-results" data-tracking-results>
-            <div class="empty-state">
-              <strong>Enter a tracking number above.</strong>
-              <p>Speed Cargo will show the full shipment journey right here.</p>
-            </div>
+          <div class="tracking-embed" id="tracking-embed">
+            <iframe
+              src="https://sn4lnwzeqh.jiandaoyun.com/q/6abb30387e7593731b7eea74"
+              title="Speed Cargo shipment tracking"
+              loading="lazy"
+              style="width:100%;height:760px;border:0;border-radius:14px;background:#fff;display:block;"
+            ></iframe>
+            <p style="margin:10px 0 0;font-size:14px;">
+              Trouble loading?
+              <a href="https://sn4lnwzeqh.jiandaoyun.com/q/6abb30387e7593731b7eea74" target="_blank" rel="noopener noreferrer">Open tracking in a new tab</a>
+            </p>
           </div>
           <div class="tracking-options">
             <a
