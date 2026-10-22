@@ -17,5 +17,8 @@
 - [ ] Admin notification log view with resend
 - [ ] Template editor
 
+## Done
+- [x] Tracking page now embeds the Jiandaoyun tracking form
+
 ## Keep intact
 Company info, office/warehouse management, daily rate sheet, existing site content CMS.
