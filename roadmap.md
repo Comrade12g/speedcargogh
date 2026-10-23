@@ -18,7 +18,7 @@
 - [ ] Template editor
 
 ## Done
-- [x] Tracking page now embeds the Jiandaoyun tracking form
+- [x] Tracking uses own UI, fetching courier + business order lookups from Jiandaoyun
 
 ## Keep intact
 Company info, office/warehouse management, daily rate sheet, existing site content CMS.

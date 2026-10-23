@@ -2175,3 +2175,7 @@ body.nav-open {
   color: rgba(7, 35, 63, 0.6);
   font-size: 0.8rem;
 }
+.track-table{width:100%;border-collapse:collapse;font-size:14px}
+.track-table th,.track-table td{padding:8px 10px;border-bottom:1px solid rgba(7,35,63,.12);text-align:left;white-space:nowrap}
+.track-table th{background:rgba(7,35,63,.06);font-weight:700}
+#tracking-type{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(7,35,63,.2);font:inherit}

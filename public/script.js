@@ -726,7 +726,8 @@ const queryLiveTracking = async (code, type = "courier") => {
 };
 
 const setupTracking = () => {
-  const openTracking = (code) => {
+  const openTracking = (code, type) => {
+    type = type || document.querySelector('#tracking-type')?.value || 'courier';
     const label = document.querySelector("[data-tracking-label]");
     if (label) label.textContent = code ? `Checking ${code}` : "Ready";
     document.querySelectorAll("[data-whatsapp-tracking-link]").forEach((link) => {
@@ -740,7 +741,7 @@ const setupTracking = () => {
       button.dataset.copyValue = code;
     });
     localStorage.setItem("speedCargoLastTracking", code);
-    queryLiveTracking(code);
+    queryLiveTracking(code, type);
   };
 
   const scrollToTrackingDetails = () => {
