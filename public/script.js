@@ -663,63 +663,55 @@ const renderTrackingResults = (state, code, payload) => {
 
   node.innerHTML = shipments
     .map((shipment) => {
-      const rows = Object.entries(shipment.details || {})
-        .filter(([, value]) => value !== null && value !== undefined && value !== "")
+      const rows = (shipment.details || [])
         .map(
-          ([key, value]) => `
+          (item) => `
             <span>
-              <strong>${escapeHtml(TRACK_LABELS[key] || key)}</strong>
-              ${escapeHtml(value)}
+              <strong>${escapeHtml(item.label)}</strong>
+              ${escapeHtml(item.value)}
             </span>
           `
         )
         .join("");
 
-      const journey = (shipment.legs || [])
-        .map((leg) => {
-          const steps = (leg.steps || [])
-            .map(
-              (step, index) => `
-                <li class="${index === 0 ? "is-latest" : ""}">
-                  <span></span>
-                  <div>
-                    <strong>${escapeHtml(step.traceName || "Update")}</strong>
-                    <small>${escapeHtml(formatTraceTime(step.traceTime))}</small>
-                  </div>
-                </li>
-              `
-            )
-            .join("");
-          const legTitle = [leg.cntNo, leg.haulageNo].filter(Boolean).join(" · ");
-          return `
+      const tables = (shipment.tables || [])
+        .map(
+          (table) => `
             <div class="track-journey">
-              ${legTitle ? `<h4>${escapeHtml(legTitle)}</h4>` : ""}
-              <ol class="track-steps">${steps}</ol>
+              <h4>${escapeHtml(table.label)}</h4>
+              <div style="overflow-x:auto;">
+                <table class="track-table">
+                  <thead><tr>${table.columns.map((c) => `<th>${escapeHtml(c)}</th>`).join("")}</tr></thead>
+                  <tbody>${table.rows
+                    .map((r) => `<tr>${r.map((c) => `<td>${escapeHtml(c)}</td>`).join("")}</tr>`)
+                    .join("")}</tbody>
+                </table>
+              </div>
             </div>
-          `;
-        })
+          `
+        )
         .join("");
 
       return `
         <article class="tracking-result-card">
-          <h3>Shipment ${escapeHtml(shipment.jobNo || code)}</h3>
+          <h3>${escapeHtml(payload.typeLabel || "Shipment")}: ${escapeHtml(shipment.title || code)}</h3>
           ${shipment.status ? `<p class="track-status">${escapeHtml(shipment.status)}</p>` : ""}
           <div class="tracking-result-grid">${rows}</div>
-          ${journey || `<p class="form-note">Movement updates will appear here as the cargo is scanned.</p>`}
+          ${tables}
         </article>
       `;
     })
     .join("");
 };
 
-const queryLiveTracking = async (code) => {
+const queryLiveTracking = async (code, type = "courier") => {
   if (!code) return;
   renderTrackingResults("loading", code);
   try {
     const response = await fetch("/api/public/track", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ code })
+      body: JSON.stringify({ code, type })
     });
 
     const payload = await response.json().catch(() => null);
