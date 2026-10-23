@@ -14,6 +14,196 @@ export type Database = {
   }
   public: {
     Tables: {
+      containers: {
+        Row: {
+          ata: string | null
+          atd: string | null
+          created_at: string
+          eta: string | null
+          etd: string | null
+          id: string
+          number: string
+          status: string
+          updated_at: string
+          vessel: string | null
+          voyage: string | null
+        }
+        Insert: {
+          ata?: string | null
+          atd?: string | null
+          created_at?: string
+          eta?: string | null
+          etd?: string | null
+          id?: string
+          number: string
+          status?: string
+          updated_at?: string
+          vessel?: string | null
+          voyage?: string | null
+        }
+        Update: {
+          ata?: string | null
+          atd?: string | null
+          created_at?: string
+          eta?: string | null
+          etd?: string | null
+          id?: string
+          number?: string
+          status?: string
+          updated_at?: string
+          vessel?: string | null
+          voyage?: string | null
+        }
+        Relationships: []
+      }
+      customers: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: string
+          name: string
+          notes: string | null
+          phone: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          name: string
+          notes?: string | null
+          phone: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          name?: string
+          notes?: string | null
+          phone?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      invoices: {
+        Row: {
+          clearing_fee: number
+          created_at: string
+          currency: string
+          delivery_fee: number
+          freight_fee: number
+          id: string
+          paid: boolean
+          shipment_id: string
+          updated_at: string
+        }
+        Insert: {
+          clearing_fee?: number
+          created_at?: string
+          currency?: string
+          delivery_fee?: number
+          freight_fee?: number
+          id?: string
+          paid?: boolean
+          shipment_id: string
+          updated_at?: string
+        }
+        Update: {
+          clearing_fee?: number
+          created_at?: string
+          currency?: string
+          delivery_fee?: number
+          freight_fee?: number
+          id?: string
+          paid?: boolean
+          shipment_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "invoices_shipment_id_fkey"
+            columns: ["shipment_id"]
+            isOneToOne: true
+            referencedRelation: "shipments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notification_templates: {
+        Row: {
+          body: string
+          enabled: boolean
+          stage: string
+          updated_at: string
+        }
+        Insert: {
+          body: string
+          enabled?: boolean
+          stage: string
+          updated_at?: string
+        }
+        Update: {
+          body?: string
+          enabled?: boolean
+          stage?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      notifications: {
+        Row: {
+          attempts: number
+          body: string
+          created_at: string
+          error: string | null
+          id: string
+          phone: string
+          provider_message_id: string | null
+          sent_at: string | null
+          shipment_id: string | null
+          stage: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          attempts?: number
+          body: string
+          created_at?: string
+          error?: string | null
+          id?: string
+          phone: string
+          provider_message_id?: string | null
+          sent_at?: string | null
+          shipment_id?: string | null
+          stage: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          attempts?: number
+          body?: string
+          created_at?: string
+          error?: string | null
+          id?: string
+          phone?: string
+          provider_message_id?: string | null
+          sent_at?: string | null
+          shipment_id?: string | null
+          stage?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_shipment_id_fkey"
+            columns: ["shipment_id"]
+            isOneToOne: false
+            referencedRelation: "shipments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       quote_requests: {
         Row: {
           company: string | null
@@ -65,6 +255,125 @@ export type Database = {
         }
         Relationships: []
       }
+      shipment_events: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          id: string
+          note: string | null
+          photo_path: string | null
+          shipment_id: string
+          stage: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          note?: string | null
+          photo_path?: string | null
+          shipment_id: string
+          stage: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          note?: string | null
+          photo_path?: string | null
+          shipment_id?: string
+          stage?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "shipment_events_shipment_id_fkey"
+            columns: ["shipment_id"]
+            isOneToOne: false
+            referencedRelation: "shipments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      shipments: {
+        Row: {
+          container_id: string | null
+          created_at: string
+          created_by: string | null
+          customer_id: string
+          delivered_at: string | null
+          delivery_address: string | null
+          description: string | null
+          driver: string | null
+          id: string
+          pieces: number | null
+          platform_tracking_no: string | null
+          sender_address: string | null
+          sender_name: string | null
+          sender_phone: string | null
+          stage: string
+          tracking_id: string
+          updated_at: string
+          volume_cbm: number | null
+          weight_kg: number | null
+        }
+        Insert: {
+          container_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          customer_id: string
+          delivered_at?: string | null
+          delivery_address?: string | null
+          description?: string | null
+          driver?: string | null
+          id?: string
+          pieces?: number | null
+          platform_tracking_no?: string | null
+          sender_address?: string | null
+          sender_name?: string | null
+          sender_phone?: string | null
+          stage?: string
+          tracking_id?: string
+          updated_at?: string
+          volume_cbm?: number | null
+          weight_kg?: number | null
+        }
+        Update: {
+          container_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          customer_id?: string
+          delivered_at?: string | null
+          delivery_address?: string | null
+          description?: string | null
+          driver?: string | null
+          id?: string
+          pieces?: number | null
+          platform_tracking_no?: string | null
+          sender_address?: string | null
+          sender_name?: string | null
+          sender_phone?: string | null
+          stage?: string
+          tracking_id?: string
+          updated_at?: string
+          volume_cbm?: number | null
+          weight_kg?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "shipments_container_id_fkey"
+            columns: ["container_id"]
+            isOneToOne: false
+            referencedRelation: "containers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "shipments_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       site_content: {
         Row: {
           data: Json
@@ -112,6 +421,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      enqueue_notification: {
+        Args: { _shipment: string; _stage: string }
+        Returns: undefined
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -119,9 +432,10 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_staff: { Args: { _user_id: string }; Returns: boolean }
     }
     Enums: {
-      app_role: "admin" | "user"
+      app_role: "admin" | "user" | "staff"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -249,7 +563,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["admin", "user"],
+      app_role: ["admin", "user", "staff"],
     },
   },
 } as const
